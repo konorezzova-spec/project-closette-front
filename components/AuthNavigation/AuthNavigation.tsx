@@ -17,9 +17,9 @@ export default function AuthNavigation({ onClick }: AuthNavigationProps) {
       {isAuthenticated ? (
         <li>
           <Link
+            className={css.nav_auth}
             href="/order"
             prefetch={false}
-            className={css.nav_auth}
             onClick={onClick}
           >
             Кабінет
@@ -39,7 +39,7 @@ export default function AuthNavigation({ onClick }: AuthNavigationProps) {
           </li>
           <li>
             <Link
-              className={css.nav_auth}
+              className={css.nav_auth_in}
               href="/auth/register"
               prefetch={false}
               onClick={onClick}
