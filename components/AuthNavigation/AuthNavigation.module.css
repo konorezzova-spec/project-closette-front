@@ -1,0 +1,17 @@
+.nav_auth {
+  border: 1px solid var(--color-deco);
+  border-radius: 100px;
+  padding: 6px 12px;
+  width: 335px;
+  height: 36px;
+  background-color: var(--color-deco);
+}
+
+.nav_auth_in {
+  border: 1px solid var(--opacity-transparent);
+  background-color: var(--opacity-neutral-darkest-5);
+  border-radius: 100px;
+  padding: 6px 12px;
+  width: 335px;
+  height: 36px;
+}
