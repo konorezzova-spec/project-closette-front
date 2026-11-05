@@ -1,3 +1,18 @@
+import { Suspense } from "react";
+import { connection } from "next/server";
+
+async function DynamicMarker() {
+  await connection();
+  return null;
+}
+
 export default function GoodPage() {
-  return <div>Good Page</div>;
+  return (
+    <>
+      <Suspense fallback={null}>
+        <DynamicMarker />
+      </Suspense>
+      <div>Good Page</div>
+    </>
+  );
 }
