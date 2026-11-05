@@ -9,7 +9,7 @@ import burger_menu from "/public/header/burger_btn.svg";
 import close from "/public/header/close.svg";
 import { useState, useEffect } from "react";
 import basket from "/public/header/basket.svg";
-// import AuthNavigation from "../AuthNavigation/AuthNavigation";
+import AuthNavigation from "../AuthNavigation/AuthNavigation";
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
@@ -114,7 +114,22 @@ export default function Header() {
             />
           )}
         </button>
-        <nav className={css.decktop_menu}>
+
+        <nav className={css.mobile_menu}>
+          <Link className={css.basket} href="/basket" aria-label="Home">
+            <Image
+              className={css.logo}
+              src={basket}
+              alt="logo"
+              width={36}
+              height={36}
+              priority
+            />
+            <p className={css.amount}>{20}</p>
+          </Link>
+        </nav>
+
+        <nav className={css.desktop_menu}>
           {/* <AuthNavigation onClick={closeMenu} /> */}
           <Link className={css.basket} href="/basket" aria-label="Home">
             <Image
@@ -163,7 +178,7 @@ export default function Header() {
                 Категорії
               </Link>
             </li>
-            {/* <AuthNavigation onClick={closeMenu} /> */}
+            <AuthNavigation onClick={closeMenu} />
           </ul>
         </nav>
       )}
