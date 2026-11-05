@@ -3,7 +3,7 @@ import "./globals.css";
 import { inter, nunito_sans } from "@/app/fonts";
 
 import css from "./layout.module.css";
-import TanStackProvider from "./components/TanstackProvider/TanstackProvider";
+import TanStackProvider from "../components/TanstackProvider/TanstackProvider";
 
 const SITE_URL = process.env.SITE_URL;
 if (!SITE_URL) {

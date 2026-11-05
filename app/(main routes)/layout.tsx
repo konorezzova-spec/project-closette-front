@@ -1,7 +1,7 @@
 import css from "./layout.module.css";
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
-import Container from "../components/Container/Container";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import Container from "../../components/Container/Container";
 
 type Props = LayoutProps<"/"> & {
   modal: React.ReactNode;
