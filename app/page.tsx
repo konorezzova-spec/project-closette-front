@@ -1,6 +1,11 @@
-import { redirect } from "next/navigation";
+
+import PopularProducts from "@/components/PopularProducts/PopularProducts";
 
 export default function Home() {
-  redirect("/homePage");
-  return null;
+  return (
+    <main>
+      { }
+      <PopularProducts />
+    </main>
+  );
 }
