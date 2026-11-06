@@ -6,10 +6,19 @@
   width: 100vw;
   background-color: var(--color-scheme-5-background);
   border-bottom: 1px solid var(--color-scheme-5-border);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 150%;
   color: var(--color-scheme-5-text);
   transition: transform 0.3s ease-in-out;
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .header {
+    font-size: 16px;
+  }
 }
 
 .header_container {
@@ -42,8 +51,12 @@
     display: none;
   }
   .desktop_menu {
-    display: block;
+    display: inline-flex;
   }
+}
+
+.mobile_nav_menu {
+  height: 100vh;
 }
 
 .link {
@@ -101,6 +114,7 @@
   align-items: center;
   margin-top: 40px;
   margin-bottom: 64px;
+  flex-grow: 1;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;

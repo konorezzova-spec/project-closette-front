@@ -15,21 +15,23 @@ export default function AuthNavigation({ onClick }: AuthNavigationProps) {
   return (
     <>
       {isAuthenticated ? (
-        <li>
-          <Link
-            className={css.nav_auth}
-            href="/order"
-            prefetch={false}
-            onClick={onClick}
-          >
-            Кабінет
-          </Link>
-        </li>
-      ) : (
-        <>
+        <ul className={css.auth_ul}>
           <li>
             <Link
-              className={css.nav_auth}
+              className={css.auth_li_cabinet}
+              href="/order"
+              prefetch={false}
+              onClick={onClick}
+            >
+              Кабінет
+            </Link>
+          </li>
+        </ul>
+      ) : (
+        <ul className={css.auth_ul}>
+          <li>
+            <Link
+              className={css.auth_li}
               href="/auth/login"
               prefetch={false}
               onClick={onClick}
@@ -39,7 +41,7 @@ export default function AuthNavigation({ onClick }: AuthNavigationProps) {
           </li>
           <li>
             <Link
-              className={css.nav_auth_in}
+              className={css.auth_in_li}
               href="/auth/register"
               prefetch={false}
               onClick={onClick}
@@ -47,7 +49,7 @@ export default function AuthNavigation({ onClick }: AuthNavigationProps) {
               Реєстрація
             </Link>
           </li>
-        </>
+        </ul>
       )}
     </>
   );

@@ -130,7 +130,7 @@ export default function Header() {
         </nav>
 
         <nav className={css.desktop_menu}>
-          {/* <AuthNavigation onClick={closeMenu} /> */}
+          <AuthNavigation onClick={closeMenu} />
           <Link className={css.basket} href="/basket" aria-label="Home">
             <Image
               className={css.logo}
@@ -146,7 +146,10 @@ export default function Header() {
       </Container>
 
       {isMenuOpen && (
-        <nav className={css.mobile_menu} aria-hidden={!isMenuOpen}>
+        <nav
+          className={`${css.mobile_menu} ${css.mobile_nav_menu}`}
+          aria-hidden={!isMenuOpen}
+        >
           <ul className={css.nav}>
             <li className={css.nav_item}>
               <Link
@@ -178,8 +181,8 @@ export default function Header() {
                 Категорії
               </Link>
             </li>
-            <AuthNavigation onClick={closeMenu} />
           </ul>
+          <AuthNavigation onClick={closeMenu} />
         </nav>
       )}
     </header>
