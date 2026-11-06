@@ -1,10 +1,7 @@
 
-import GoodsPage from "@/components/GoodsPage/goodsPage";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <main>
-          <GoodsPage />
-    </main>
-  );
+  redirect("/homePage");
+  return null;
 }
