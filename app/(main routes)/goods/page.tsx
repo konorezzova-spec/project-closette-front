@@ -1,62 +1,31 @@
+
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import Link from "next/link";
 import css from "./PopularProducts.module.css";
-
-
-interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
-  category: string;
-  rating: number;
-  reviewsCount: number;
-}
-
-interface ProductsResponse {
-  products: Product[];
-  total: number;
-}
+import type { ProductsResponse } from "@/types/good";
+import  { getPopularProducts } from "@/lib/api/clientApi"
 
 export default function PopularProducts() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [activePage, setActivePage] = useState(0);
+  
+  const {
+  data,
+  isLoading,
+  isError,
+  error,
+} = useQuery<ProductsResponse>({
+  queryKey: ["popularProducts"],
+  queryFn: getPopularProducts,
+});
 
+  const products = data?.products ?? [];
+
+  const [activePage, setActivePage] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  
-  useEffect(() => {
-    async function getPopularProducts() {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/products/popular`,
-        );
-
-        if (!response.ok) {
-          throw new Error(`Помилка завантаження: HTTP ${response.status}`);
-        }
-
-        const data: ProductsResponse = await response.json();
-        setProducts(data.products);
-      } catch (error) {
-        setError(
-          error instanceof Error
-            ? error.message
-            : "Не вдалося завантажити товари",
-        );
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    getPopularProducts();
-  }, []);
-
-  
   const updatePagination = () => {
     const slider = sliderRef.current;
 
@@ -74,7 +43,6 @@ export default function PopularProducts() {
     return Math.max(1, Math.ceil(slider.scrollWidth / slider.clientWidth));
   };
 
-  
   const scrollToPage = (page: number) => {
     const slider = sliderRef.current;
 
@@ -94,7 +62,6 @@ export default function PopularProducts() {
   return (
     <section className={css.section}>
       <div className={css.container}>
-        {/* 🟩 Заголовок секції */}
         <div className={css.header}>
           <h2 className={css.title}>Популярні товари</h2>
 
@@ -103,14 +70,19 @@ export default function PopularProducts() {
           </Link>
         </div>
 
-        
-        {loading && <p className={css.message}>Завантаження товарів...</p>}
+                {isLoading && (
+          <p className={css.message}>Завантаження товарів...</p>
+        )}
 
-       
-        {error && <p className={css.error}>{error}</p>}
+        {isError && (
+          <p className={css.error}>
+            {error instanceof Error
+              ? error.message
+              : "Не вдалося завантажити товари"}
+          </p>
+        )}
 
-        
-        {!loading && !error && products.length > 0 && (
+        {!isLoading && !isError && products.length > 0 && (
           <>
             <div className={css.sliderWrapper}>
               <div
@@ -125,10 +97,10 @@ export default function PopularProducts() {
                       className={css.imageLink}
                     >
                       <div className={css.imageWrapper}>
-                        <img
-                          src={product.imageUrl}
+                    <Image
+                          src={product.image}
                           alt={product.name}
-                          className={css.productImage}
+                           className={css.productImage}
                         />
                       </div>
                     </Link>
@@ -136,8 +108,12 @@ export default function PopularProducts() {
                     <div className={css.productInfo}>
                       <div className={css.productTop}>
                         <div>
-                          <h3 className={css.productName}>{product.name}</h3>
-                          <p className={css.category}>{product.category}</p>
+                          <h3 className={css.productName}>
+                            {product.name}
+                          </h3>
+                          <p className={css.category}>
+                            {product.category}
+                          </p>
                         </div>
 
                         <p className={css.price}>
@@ -167,7 +143,6 @@ export default function PopularProducts() {
                 ))}
               </div>
 
-              
               <button
                 type="button"
                 className={`${css.arrow} ${css.prev}`}
@@ -195,7 +170,6 @@ export default function PopularProducts() {
               </button>
             </div>
 
-           
             <div className={css.pagination}>
               {Array.from({ length: getPageCount() }).map((_, index) => (
                 <button
@@ -212,8 +186,10 @@ export default function PopularProducts() {
           </>
         )}
 
-        {!loading && !error && products.length === 0 && (
-          <p className={css.message}>Популярних товарів поки немає.</p>
+        {!isLoading && !isError && products.length === 0 && (
+          <p className={css.message}>
+            Популярних товарів поки немає.
+          </p>
         )}
       </div>
     </section>

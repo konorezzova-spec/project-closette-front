@@ -10,3 +10,19 @@ export interface Category {
   name: string;
   // приклад
 }
+
+ export interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+  rating: number;
+   reviewsCount: number;
+   
+}
+
+export interface ProductsResponse {
+  products: Product[];
+  total: number;
+}
