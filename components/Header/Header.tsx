@@ -10,6 +10,7 @@ import close from "/public/header/close.svg";
 import { useState, useEffect } from "react";
 import basket from "/public/header/basket.svg";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
+import { useOrderStore } from "@/lib/store/basketStore";
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
@@ -45,6 +46,12 @@ export default function Header() {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  const goodsOrderList = useOrderStore(state => state.draft.goodsOrderList);
+  const totalQuantity = goodsOrderList.reduce(
+    (total, good) => total + good.quantity,
+    0
+  );
   return (
     <header className={`${css.header} ${isVisible ? css.visible : css.hidden}`}>
       <Container className={`${css.header_container}`}>
@@ -125,7 +132,7 @@ export default function Header() {
               height={36}
               priority
             />
-            <p className={css.amount}>{20}</p>
+            <p className={css.amount}>{totalQuantity}</p>
           </Link>
         </nav>
 
@@ -140,7 +147,7 @@ export default function Header() {
               height={36}
               priority
             />
-            <p className={css.amount}>{20}</p>
+            <p className={css.amount}>{totalQuantity}</p>
           </Link>
         </nav>
       </Container>
