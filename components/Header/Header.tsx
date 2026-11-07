@@ -10,6 +10,7 @@ import close from "/public/header/close.svg";
 import { useState, useEffect } from "react";
 import basket from "/public/header/basket.svg";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
+import { useOrderStore } from "@/lib/store/basketStore";
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
@@ -45,6 +46,12 @@ export default function Header() {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  const goodsOrderList = useOrderStore(state => state.draft.goodsOrderList);
+  const totalQuantity = goodsOrderList.reduce(
+    (total, good) => total + good.quantity,
+    0
+  );
   return (
     <header className={`${css.header} ${isVisible ? css.visible : css.hidden}`}>
       <Container className={`${css.header_container}`}>
@@ -125,12 +132,12 @@ export default function Header() {
               height={36}
               priority
             />
-            <p className={css.amount}>{20}</p>
+            <p className={css.amount}>{totalQuantity}</p>
           </Link>
         </nav>
 
         <nav className={css.desktop_menu}>
-          {/* <AuthNavigation onClick={closeMenu} /> */}
+          <AuthNavigation onClick={closeMenu} />
           <Link className={css.basket} href="/basket" aria-label="Home">
             <Image
               className={css.logo}
@@ -140,13 +147,16 @@ export default function Header() {
               height={36}
               priority
             />
-            <p className={css.amount}>{20}</p>
+            <p className={css.amount}>{totalQuantity}</p>
           </Link>
         </nav>
       </Container>
 
       {isMenuOpen && (
-        <nav className={css.mobile_menu} aria-hidden={!isMenuOpen}>
+        <nav
+          className={`${css.mobile_menu} ${css.mobile_nav_menu}`}
+          aria-hidden={!isMenuOpen}
+        >
           <ul className={css.nav}>
             <li className={css.nav_item}>
               <Link
@@ -178,8 +188,8 @@ export default function Header() {
                 Категорії
               </Link>
             </li>
-            <AuthNavigation onClick={closeMenu} />
           </ul>
+          <AuthNavigation onClick={closeMenu} />
         </nav>
       )}
     </header>

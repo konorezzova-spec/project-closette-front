@@ -8,3 +8,7 @@
 .main {
   flex-grow: 1;
 }
+
+.plug {
+  height: 80px;
+}
