@@ -11,17 +11,13 @@ import  { getPopularProducts } from "@/lib/api/clientApi"
 
 export default function PopularProducts() {
   
-  const {
-  data,
-  isLoading,
-  isError,
-  error,
-} = useQuery<ProductsResponse>({
+  const { data, isLoading, isError, error } = useQuery<ProductsResponse>({
   queryKey: ["popularProducts"],
   queryFn: getPopularProducts,
 });
 
-  const products = data?.products ?? [];
+
+const products = data?.data.goods ?? [];
 
   const [activePage, setActivePage] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -56,8 +52,8 @@ export default function PopularProducts() {
     setActivePage(page);
   };
 
-  const formatPrice = (price: number) =>
-    new Intl.NumberFormat("uk-UA").format(price);
+const formatPrice = (price: { value: number; currency: string }) =>
+  new Intl.NumberFormat("uk-UA").format(price.value)
 
   return (
     <section className={css.section}>
@@ -117,18 +113,19 @@ export default function PopularProducts() {
                         </div>
 
                         <p className={css.price}>
-                          {formatPrice(product.price)} грн
-                        </p>
+  
+  {formatPrice(product.price)} {product.price.currency}
+</p>
                       </div>
 
                       <div className={css.rating}>
                         <span className={css.stars}>
-                          {"★".repeat(Math.round(product.rating))}
+                          {"★".repeat(0)}
                         </span>
 
                         <span className={css.reviews}>
                           <span aria-hidden="true">▤</span>
-                          {product.reviewsCount}
+                         {product.feedbacks?.length ?? 0}
                         </span>
                       </div>
 

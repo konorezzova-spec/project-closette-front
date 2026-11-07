@@ -1,8 +1,14 @@
 export interface Good {
-  _id: string;
-  title: string;
-  category: string;
-  // Приклад
+  _id: string
+  name: string
+  image: string
+  price: {
+    value: number
+    currency: string
+  }
+  category: string
+
+  feedbacks: string[]
 }
 
 export interface Category {
@@ -12,17 +18,25 @@ export interface Category {
 }
 
  export interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-  rating: number;
-   reviewsCount: number;
-   
+  _id: string
+  name: string
+  image: string
+  category: string
+  price: {
+    value: number
+    currency: string
+  }
+  feedbacks?: string[]
 }
 
 export interface ProductsResponse {
-  products: Product[];
-  total: number;
+  status: number;
+  message: string;
+  data: {
+    goods: Good[];
+    totalItems: number;
+    page: number;
+    perPage: number;
+    totalPages: number;
+  };
 }
