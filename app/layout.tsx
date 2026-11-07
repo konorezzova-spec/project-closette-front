@@ -40,7 +40,10 @@ export default async function RootLayout({ children, modal }: Props) {
         <TanStackProvider>
           {/* <AuthProvider> */}
 
-          <main className={css.main}>{children}</main>
+          <main className={css.main}>
+            <div className={css.plug}></div>
+            {children}
+          </main>
           {modal}
 
           {/* </AuthProvider> */}
