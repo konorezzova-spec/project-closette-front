@@ -31,6 +31,18 @@ const mockGood = {
   ],
 };
 
+const splitDescription = (description: string) => {
+  const sentences = description.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+
+  const paragraphs = [];
+
+  for (let i = 0; i < sentences.length; i += 3) {
+    paragraphs.push(sentences.slice(i, i + 3).join(" "));
+  }
+
+  return paragraphs;
+};
+
 const GoodForPurchase = () => {
   const { id } = useParams<{ id: string }>();
 
@@ -52,28 +64,42 @@ const GoodForPurchase = () => {
     <main className={css.main}>
       <div className={css.container}>
         <div className={css.item}>
-          <Image className={css.img}
-            src={mockGood.image}
-            alt={mockGood.name}
-            width={640}
-            height={700}
-          />
-          <h3>{mockGood.name}</h3>
-          <p className={css.price}>
-            {mockGood.price.value}
-            {mockGood.price.currency}
-          </p>
-          <p className={css.prevDescription}>{mockGood.prevDescription}</p>
-          {/* форма вибору розміру */}
-          {/* Button: Додати в кошик + форма кількості товару */}
-          {/* Button: Купити зараз */}
-          <p>Безкоштовна доставка для замовлень від 1000 грн</p>
-          <p className={css.description}>{mockGood.description}</p>
-          <ul className={css.characteristics}>
-            {mockGood.characteristics.map(characteristic => (
-              <li key={characteristic}>{characteristic}</li>
-            ))}
-          </ul>
+          <div className={css.thumb}>
+            <Image
+              className={css.img}
+              src={mockGood.image}
+              alt={mockGood.name}
+              width={640}
+              height={700}
+            />
+          </div>
+          <div className={css.wrapper}>
+            <h2>{mockGood.name}</h2>
+            <p className={css.price}>
+              {mockGood.price.value}
+              {mockGood.price.currency}
+            </p>
+            <p className={css.prevDescription}>{mockGood.prevDescription}</p>
+            {/* форма вибору розміру */}
+            {/* Button: Додати в кошик + форма кількості товару */}
+            {/* Button: Купити зараз */}
+            <p>Безкоштовна доставка для замовлень від 1000 грн</p>
+            <p>Опис</p>
+            {/* <p className={css.description}>{mockGood.description}</p> */}
+            <div className={css.description}>
+              {splitDescription(mockGood.description).map(
+                (paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                )
+              )}
+            </div>
+            <p>Основні характеристики</p>
+            <ul className={css.characteristics}>
+              {mockGood.characteristics.map(characteristic => (
+                <li key={characteristic}>{characteristic}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </main>
