@@ -1,46 +1,23 @@
 export interface Good {
   _id: string;
   name: string;
-  category: string;
   image: string;
   price: {
     value: number;
     currency: string;
   };
-  size: ("XS" | "S" | "M" | "L" | "XL" | "XXL")[];
-  description: string;
-  feedbacks: string[];
-  prevDescription: string;
-  characteristics: string[];
+  feedbacks?: string[];
 }
 
-export interface Category {
-  _id: string;
-  name: string;
-  // приклад
+export interface GoodsResponse {
+  goods: Good[];
+  totalItems: number;
+  page: number;
+  totalPages: number;
 }
 
- export interface Product {
-  _id: string
-  name: string
-  image: string
-  category: string
-  price: {
-    value: number
-    currency: string
-  }
-  feedbacks?: string[]
-}
-
-export interface ProductsResponse {
+export interface GoodsHttpResponse {
   status: number;
   message: string;
-  data: {
-    goods: Good[];
-    totalItems: number;
-    page: number;
-    perPage: number;
-    totalPages: number;
-  };
+  data: GoodsResponse;
 }
-
