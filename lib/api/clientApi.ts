@@ -1,4 +1,5 @@
 import { Good } from "@/types/good";
+import type { CategoriesResponse } from "@/types/category";
 import { nextServer } from "./api";
 
 export interface fetchParams {
@@ -26,3 +27,13 @@ export const fetchGoods = async (
 
   return data;
 };
+
+export async function fetchCategories(
+  page: number,
+  perPage: number,
+): Promise<CategoriesResponse> {
+  const { data } = await nextServer.get("/categories", {
+    params: { page, perPage },
+  });
+  return data.data;
+}
