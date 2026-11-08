@@ -6,18 +6,19 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import css from "./PopularProducts.module.css";
-import type { ProductsResponse } from "@/types/good";
-import  { getPopularProducts } from "@/lib/api/clientApi"
+import { fetchGoods } from "@/lib/api/clientApi";
+
 
 export default function PopularProducts() {
   
-  const { data, isLoading, isError, error } = useQuery<ProductsResponse>({
-  queryKey: ["popularProducts"],
-  queryFn: getPopularProducts,
+ const { data, isLoading, isError, error } = useQuery({
+  queryKey: ["goods", { page: 1, perPage: 12 }],
+  queryFn: () => fetchGoods({ page: 1, perPage: 12 }),
 });
 
 
-const products = data?.data.goods ?? [];
+
+const products = data?.data?.goods ?? [];
 
   const [activePage, setActivePage] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -115,8 +116,8 @@ const formatPrice = (price: { value: number; currency: string }) =>
                         </div>
 
                         <p className={css.price}>
-  
-  {formatPrice(product.price)} {product.price.currency}
+  {new Intl.NumberFormat("uk-UA").format(product.price.value)}{" "}
+  {product.price.currency}
 </p>
                       </div>
 

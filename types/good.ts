@@ -1,14 +1,17 @@
 export interface Good {
-  _id: string
-  name: string
-  image: string
+  _id: string;
+  name: string;
+  category: string;
+  image: string;
   price: {
-    value: number
-    currency: string
-  }
-  category: string
-
-  feedbacks: string[]
+    value: number;
+    currency: string;
+  };
+  size: ("XS" | "S" | "M" | "L" | "XL" | "XXL")[];
+  description: string;
+  feedbacks: string[];
+  prevDescription: string;
+  characteristics: string[];
 }
 
 export interface Category {
@@ -40,3 +43,4 @@ export interface ProductsResponse {
     totalPages: number;
   };
 }
+
