@@ -1,0 +1,6 @@
+.hero{
+    background: var(--color-scheme-4-background);
+    padding: 112px 64px;
+    width: 1440px;
+    height: 618px;
+}

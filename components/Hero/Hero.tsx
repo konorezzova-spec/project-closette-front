@@ -3,10 +3,8 @@ import Container from "../Container/Container";
 
 export default function Hero() {
 return 
-
-    <Container> 
+    <Container className={css.hero}> 
         <p>Hero</p>
     </Container>;
-
 }
 
