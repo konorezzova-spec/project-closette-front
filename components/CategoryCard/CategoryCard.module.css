@@ -5,6 +5,7 @@
 }
 
 .thumb {
+  background-color: var(--color-neutral-lighter);
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 2;

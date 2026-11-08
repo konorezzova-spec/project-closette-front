@@ -1,7 +1,7 @@
 export interface Category {
   _id: string;
   name: string;
-  img: string;
+  image: string;
 }
 
 export interface CategoriesResponse {

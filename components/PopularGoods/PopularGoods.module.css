@@ -1,0 +1,18 @@
+.popularGoodsNavigation {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+
+  button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 250ms ease;
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+}
