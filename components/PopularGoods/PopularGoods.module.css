@@ -1,14 +1,112 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 48px;
+  margin-bottom: 40px;
+}
+
+.header h2 {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  color: var(--color-scheme-1-text);
+}
+
+.header_link {
+  background-color: var(--opacity-neutral-darkest-5);
+  border: 1px solid var(--opacity-transparent);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  width: 158px;
+  height: 36px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-neutral-darkest);
+}
+
+.image_container {
+  position: relative;
+  width: 335px;
+  height: 413px;
+  margin-bottom: 16px;
+}
+
+.image {
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.lower_group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 150%;
+  color: var(--color-scheme-1-text);
+  margin-bottom: 16px;
+}
+
+.left_side {
+  display: flex;
+  flex-direction: column;
+  width: 231px;
+}
+
+.price {
+  font-size: 20px;
+}
+
+.img_wrapper p {
+  display: inline-block;
+  margin-right: 12px;
+  /* margin-bottom: 16px; */
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.detale {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+  border: 1px solid var(--opacity-transparent);
+  border-radius: 100px;
+  padding: 4px 10px;
+  width: 335px;
+  height: 40px;
+  background-color: var(--opacity-neutral-darkest-5);
+}
+
+/* #region swiper */
+
 .popularGoodsNavigation {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   gap: 12px;
 
   button {
+    border: 1px solid var(--color-scheme-1-background);
+    border-radius: 100px;
+    padding: 12px;
     width: 48px;
     height: 48px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: opacity 250ms ease;
+    background-color: var(--color-scheme-5-foreground);
 
     &:disabled {
       opacity: 0.3;

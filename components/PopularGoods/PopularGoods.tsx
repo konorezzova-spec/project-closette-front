@@ -4,9 +4,10 @@ import { useRef, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Keyboard, A11y } from "swiper/modules";
+import { Keyboard, A11y, Pagination } from "swiper/modules";
 import type { Swiper as SwiperInstance } from "swiper/types";
 import "swiper/css";
+import "swiper/css/pagination";
 
 import Container from "@/components/Container/Container";
 import Loader from "../Loader/Loader";
@@ -15,6 +16,9 @@ import { Good } from "@/types/good";
 import Image from "next/image";
 import css from "./PopularGoods.module.css";
 import { fetchGoods } from "@/lib/api/clientApi";
+import Link from "next/link";
+import star from "/public/star-filled.svg";
+import comment from "/public/comment.svg";
 
 export default function PopularGoods() {
   const swiperRef = useRef<SwiperInstance | null>(null);
@@ -29,8 +33,6 @@ export default function PopularGoods() {
     placeholderData: keepPreviousData,
   });
   const goods: Good[] = data?.data?.goods ?? [];
-  console.log("DATA:", data);
-  console.log("GOODS:", goods);
 
   const handleSlideChange = (swiper: SwiperInstance) => {
     setIsBeginning(swiper.isBeginning);
@@ -45,12 +47,17 @@ export default function PopularGoods() {
     swiperRef.current?.slideNext();
   };
 
+  // Ref для пагінації
+  const paginationRef = useRef<HTMLDivElement>(null);
+
   return (
     <Container>
-      <div className="popularGoodsHeader">
+      <div className={css.header}>
         <h2>Популярні товари</h2>
 
-        <button type="button">Всі товари</button>
+        <Link href="/goods" className={css.header_link}>
+          Всі товари
+        </Link>
       </div>
 
       {isLoading && <Loader />}
@@ -60,7 +67,16 @@ export default function PopularGoods() {
       {goods.length > 0 && (
         <>
           <Swiper
-            modules={[Keyboard, A11y]}
+            modules={[Keyboard, A11y, Pagination]}
+            onBeforeInit={swiper => {
+              if (paginationRef.current) {
+                swiper.params.pagination = {
+                  el: paginationRef.current,
+                  clickable: true,
+                  dynamicBullets: false,
+                };
+              }
+            }}
             onSwiper={swiper => {
               swiperRef.current = swiper;
               handleSlideChange(swiper);
@@ -73,6 +89,11 @@ export default function PopularGoods() {
               prevSlideMessage: "Previous slide",
               nextSlideMessage: "Next slide",
             }}
+            // pagination={{
+            //   el: .${css.pagination},
+            //   clickable: true,
+            //   dynamicBullets: true,
+            // }}
             slidesPerView={1}
             spaceBetween={16}
             breakpoints={{
@@ -88,27 +109,57 @@ export default function PopularGoods() {
           >
             {goods.map(good => (
               <SwiperSlide key={good._id}>
-                <Image
-                  src={
-                    good.image ||
-                    "https://res.cloudinary.com/rvojizer/image/upload/v1793553598/Default_dish.webp"
-                  }
-                  alt="Good image"
-                  className={css.image}
-                  width="335"
-                  height="413"
-                ></Image>
-                <div className={css.left_side}>
-                  <p className={css.good_name}>{good.name}</p>
+                <div className={css.image_container}>
+                  <Image
+                    src={
+                      good.image ||
+                      "https://res.cloudinary.com/rvojizer/image/upload/v1793553598/Default_dish.webp"
+                    }
+                    alt={good.name}
+                    className={css.image}
+                    fill
+                    sizes="(min-width: 1440px) 25vw, (min-width: 768px) 50vw, 100vw"
+                  ></Image>
                 </div>
-                <div className={css.price}>
-                  <p>{`${good.price.value} ${good.price.value}`}</p>
+                <div className={css.lower_group}>
+                  <div className={css.bottom}>
+                    <div className={css.left_side}>
+                      <p className={css.good_name}>{good.name}</p>
+                      <div className={css.img_wrapper}>
+                        <Image
+                          src={star}
+                          alt="Rating"
+                          className={css.image}
+                          width={16}
+
+                          height={16}
+                        ></Image>
+                        <p>{5}</p>
+                        <Image
+                          src={comment}
+                          alt="Comments"
+                          className={css.image}
+                          width={16}
+
+                          height={16}
+                        ></Image>
+                        <p>{good.feedbacks.length}</p>
+                      </div>
+                    </div>
+                    <div className={css.price}>
+                      <p>{`${good.price.value} ${good.price.currency}`}</p>
+                    </div>
+                  </div>
+                  <Link className={css.detale} href={`/goods/${good._id}`}>
+                    Детальніше
+                  </Link>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
 
-          <div className="popularGoodsNavigation">
+          <div className={css.popularGoodsNavigation}>
+            <div ref={paginationRef} className={css.pagination} />
             <button
               type="button"
               onClick={handlePrev}
