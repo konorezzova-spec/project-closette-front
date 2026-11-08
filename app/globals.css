@@ -66,7 +66,7 @@
   --color-red: #9d0000;
 
   --font-family: var(--font-inter), sans-serif;
-  --second-family: var(--nunito_sans), sans-serif;
+  --second-family: var(--font-nunito-sans), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

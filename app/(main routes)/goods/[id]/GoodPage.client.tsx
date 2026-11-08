@@ -5,7 +5,10 @@ import { useParams } from "next/navigation";
 import { fetchGoodById } from "@/lib/api/clientApi";
 import Image from "next/image";
 
+import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+
 import css from "./GoodPage.client.module.css";
+import { useState } from "react";
 
 const mockGood = {
   _id: "6877b9f116ae59c7b60d0107",
@@ -44,6 +47,8 @@ const splitDescription = (description: string) => {
 };
 
 const GoodForPurchase = () => {
+  const [selectedSize, setSelectedSize] = useState("L");
+  const [quantity, setQuantity] = useState<string>("1");
   const { id } = useParams<{ id: string }>();
 
   // const {
@@ -73,17 +78,54 @@ const GoodForPurchase = () => {
               height={700}
             />
           </div>
+
           <div className={css.wrapper}>
-            <h2>{mockGood.name}</h2>
+            <Breadcrumbs productName={mockGood.name} />
+            <h3 className={css.title}>{mockGood.name}</h3>
             <p className={css.price}>
               {mockGood.price.value}
               {mockGood.price.currency}
             </p>
             <p className={css.prevDescription}>{mockGood.prevDescription}</p>
-            {/* форма вибору розміру */}
-            {/* Button: Додати в кошик + форма кількості товару */}
-            {/* Button: Купити зараз */}
-            <p>Безкоштовна доставка для замовлень від 1000 грн</p>
+            <div className={css.sizeSelector}>
+              <p>Розмір</p>
+              <div className={css.selectWrapper}>
+                <select
+                  className={css.sizeSelect}
+                  value={selectedSize}
+                  onChange={event => setSelectedSize(event.target.value)}
+                >
+                  {mockGood.size.map(size => (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  ))}
+                </select>
+
+                <span className={css.selectArrow}></span>
+              </div>
+            </div>
+            <div className={css.cartActions}>
+              {/* <button type="button" onClick={handleAddToCart}></button> */}
+              <button className={css.btn} type="button">
+                Додати в кошик
+              </button>
+              <div className={css.quantity}>
+                <input
+                  type="number"
+                  min="1"
+                  step="1"
+                  value={quantity}
+                  onChange={e => setQuantity(e.target.value)}
+                />
+              </div>
+            </div>
+            <button className={css.btn} type="button">
+              Купити зараз
+            </button>
+            <p className={css.delivery}>
+              Безкоштовна доставка для замовлень від 1000 грн
+            </p>
             <p>Опис</p>
             {/* <p className={css.description}>{mockGood.description}</p> */}
             <div className={css.description}>
