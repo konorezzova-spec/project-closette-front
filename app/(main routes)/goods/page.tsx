@@ -92,13 +92,15 @@ const formatPrice = (price: { value: number; currency: string }) =>
                       href={`/products/${product._id}`}
                       className={css.imageLink}
                     >
-                      <div className={css.imageWrapper}>
-                    <Image
-                          src={product.image}
-                          alt={product.name}
-                           className={css.productImage}
-                        />
-                      </div>
+                     <div className={css.imageWrapper}>
+  <Image
+    src={product.image}
+    alt={product.name}
+    fill // 🟩
+    sizes="(max-width: 768px) 100vw, 300px" // 🟩
+    className={css.productImage}
+  />
+</div>
                     </Link>
 
                     <div className={css.productInfo}>
