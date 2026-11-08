@@ -1,34 +1,38 @@
 
 .hero_content{
-    margin: 112px 0px;
-    /* width: 1312px; */
-    height: 394px;
-    max-width: 1312px;
+    padding-top: 64px;
+    padding-bottom: 64px;
     border: 1px solid darkred;
 }
 .hero_left{
-    margin: 30px 32px 30px 0px;
+    /* margin: 30px 32px 30px 0px;
     max-width: 640px;
-    max-height: 334px;
+    max-height: 334px; */
     border: 1px solid darkred;
+    margin-bottom: 32px;
 }
 
-.hero_right_image{
-    width: 640px;
-    max-height: 394px;
+.hero_right_img{
+    position: relative;
+    width: 100%;
+    max-width: 335px;
+    aspect-ratio: 1 / 1;
     border: 1px solid darkred;
 }
 
 .hero_title{
     font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 40px;
     line-height: 120%;
     letter-spacing: -0.01em;
     color: var(--color-scheme-4-text);
-    margin-bottom: 24;
+    margin-bottom: 24px;
 }
 
 .hero_subtitle{
     font-family: var(--font-family);
+    font-weight: 400;
     font-size: 18px;
     line-height: 150%;
     color: var(--color-scheme-4-text);
@@ -37,6 +41,7 @@
 
 .hero_btns{
     display: flex;
+    flex-direction: column;
     gap: 16px;
     border: 1px solid darkred;
 }
@@ -48,29 +53,28 @@
     border: 1px solid var(--color-deco);
     border-radius: 100px;
     padding: 6px 12px;
-    width: 110x;
+    max-width: 335px;
     height: 36px;
-    background: var(--color-deco);
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 16px;
     line-height: 150%;
-    /* text- */
     color: var(--color-neutral-darkest);
+    background: var(--color-deco);
+    /* margin-bottom: 16px;  */
 }
 .hero_btn_right{
-    display: flex;
+     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--opacity-transparent);
     border-radius: 100px;
     padding: 6px 12px;
-    width: 181px;
+    width: 335px;
     height: 36px;
     background: var(--opacity-neutral-darkest-5);
 }
 
-.hero_btn:hover{
-    background-color: var(--color-scheme-4-text);
-    color: var(--color-scheme-1-text);
-}
+/* .hero_btn:hover {
+    /* background-color: var(--color-scheme-4-text);
+    color: var(--color-scheme-1-text); }*/

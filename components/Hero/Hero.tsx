@@ -11,11 +11,11 @@ return (
                 <h1 className={css.hero_title}>
                     Знайди свій стиль з Clothica вже сьогодні!
                 </h1>
-                <p className={css.hero_subtitle}>
+                <h2 className={css.hero_subtitle}>
                     Clothica — це місце, де комфорт поєднується зі стилем. 
                     Ми створюємо базовий одяг, який легко комбінується та підходить для будь-якої нагоди.
                      Обирай речі, що підкреслять твою індивідуальність і завжди будуть актуальними.
-                </p>
+                </h2>
                <div className={css.hero_btns}>
                     <div className={css.hero_btn_left}>
                         <Link href="#products">До товарів</Link>
@@ -26,7 +26,8 @@ return (
                  </div>
             </div>
             <div className={css.hero_right_img}>
-                <p>HERO FOTO</p>
+                <Image src="/imagehero.jpg" alt="image mask group"  fill priority
+                className="object-cover"/>
             </div>
         </div>    
     </Container>
