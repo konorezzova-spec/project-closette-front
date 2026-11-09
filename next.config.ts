@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "ftp.goit.study" },
     ],
   },
-  cacheComponents: true,
-  partialPrefetching: true,
+  // cacheComponents: true,
+  // partialPrefetching: true,
   reactCompiler: true,
 };
 

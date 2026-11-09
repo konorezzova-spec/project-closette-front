@@ -1,8 +1,19 @@
+export type Size = "XXS" | "XS" | "S" | "M" | "L" | "XL" | "XXL";
+
 export interface Good {
   _id: string;
-  title: string;
+  name: string;
   category: string;
-  // Приклад
+  image: string;
+  price: {
+    value: number;
+    currency: string;
+  };
+  size: Size[];
+  description: string;
+  feedbacks: string[];
+  prevDescription: string;
+  characteristics: string[];
 }
 
 export interface Category {

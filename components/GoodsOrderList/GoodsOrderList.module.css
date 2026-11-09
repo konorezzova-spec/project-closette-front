@@ -1,0 +1,160 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  /* color: var(--color-scheme-1-text); */
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item{
+  display: flex;
+  gap: 12px;
+}
+
+.image{
+  flex-shrink: 0;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.details{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name{
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.meta{
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.metaItem{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.price{
+  margin: 0;
+  font-size: 14px;
+}
+
+.actions{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-top: 0;
+}
+
+.quantity{
+  width: 72px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-scheme-1-border);
+  border-radius: 8px;
+  background-color: var(--color-scheme-1-foreground);
+  color: var(--color-scheme-1-text);
+  color: inherit;
+  font: inherit;
+}
+
+.deleteBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border: none;
+  border-radius: 8px;
+  color: var(--color-scheme-1-text);
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+}
+
+.deleteBtn:hover,
+.deleteBtn:focus-visible{
+  background-color:var(--color-deco-light);
+}
+
+.summary{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-scheme-1-border);
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.row dd{
+  margin: 0;
+}
+
+.total{
+  font-size: 16px;
+  font-weight: 700;
+}
+
+@media screen and (min-width: 768px) {
+  .item{
+    align-items: center;
+    gap: 16px;
+  }
+
+  .content{
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .details{
+    flex-grow: 1;
+  }
+  
+  .price{
+    flex-shrink: 0;
+  }
+
+  .name,
+  .price,
+  .row{
+    font-size: 16px;
+  }
+
+  .total{
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1440px){
+  .list{
+    gap: 24px;
+  }
+}
