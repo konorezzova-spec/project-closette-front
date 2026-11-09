@@ -47,11 +47,8 @@ export default function PopularGoods() {
     swiperRef.current?.slideNext();
   };
 
-  // Ref для пагінації
-  const paginationRef = useRef<HTMLDivElement>(null);
-
   return (
-    <Container>
+    <Container className={css.container}>
       <div className={css.header}>
         <h2>Популярні товари</h2>
 
@@ -68,32 +65,21 @@ export default function PopularGoods() {
         <>
           <Swiper
             modules={[Keyboard, A11y, Pagination]}
-            onBeforeInit={swiper => {
-              if (paginationRef.current) {
-                swiper.params.pagination = {
-                  el: paginationRef.current,
-                  clickable: true,
-                  dynamicBullets: false,
-                };
-              }
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
+              dynamicMainBullets: 3,
             }}
             onSwiper={swiper => {
               swiperRef.current = swiper;
               handleSlideChange(swiper);
             }}
             onSlideChange={handleSlideChange}
-            keyboard={{
-              enabled: true,
-            }}
+            keyboard={{ enabled: true }}
             a11y={{
               prevSlideMessage: "Previous slide",
               nextSlideMessage: "Next slide",
             }}
-            // pagination={{
-            //   el: .${css.pagination},
-            //   clickable: true,
-            //   dynamicBullets: true,
-            // }}
             slidesPerView={1}
             spaceBetween={16}
             breakpoints={{
@@ -159,21 +145,23 @@ export default function PopularGoods() {
           </Swiper>
 
           <div className={css.popularGoodsNavigation}>
-            <div ref={paginationRef} className={css.pagination} />
+            {/* <div className={css.pagination} /> */}
             <button
               type="button"
+              className={css.btn_left}
               onClick={handlePrev}
               disabled={isBeginning}
-              aria-label="Попередні товари"
+              aria-label="Previous goods"
             >
               ←
             </button>
 
             <button
               type="button"
+              className={css.btn_right}
               onClick={handleNext}
               disabled={isEnd}
-              aria-label="Наступні товари"
+              aria-label="Next goods"
             >
               →
             </button>
