@@ -14,13 +14,13 @@ return (
                 <h2 className={css.hero_subtitle}>
                     Clothica — це місце, де комфорт поєднується зі стилем. 
                     Ми створюємо базовий одяг, який легко комбінується та підходить для будь-якої нагоди.
-                     Обирай речі, що підкреслять твою індивідуальність і завжди будуть актуальними.
+                    Обирай речі, що підкреслять твою індивідуальність і завжди будуть актуальними.
                 </h2>
                <div className={css.hero_btns}>
                     <div className={css.hero_btn_left}>
                         <Link href="#products">До товарів</Link>
                     </div>
-                    <div className={css.hero_btn_right} >
+                    <div className={css.hero_btn_right}>
                         <Link href="#about">Дізнатися більше</Link>
                     </div>
                  </div>
