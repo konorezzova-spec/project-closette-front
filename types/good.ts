@@ -2,13 +2,14 @@ export type Size = "XXS" | "XS" | "S" | "M" | "L" | "XL" | "XXL";
 
 export interface Good {
   _id: string;
+   category: string;
   name: string;
-  category: string;
   image: string;
   price: {
     value: number;
     currency: string;
   };
+  
   size: Size[];
   description: string;
   feedbacks: string[];
@@ -16,8 +17,15 @@ export interface Good {
   characteristics: string[];
 }
 
-export interface Category {
-  _id: string;
-  name: string;
-  // приклад
+export interface GoodsResponse {
+  goods: Good[];
+  totalItems: number;
+  page: number;
+  totalPages: number;
+}
+
+export interface GoodsHttpResponse {
+  status: number;
+  message: string;
+  data: GoodsResponse;
 }

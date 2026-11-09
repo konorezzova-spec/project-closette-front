@@ -1,8 +1,9 @@
-import { Good } from "@/types/good";
+import type { Good } from "@/types/good";
+
 import type { CategoriesResponse } from "@/types/category";
 import { nextServer } from "./api";
 
-export interface fetchParams {
+export interface FetchParams {
   page: number;
   perPage: number;
   category?: string;
@@ -10,16 +11,23 @@ export interface fetchParams {
   price?: number;
   gender?: string;
 }
+
+// 🟩 Структура відповіді API
 export interface GoodsHttpResponse {
-  data: { goods: Good[] };
-  page: number;
-  perPage: number;
-  totalPages: number;
-  totalItems: number;
+  status: number;
+  message: string;
+  data: {
+    goods: Good[];
+    page: number;
+    perPage: number;
+    totalPages: number;
+    totalItems: number;
+  };
 }
 
+// 🟩 Запит товарів
 export const fetchGoods = async (
-  fetchParams: fetchParams
+  fetchParams: FetchParams
 ): Promise<GoodsHttpResponse> => {
   const { data } = await nextServer.get<GoodsHttpResponse>("/goods", {
     params: fetchParams,
@@ -27,6 +35,7 @@ export const fetchGoods = async (
 
   return data;
 };
+
 
 export async function fetchCategories(
   page: number,
