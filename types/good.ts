@@ -2,6 +2,7 @@ export type Size = "XXS" | "XS" | "S" | "M" | "L" | "XL" | "XXL";
 
 export interface Good {
   _id: string;
+   category: string;
   name: string;
   image: string;
   price: {
