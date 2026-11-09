@@ -91,9 +91,15 @@ const initialDraft: CreateOrderParams = {
   city: "",
   postOffice: 0,
   amount: 1,
-   goodsOrderList: [{ goodId: "", quantity: 0 }],
+  //  goodsOrderList: [{ goodId: "", quantity: 0 }],
 // перевірка порожнього кошика 
     // goodsOrderList: [],
+    // Тимчасово додаємо два товари для перевірки верстки
+  goodsOrderList: [
+    { goodId: "1", quantity: 1 },
+    { goodId: "2", quantity: 2 }
+    ],
+
 };
 
 /** @deprecated Використовуйте useBasketStore */
