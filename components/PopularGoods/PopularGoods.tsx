@@ -19,6 +19,8 @@ import { fetchGoods } from "@/lib/api/clientApi";
 import Link from "next/link";
 import star from "/public/star-filled.svg";
 import comment from "/public/comment.svg";
+import right from "/public/arrow_forward.svg";
+import left from "/public/arrow_back.svg";
 
 export default function PopularGoods() {
   const swiperRef = useRef<SwiperInstance | null>(null);
@@ -152,7 +154,14 @@ export default function PopularGoods() {
               disabled={isBeginning}
               aria-label="Previous goods"
             >
-              ←
+              <Image
+                src={left}
+                alt="Comments"
+                className={css.image}
+                width={24}
+
+                height={24}
+              ></Image>
             </button>
 
             <button
@@ -162,7 +171,14 @@ export default function PopularGoods() {
               disabled={isEnd}
               aria-label="Next goods"
             >
-              →
+              <Image
+                src={right}
+                alt="Comments"
+                className={css.image}
+                width={24}
+
+                height={24}
+              ></Image>
             </button>
           </div>
         </>
