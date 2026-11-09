@@ -17,6 +17,9 @@
   line-height: 120%;
   letter-spacing: -0.01em;
   color: var(--color-scheme-1-text);
+  @media screen and (min-width: 1440px) {
+    font-size: 48px;
+  }
 }
 
 .header_link {
@@ -33,6 +36,9 @@
   font-size: 16px;
   line-height: 150%;
   color: var(--color-neutral-darkest);
+  @media screen and (min-width: 1440px) {
+    width: 108px;
+  }
 }
 
 .image_container {
@@ -40,6 +46,10 @@
   width: 335px;
   height: 413px;
   margin-bottom: 16px;
+  @media screen and (min-width: 1440px) {
+    width: 304px;
+    height: 375px;
+  }
 }
 
 .image {
@@ -74,23 +84,30 @@
   }
 }
 
-.left_side p {
+.good_name {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  @media screen and (min-width: 768px) {
+    -webkit-line-clamp: 1;
+    margin-bottom: 16px;
+  }
 }
 
 .price {
   font-size: 20px;
 }
 
-.img_wrapper p {
-  display: inline-block;
-  margin-right: 12px;
-  font-weight: 400;
-  font-size: 12px;
-  /* margin-bottom: 16px; */
+.img_wrapper {
+  display: flex;
+  align-items: center;
+  p {
+    display: inline-block;
+    margin-right: 12px;
+    font-weight: 400;
+    font-size: 12px;
+  }
 }
 
 .detale {
@@ -106,16 +123,16 @@
   width: 335px;
   height: 40px;
   background-color: var(--opacity-neutral-darkest-5);
+  @media screen and (min-width: 768px) {
+    width: 304px;
+    height: 40px;
+  }
 }
 
 /* #region  */
 
 .popularGoodsNavigation {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
 }
 
 .btn_left,
@@ -124,7 +141,8 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  z-index: 10;
+  z-index: 2;
+
   border: 1px solid var(--color-scheme-1-background);
   border-radius: 100px;
   padding: 12px;
@@ -163,14 +181,31 @@
   right: 0;
 }
 
+@media screen and (min-width: 768px) {
+  .btn_left {
+    bottom: 415px;
+    left: -24px;
+  }
+
+  .btn_right {
+    bottom: 415px;
+    right: -24px;
+  }
+}
+
 :global(.swiper-pagination) {
   display: inline-block;
   position: absolute !important;
-  left: 35% !important;
 
+  left: 35% !important;
   transform: translateX(-100%) !important;
+
   width: auto;
   margin-bottom: 14px;
+  @media screen and (min-width: 768px) {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
 }
 
 :global(.swiper-pagination-bullet) {
