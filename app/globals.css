@@ -69,21 +69,21 @@
   --second-family: var(--font-nunito-sans), sans-serif;
 }
 
-<<<<<<< HEAD
+
 /* @media (prefers-color-scheme: dark) {
   :root {
     --color-scheme-1-background: var(--color-deco-darkest);
     --color-scheme-1-text: var(--color-white);
   }
 } */
-=======
+
  @media (prefers-color-scheme: dark) {
   :root {
     --color-scheme-1-background: var(--color-deco-darkest);
     --color-scheme-1-text: var(--color-white);
   } 
  } 
->>>>>>> 736c1a4 (feat: without empty basket)
+
 
 html,
 body {
