@@ -14,10 +14,14 @@ import commentIcon from "/public/basket/comment.svg";
 import iconTrash from "/public/basket/iconTrash.svg";
 import starBasket from "/public/basket/starBasket.svg"; */
 
+interface BasketModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
 
 
-
-export const BasketModal = () => {
+export const BasketModal: React.FC<BasketModalProps> = ({ isOpen, onClose, children }) => {
   const router = useRouter();
 
   //  товари з Zustand
@@ -73,7 +77,7 @@ export const BasketModal = () => {
             </Link>
           </div>
         ) : (
-
+         <>
         
         <div className={css.goodsList}>
           {goodsOrderList.map((item) => (
@@ -120,7 +124,7 @@ export const BasketModal = () => {
             </div>
           ))}
         </div>
-        )}
+      
              {/* Статичні блоки підсумків та кнопок, які відображаються завжди */}
         <div className={css.summaryContainer}>
           <div className={css.summaryRow}>
@@ -146,8 +150,9 @@ export const BasketModal = () => {
           <Link href="/order" onClick={closeModal} className={css.orderLink}>
             Оформити замовлення
           </Link>
-        </div>   
-       
+        </div> 
+        </>  
+         )}
       </div>     
     </div>
   )};
