@@ -69,10 +69,10 @@
   }
 }
 
-.link:hover,
+/* .link:hover,
 .link:focus {
   border-bottom: 1px solid var(--color-neutral-darkest);
-}
+} */
 
 .logo {
   fill: var(--color-neutral-darkest);

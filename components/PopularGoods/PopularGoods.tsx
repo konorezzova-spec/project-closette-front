@@ -146,7 +146,6 @@ export default function PopularGoods() {
             ))}
           </Swiper>
           <div className={css.popularGoodsNavigation}>
-            {/* <div className={css.pagination} /> */}
             <button
               type="button"
               className={css.btn_left}
