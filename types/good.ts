@@ -1,3 +1,5 @@
+export type Size = "XXS" | "XS" | "S" | "M" | "L" | "XL" | "XXL";
+
 export interface Good {
   _id: string;
   name: string;
@@ -7,6 +9,11 @@ export interface Good {
     currency: string;
   };
   feedbacks?: string[];
+  size: Size[];
+  description: string;
+  feedbacks: string[];
+  prevDescription: string;
+  characteristics: string[];
 }
 
 export interface GoodsResponse {

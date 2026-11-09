@@ -1,0 +1,24 @@
+.section {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.title {
+  margin-bottom: 32px;
+  font-family: var(--font-nunito-sans), sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.2;
+  color: var(--color-neutral-darkest);
+}
+
+@media screen and (min-width: 1440px) {
+  .section {
+    padding-top: 112px;
+    padding-bottom: 112px;
+  }
+
+  .title {
+    font-size: 56px;
+  }
+}
