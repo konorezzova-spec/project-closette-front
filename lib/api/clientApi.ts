@@ -1,6 +1,9 @@
 import type { Good } from "@/types/good";
 
 import type { CategoriesResponse } from "@/types/category";
+
+import type { CreateOrderParams, Order } from "@/types/order";
+
 import { nextServer } from "./api";
 
 export interface FetchParams {
@@ -45,4 +48,10 @@ export async function fetchCategories(
     params: { page, perPage },
   });
   return data.data;
+}
+
+
+export const createOrder = async (params: CreateOrderParams):Promise<Order> => {
+  const response = await nextServer.post<Order>("/orders", params);
+  return response.data;
 }
