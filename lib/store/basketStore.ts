@@ -9,7 +9,7 @@ interface BasketStore {
   items: OrderItem[];
   addItem: (item: OrderItem) => void;
   removeItem: (id: string, size: Size) => void;
-  updateQuantity: (id: string, size: string, quantity: number) => void;
+  updateQuantity: (id: string, size: Size, quantity: number) => void;
   clearBasket: () => void;
 }
 
