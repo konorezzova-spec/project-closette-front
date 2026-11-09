@@ -5,6 +5,7 @@ import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import { useState } from "react";
 import type { Good } from "@/types/good";
+import Rating from "@/components/Rating/Rating";
 
 const splitDescription = (description: string) => {
   const sentences = description.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
@@ -44,9 +45,9 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
             <Breadcrumbs productName={good.name} />
             <h3 className={css.title}>{good.name}</h3>
             <p className={css.price}>
-              {good.price.value}
-              {good.price.currency}
+              {good.price.value} {good.price.currency}
             </p>
+            <Rating value={4.5} readOnly />
             <p className={css.prevDescription}>{good.prevDescription}</p>
             <div className={css.sizeSelector}>
               <p>Розмір</p>
