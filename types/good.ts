@@ -8,7 +8,7 @@ export interface Good {
     value: number;
     currency: string;
   };
-  feedbacks?: string[];
+  
   size: Size[];
   description: string;
   feedbacks: string[];
