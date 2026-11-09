@@ -19,7 +19,30 @@ item.id === id && item.size === size;
 export const useBasketStore = create<BasketStore>()(
   persist(
     set => ({
-      items: [],
+      items: [
+        // !=====  vvvvvvvдобавлено для перевірки верстки vvvvvv
+        { 
+          id: "1", 
+          size: "M", 
+          quantity: 1,
+          name: "Класичне худі", // Додаємо обов'язкові поля
+          image: "/images/hoodie.jpg", // Впиши будь-який тестовий шлях
+          price: 1499,
+          rating: 4.8,
+          reviewsCount: 12
+        },
+        { 
+          id: "2", 
+          size: "L", 
+          quantity: 2,
+          name: "Спортивні штани",
+          image: "/images/pants.jpg",
+          price: 899,
+          rating: 4.5,
+          reviewsCount: 5
+        }
+        // !===== 111 добавлено для перевірки верстки 111
+      ],
       
       addItem: newItem =>
         set(state => {

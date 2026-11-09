@@ -6,30 +6,30 @@
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.25);
-  z-index: 1000; 
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .modal {
-  position: relative; 
+  position: relative;
   width: 100%;
-  max-width: 382px; 
-  max-height: 90vh; 
+  max-width: 382px;
+  max-height: 90vh;
   overflow-y: auto;
-  background: var(--color-scheme-1-background);    
-  padding: 40px 20px 16px;  
+  background: var(--color-scheme-1-background);
+  padding: 40px 20px 16px;
   overflow-x: hidden;
   user-select: none;
 }
 
 .closeWrapper {
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   width: 100%;
-  margin-bottom: 24px; 
+  margin-bottom: 24px;
 }
 
 .closeBtn {
@@ -42,29 +42,23 @@
   padding: 0; /* Обнуляємо дефолтні паддінги кнопки, щоб висота блоку дорівнювала іконці (24px) */
 }
 
-/* ! мітка */
-
 .title {
   font-family: var(--second-family);
   font-weight: 400;
   font-size: 36px;
-  line-height: 1.2; 
+  line-height: 1.2;
   letter-spacing: -0.01em;
   text-align: center;
   color: var(--color-scheme-1-text);
-  
-  margin-bottom: 24px; 
+
+  margin-bottom: 24px;
 }
-
-
 
 .goodsList {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-
-
 
 .card {
   display: flex;
@@ -87,44 +81,42 @@
   object-fit: cover;
 }
 
-
-
 /* #region ICONS */
 
 .iconClose,
-.iconStar, 
+.iconStar,
 .iconComment,
 .iconTrash {
-fill: var(--color-scheme-1-text);
+  fill: var(--color-scheme-1-text);
 }
 
 .iconClose {
   width: 24px;
   height: 24px;
-  
 }
 
 .iconStar {
   width: 16px;
   height: 16px;
-  
 }
 
-
 .iconComment {
-  width: 14px; 
-  height: 13px; 
- 
+  width: 14px;
+  height: 13px;
 }
 
 .iconTrash {
   width: 17px;
   height: 19px;
-  
 }
 
-
 /* #endregion */
+
+
+.size {
+  color: var(--color-scheme-1-text);
+  margin-bottom: 8px;
+}
 
 .info {
   display: flex;
@@ -133,44 +125,42 @@ fill: var(--color-scheme-1-text);
 }
 
 .goodsTitle {
-  font-family: var(--font-family); 
-  font-weight: 600; 
-  font-size: 18px; 
-  line-height: 1.5; 
-  color: var(--color-scheme-1-text); 
-  
-  margin: 0 0 8px 0; 
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text);
+
+  margin: 0 0 8px 0;
 }
 
 .rating {
   display: flex;
   align-items: center;
-  gap: 4px; 
-  margin: 0 0 12px 0; 
+  gap: 4px;
+  margin: 0 0 12px 0;
 }
 
 .rating span {
-  font-family: var(--font-family); 
-  font-weight: 400; 
-  font-size: 12px; 
-  line-height: 1.5; 
-  color: var(--color-scheme-1-text); 
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text);
 }
 
 .rating span:first-of-type {
-  margin-right: 12px; 
+  margin-right: 12px;
 }
 
-
-
 .price {
-  font-family: var(--font-family); 
-  font-weight: 400; 
-  font-size: 16px; 
-  line-height: 1.5; 
-  color: var(--color-scheme-1-text); 
-  
-  margin: 0 0 12px 0; 
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text);
+
+  margin: 0 0 12px 0;
 }
 /* ! мітка */
 /* #region input */
@@ -179,13 +169,13 @@ fill: var(--color-scheme-1-text);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 236px; 
-  height: 40px; 
+  width: 236px;
+  height: 40px;
 }
 
 .quantityInput {
-  width: 64px; 
-  height: 40px; 
+  width: 64px;
+  height: 40px;
   border: 1px solid var(--opacity-transparent-dark-10, #ccc);
   border-radius: 100px;
   background: transparent;
@@ -204,8 +194,6 @@ fill: var(--color-scheme-1-text);
 
 /* #endregion input */
 
-
-
 .deleteBtn {
   display: flex;
   align-items: center;
@@ -215,7 +203,10 @@ fill: var(--color-scheme-1-text);
   padding: 4px; /*[cite: 16] */
   border: 1px solid var(--opacity-transparent-dark-10, #ccc); /*[cite: 16] */
   border-radius: 100px; /*[cite: 16] */
-  background: var(--opacity-neutral-darkest, rgba(0, 0, 0, 0.05)); /*[cite: 17] */
+  background: var(
+    --opacity-neutral-darkest,
+    rgba(0, 0, 0, 0.05)
+  ); /*[cite: 17] */
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
@@ -227,7 +218,7 @@ fill: var(--color-scheme-1-text);
 .summaryContainer {
   display: flex;
   flex-direction: column;
-  width: 100%; 
+  width: 100%;
 }
 
 .summaryRow {
@@ -239,9 +230,9 @@ fill: var(--color-scheme-1-text);
 
 /* Перший рядок (Проміжний підсумок) */
 .summaryRow:nth-child(1) {
-  border-top: 1px solid var(--color-scheme-1-border, #e0e0e0); 
-  padding: 12px 0 4px 0; 
-  height: 40px; 
+  border-top: 1px solid var(--color-scheme-1-border, #e0e0e0);
+  padding: 12px 0 4px 0;
+  height: 40px;
 }
 
 /* Другий рядок (Доставка) */
@@ -253,10 +244,9 @@ fill: var(--color-scheme-1-text);
 /* Третій рядок (Всього) */
 .totalRow {
   border-top: 1px solid var(--color-scheme-1-border, #e0e0e0);
-  padding: 12px 0; 
-  height: 51px;    
+  padding: 12px 0;
+  height: 51px;
 }
-
 
 .summaryLabel,
 .summaryValue {
@@ -269,18 +259,18 @@ fill: var(--color-scheme-1-text);
 
 .totalLabel {
   font-family: var(--font-family);
-  font-weight: 600;     
-  font-size: 18px;      
+  font-weight: 600;
+  font-size: 18px;
   line-height: 150%;
   color: var(--color-scheme-1-text);
 }
 
 .totalValue {
   font-family: var(--font-family);
-  font-weight: 600;      /* Жирний шрифт 600 */
-  font-size: 16px;       /* Розмір 16px */
+  font-weight: 600; /* Жирний шрифт 600 */
+  font-size: 16px; /* Розмір 16px */
   line-height: 150%;
-  color: var(--color-scheme-1-text);;
+  color: var(--color-scheme-1-text);
 }
 
 /* #region Button ================ */
@@ -310,10 +300,11 @@ fill: var(--color-scheme-1-text);
   line-height: 150%;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
-
-
 
 /* Кнопка "Продовжити покупки" (світла) */
 .continueLink {
@@ -323,7 +314,7 @@ fill: var(--color-scheme-1-text);
   transition: background-color 0.3s ease;
 }
 .continueLink:hover {
- background: rgba(128, 128, 128, 0.2);
+  background: rgba(128, 128, 128, 0.2);
 }
 
 /* Кнопка "Оформити замовлення" (акцентна) */
@@ -342,9 +333,7 @@ fill: var(--color-scheme-1-text);
 
 /* #endregion Buttons  */
 
-
 /* #region EMPTY BASKET */
-
 
 .emptyContainer {
   display: flex;
@@ -383,7 +372,10 @@ fill: var(--color-scheme-1-text);
   line-height: 150%;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .emptyBtn:hover {
@@ -399,16 +391,15 @@ fill: var(--color-scheme-1-text);
 @media screen and (min-width: 768px) {
   .modal {
     width: 552px;
-     max-width: 100%;  /*Перебиваємо мобільні 382px */
+    max-width: 100%; /*Перебиваємо мобільні 382px */
     padding: 40px 32px 16px;
   }
 
-  
   .info {
     display: grid;
-    grid-template-columns: 1fr auto auto; 
+    grid-template-columns: 1fr auto auto;
     grid-template-rows: auto auto;
-    align-items: center; 
+    align-items: center;
     column-gap: 32px; /* Відстань між назвою, ціною та кнопками (відрегулюй за макетом) */
   }
 
@@ -434,27 +425,26 @@ fill: var(--color-scheme-1-text);
     width: auto; /* Скидаємо 236px з мобілки, щоб блок став компактним */
     gap: 16px; /* Відстань між інпутом та кошиком */
   }
-  
-.actions { 
+
+  .actions {
     flex-direction: row;
     margin-bottom: 75px;
     gap: 24px;
   }
 
-  .continueBtn, .orderBtn { 
+  .continueBtn,
+  .orderBtn {
     flex: 1;
     margin-bottom: 0;
   }
 }
 /* #endregion TABLET-END */
 
-
 @media screen and (min-width: 1440px) {
-
-.modal {
+  .modal {
     width: 589px;
-    max-width: 589px; 
-    padding: 40px 64px 16px 32px; 
+    max-width: 589px;
+    padding: 40px 64px 16px 32px;
   }
 
   .title {
@@ -466,7 +456,7 @@ fill: var(--color-scheme-1-text);
   }
 
   /* Пустий кошик  */
-  
+
   .emptyContainer {
     display: flex;
     flex-direction: column;
@@ -488,6 +478,3 @@ fill: var(--color-scheme-1-text);
     padding: 12px 32px;
   }
 }
- 
-
-
