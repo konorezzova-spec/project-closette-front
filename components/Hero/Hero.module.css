@@ -1,38 +1,68 @@
+@media (min-width:1440px){
+    .hero__container{
+        width: 1440px;
+        height: 618px;
+    }
+}
 
-.hero_content{
+.hero__content{
     display: flex;
     flex-direction: column;
     padding-top: 64px;
     padding-bottom: 64px;
-    border: 1px solid darkred;
+    /* border: 1px solid darkred; */
 }
 
 @media (min-width: 768px) {
-    .hero_content{
+    .hero__content{
         flex-direction: row;
         gap: 32px; 
     }
 }
 
-.hero_left{
-    border: 1px solid darkred;
+@media (min-width:1440px){
+    .hero__content{
+        padding:112px 64px;
+        padding-left: 0px;
+        padding-right: 0px;
+        max-width: 1312px;
+        /* max-height: 394px; */
+    }
+}
+
+.hero__left{
+    /* border: 1px solid darkred; */
     margin-bottom: 32px;
-    flex-basis: calc((100% - 32px) / 2);
 }
 @media (min-width:768px) {
-    .hero_left{
+    .hero__left{
         margin-bottom: 0px;
+        width: calc((100% - 32px) / 2);
     }    
 }
-.hero_right_img{
+@media (min-width:1440px){
+    .hero__left{
+        padding-top: 30px;
+        padding-bottom: 30px;     
+    }
+}
+
+.hero__right-img{
     position: relative;
     width: 100%;
     max-width: 335px;
     aspect-ratio: 1 / 1;
-    border: 1px solid darkred;
+    /* border: 1px solid darkred; */
 }
 
-.hero_title{
+@media (min-width:1440px){
+.hero__right-img{
+    max-width: calc((100% - 32px) / 2);
+    aspect-ratio: auto;
+    }
+}
+
+.hero__title{
     font-family: var(--second-family);
     font-weight: 400;
     font-size: 40px;
@@ -42,7 +72,13 @@
     margin-bottom: 24px;
 }
 
-.hero_subtitle{
+@media(min-width:1440px){
+    .hero__title{
+        font-size: 56px;
+    }
+}
+
+.hero__subtitle{
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 18px;
@@ -50,26 +86,37 @@
     color: var(--color-scheme-4-text);
     margin-bottom: 32px;
 }
-.hero_btns{
+
+@media(min-width:1440px){
+    .hero__subtitle{
+        font-family: var(--font-family);
+        font-weight: 400;
+        font-size: 18px;  
+    }    
+} 
+
+.hero__buttons{
     display: flex;
     flex-direction: column;
     gap: 16px;
-    border: 1px solid darkred;
+    /* border: 1px solid darkred; */
 }
-@media(min-width:768){
-    .hero_btns{
+
+@media(min-width:768px){
+    .hero__buttons{
         flex-direction:row;
         gap: 16px;
     }
 }
 
-.hero_btn_left{
+.hero__btn--left{
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--color-deco);
     border-radius: 100px;
-    padding: 6px 12px;
+    /* padding: 6px 12px; */
+    padding: 0px;
     max-width: 335px;
     height: 36px;
     font-family: var(--font-family);
@@ -79,38 +126,53 @@
     color: var(--color-neutral-darkest);
     background: var(--color-deco);
 }
-@media(min-width:768){
-    .hero_btn_left{
+
+@media(min-width:768px){
+    .hero__btn--left{
         white-space: nowrap;
     }
 }
-.hero_btn_right{
+
+.hero__btn--right{
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--opacity-transparent);
     border-radius: 100px;
-    padding: 6px 12px;
+    /* padding: 6px 12px; */
+    padding:0px;
     width: 335px;
     height: 36px;
     background: var(--opacity-neutral-darkest-5);
 }
 
-@media(min-width:768){
-    .hero_btn_right{
+@media(min-width:768px){
+    .hero__btn--right{
         max-width:181px;
     }
 }
 
-.hero_btn_left:hover,
-.hero_btn_left:focus{
+.hero__btn--left a,
+.hero__btn--right a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 6px 12px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.hero__btn--left:hover,
+.hero__btn--left:focus-within{
     border: 1px solid var(--color-deco-darker);
     background: var(--color-deco-dark);
     cursor: pointer; 
 }
 
-.hero_btn_right:hover,
-.hero_btn_right:focus{
+.hero__btn--right:hover,
+.hero__btn--right:focus-within{
     border: 1px solid var(--opacity-neutral-darkest-50);
     background: var(--opacity-neutral-darkest-15);
     cursor: pointer; 

@@ -3,29 +3,31 @@ import Container from "../Container/Container";
 import Image from "next/image";
 import Link from "next/link";
 
+// добавить мягкие эфекты при наведению на кнопки кубик бизер
+
 export default function Hero() {
 return (
-    <Container > 
-        <div className={css.hero_content}>
-            <div className={css.hero_left}>
-                <h1 className={css.hero_title}>
+    <Container className={css.hero__container} > 
+        <div className={css.hero__content}>
+            <div className={css.hero__left}>
+                <h1 className={css.hero__title}>
                     Знайди свій стиль з Clothica вже сьогодні!
                 </h1>
-                <h2 className={css.hero_subtitle}>
+                <h2 className={css.hero__subtitle}>
                     Clothica — це місце, де комфорт поєднується зі стилем. 
                     Ми створюємо базовий одяг, який легко комбінується та підходить для будь-якої нагоди.
                     Обирай речі, що підкреслять твою індивідуальність і завжди будуть актуальними.
                 </h2>
-               <div className={css.hero_btns}>
-                    <div className={css.hero_btn_left}>
+               <ul className={css.hero__buttons}>
+                    <li className={css["hero__btn--left"]}>
                         <Link href="#products">До товарів</Link>
-                    </div>
-                    <div className={css.hero_btn_right}>
+                    </li>
+                    <li className={css["hero__btn--right"]}>
                         <Link href="#about">Дізнатися більше</Link>
-                    </div>
-                 </div>
+                    </li>
+                </ul>
             </div>
-            <div className={css.hero_right_img}>
+            <div className={css["hero__right-img"]}>
                 <Image src="/imagehero.jpg" alt="image mask group"  fill priority
                 className="object-cover"/>
             </div>
@@ -33,4 +35,3 @@ return (
     </Container>
     );
 }
-
