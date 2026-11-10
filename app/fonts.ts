@@ -3,17 +3,17 @@ import localFont from "next/font/local";
 export const inter = localFont({
   src: [
     {
-      path: "../fonts/inter/inter-v20-latin-regular.woff2",
+      path: "../fonts/inter/inter-v20-cyrillic_latin-regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../fonts/inter/inter-v20-latin-500.woff2",
+      path: "../fonts/inter/inter-v20-cyrillic_latin-500.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../fonts/inter/inter-v20-latin-600.woff2",
+      path: "../fonts/inter/inter-v20-cyrillic_latin-600.woff2",
       weight: "600",
       style: "normal",
     },
@@ -25,7 +25,7 @@ export const inter = localFont({
 export const nunito_sans = localFont({
   src: [
     {
-      path: "../fonts/nunito-sans/nunito-sans-v19-latin-regular.woff2",
+      path: "../fonts/nunito-sans/nunito-v32-cyrillic_latin-regular.woff2",
       weight: "400",
       style: "normal",
     },

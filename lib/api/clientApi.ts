@@ -1,6 +1,11 @@
+import type { Good } from "@/types/good";
+
+import type { CategoriesResponse } from "@/types/category";
+
+import type { CreateOrderParams, Order } from "@/types/order";
 
 import { nextServer } from "./api";
-import type { Good } from "@/types/good";
+
 
 export interface FetchGoodsParams {
   page: number;
@@ -52,16 +57,23 @@ export const fetchGoods = async (params: FetchGoodsParams) => {
   return data;
 };
 
-export const fetchCategories = async () => {
-  const { data } = await nextServer.get<CategoriesHttpResponse>(
-    "/categories",
-    {
-      params: {
-        page: 1,
-        perPage: 20,
-      },
-    }
-  );
+export async function fetchGoodById(id: string): Promise<Good> {
+  const response = await nextServer.get<Good>(`/goods/${id}`);
+  return response.data;
+}
 
-  return data;
-};
+export async function fetchCategories(
+  page: number,
+  perPage: number
+): Promise<CategoriesResponse> {
+  const { data } = await nextServer.get("/categories", {
+    params: { page, perPage },
+  });
+  return data.data;
+}
+
+
+export const createOrder = async (params: CreateOrderParams):Promise<Order> => {
+  const response = await nextServer.post<Order>("/orders", params);
+  return response.data;
+}
