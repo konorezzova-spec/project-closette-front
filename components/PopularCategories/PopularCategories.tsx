@@ -19,7 +19,7 @@ export default function PopularCategories() {
 
   return (
     <Container className={css.section}>
-      <div className={css.header}>
+      <div className={css.header_wrap}>
         <h2 className={css.title}>Популярні категорії</h2>
 
         <Link href="/categories" className={css.link}>
@@ -37,7 +37,7 @@ export default function PopularCategories() {
 
       <ul className={css.list}>
         {categories.map(category => (
-          <li key={category._id}>
+          <li className={css.list_item} key={category._id}>
             <CategoryCard category={category} />
           </li>
         ))}

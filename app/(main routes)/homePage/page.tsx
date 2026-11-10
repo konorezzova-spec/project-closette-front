@@ -20,8 +20,8 @@ export default async function HomePage() {
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
         {/* <Hero /> */}
-        <PopularCategories />
         <Style />
+        <PopularCategories />
         <PopularGoods />
         {/* <LastReviews/> */}
       </HydrationBoundary>
