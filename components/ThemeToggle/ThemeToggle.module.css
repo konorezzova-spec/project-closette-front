@@ -1,0 +1,8 @@
+.button {
+  display: inline-flex;
+  width: 2cqi;
+  height: 20px;
+  background-color: transparent;
+  margin: auto;
+  border: none;
+}
