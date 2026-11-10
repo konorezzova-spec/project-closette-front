@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
-import FormField from "@/components/FormField/FormField";
+import FormField from "@/components/FormField/FormField.tsx";
 import styles from "./ResetPasswordForm.module.css";
 import { getApiErrorMessage, resetPassword } from "@/lib/api/authApi";
 import {

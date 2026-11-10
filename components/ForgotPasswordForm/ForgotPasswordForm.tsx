@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
-import FormField from "@/components/FormField/FormField";
+import FormField from "@/components/FormField/FormField.tsx";
 import styles from "./ForgotPasswordForm.module.css";
 import { getApiErrorMessage, requestResetEmail } from "@/lib/api/authApi";
 import {
