@@ -3,7 +3,18 @@
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0;
+  /* padding: 64px 20px; */
 }
+/* @media only screen and (min-width: 768px) {
+  .container {
+    padding: 64px 32px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .container {
+    padding: 112px 64px;
+  }
+} */
 
 .title {
   font-family: var(--second-family);
@@ -197,33 +208,17 @@ p + .characteristics {
   flex-direction: column;
   gap: 8px;
 }
-@media only screen and (min-width: 1440px) {
-  .sizeSelector {
-    max-width: 640px;
-  }
-}
-
-/* .sizeSelector p {
-  margin: 0;
-} */
-
-/* .sizeSelect {
-  width: 100%;
-  max-width: 335px;
-  height: 36px;
-  padding: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 16px;
-  background-color: transparent;
-  font-family: inherit;
-  font-size: 16px;
-  cursor: pointer;
-} */
 
 .selectWrapper {
   position: relative;
   width: 335px;
   height: 36px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .selectWrapper {
+    min-width: 640px;
+  }
 }
 
 .sizeSelect {
