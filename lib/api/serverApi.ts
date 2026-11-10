@@ -2,6 +2,7 @@
 import { cookies } from "next/headers";
 import { FetchParams, GoodsHttpResponse } from "./clientApi";
 import { nextServer } from "./api";
+import { Good } from "@/types/good";
 
 export const fetchGoods = async (
   fetchParams: FetchParams
@@ -16,3 +17,11 @@ export const fetchGoods = async (
 
   return data;
 };
+
+export async function fetchGoodById(id: string): Promise<Good> {
+  const cookieStore = await cookies();
+  const response = await nextServer.get<Good>(`/goods/${id}`, {
+    headers: { Cookie: cookieStore.toString() },
+  });
+  return response.data;
+}
