@@ -1,6 +1,7 @@
 import css from "./GoodReviews.module.css";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { MessageNoInfo } from "@/components/MessageNoInfo/MessageNoInfo";
 
 type GoodReviewsProps = {
   goodId: string;
@@ -26,6 +27,10 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
 
   if (error || !feedbacks) return <p>Something went wrong.</p>;
 
+  const handleAction = () => {
+    setIsFormOpen(true);
+  };
+
   return (
     <main className={css.main}>
       <div className={css.container}>
@@ -37,6 +42,11 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
         >
           Залишити відгук
         </button>
+        <MessageNoInfo
+          message="У цього товару ще немає відгуків"
+          buttonText="Залишити відгук"
+          onAction={handleAction}
+        />
         {/* {isFormOpen && <AddReviewForm />} */}
         {/* {feedbacks.length > 0 ? <ReviewsList /> : <MessageNoInfo />} */}
       </div>
