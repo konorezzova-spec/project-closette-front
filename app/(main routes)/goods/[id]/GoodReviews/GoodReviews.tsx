@@ -18,7 +18,7 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
     error,
   } = useQuery({
     queryKey: ["feedbacks", goodId],
-    queryFn: () => fetchFeedbacks(goodId),
+    queryFn: () => fetchFeedbacks(),
     refetchOnMount: false,
   });
 
