@@ -1,3 +1,4 @@
+/* ===== Кнопка «Зареєструватися» ===== */
 .button {
   display: block;
   width: 100%;
@@ -25,6 +26,7 @@
   cursor: not-allowed;
 }
 
+/* ===== Лоадер у кнопці ===== */
 .spinner {
   display: inline-block;
   width: 16px;
@@ -43,6 +45,7 @@
   }
 }
 
+/* ===== Посилання на вхід ===== */
 .loginText {
   margin: 20px 0 0;
   text-align: center;
@@ -51,6 +54,7 @@
 .loginLink {
   color: inherit;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .loginLink:hover {
