@@ -6,6 +6,7 @@ import {
 import PopularGoods from "@/components/PopularGoods/PopularGoods";
 import { fetchGoods } from "@/lib/api/serverApi";
 import Style from "@/components/Style/Style";
+import PopularCategories from "@/components/PopularCategories/PopularCategories";
 
 export default async function HomePage() {
   const queryClient = new QueryClient();
@@ -18,8 +19,8 @@ export default async function HomePage() {
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        {/* <Hero />
-<PopularCategories/> */}
+        {/* <Hero /> */}
+        <PopularCategories />
         <Style />
         <PopularGoods />
         {/* <LastReviews/> */}
