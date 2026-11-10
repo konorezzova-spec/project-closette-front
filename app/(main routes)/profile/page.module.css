@@ -1,0 +1,172 @@
+.cabinetMain {
+  padding: 0 20px;
+  margin-top: 64px;
+}
+.cabinetContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+.cabinetTitle {
+  font-family: var(--second-family), sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-scheme-1-text);
+}
+
+.cabinetContent {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+.ordersSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ordersTitle {
+  font-family: var(--second-family), sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-scheme-1-text);
+}
+
+.ordersList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.orderCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 0;
+}
+
+.orderLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.orderNumber {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text);
+}
+
+.orderDate {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text);
+}
+
+.orderRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.orderSumLabel {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text);
+}
+
+.orderAmount {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text);
+}
+.orderStatus {
+  display: none;
+}
+
+.emptyOrdersWrapper {
+  width: 100%;
+}
+
+.cabinetButton {
+  width: 100%;
+}
+
+.logoutButton {
+  color: var(--color-neutral-darkest);
+  background: var(--opacity-neutral-darkest-5);
+  border: 1px solid var(--opacity-transparent);
+  border-radius: 100px;
+  padding: 6px 12px;
+  width: 100%;
+  font-family: var(--font-family), sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 320px) {
+  .emptyOrdersWrapper {
+    width: 335px;
+  }
+  .cabinetButton {
+    width: auto;
+  }
+  .logoutButton {
+    width: 335px;
+  }
+}
+
+@media (min-width: 768px) {
+  .logoutButton {
+    width: auto;
+    display: inline-block;
+  }
+
+  .cabinetMain {
+    padding: 0 32px;
+  }
+
+  .emptyOrdersWrapper {
+    width: 704px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1440px) {
+  .cabinetMain {
+    padding: 0 64px;
+  }
+
+  .cabinetContent {
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    gap: 32px;
+    align-items: stretch;
+  }
+}
