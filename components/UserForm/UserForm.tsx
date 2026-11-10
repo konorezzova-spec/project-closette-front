@@ -4,12 +4,12 @@ import { useState } from 'react';
 import styles from './UserForm.module.css';
 
 export interface IUserData {
-  firstName: string;
+  name: string;
   surName: string;
   tel: string;
   city: string;
   postOffice: string;
-  comment: string;
+  comment?: string;
 }
 
 interface UserFormProps {
@@ -17,12 +17,13 @@ interface UserFormProps {
   initialData?: IUserData;
   onSubmit: (data: IUserData) => void;
   submitButtonText?: string;
+  showComment?: boolean;
 }
 
 export const UserForm = ({
   title = 'Особиста інформація',
   initialData = {
-    firstName: '',
+    name: '',
     surName: '',
     tel: '',
     city: '',
@@ -31,6 +32,7 @@ export const UserForm = ({
   },
   onSubmit,
   submitButtonText = 'Оформити замовлення',
+  showComment = true,
 }: UserFormProps) => {
   const [formData, setFormData] = useState<IUserData>(initialData);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -41,7 +43,7 @@ export const UserForm = ({
     const { name, value } = e.target;
     let filteredValue = value;
 
-    if (['firstName', 'surName', 'city'].includes(name)) {
+    if (['name', 'surName', 'city'].includes(name)) {
       filteredValue = value.replace(/[0-9]/g, '');
     }
 
@@ -61,7 +63,7 @@ export const UserForm = ({
     e.preventDefault();
     
     setTouched({
-      firstName: true,
+      name: true,
       surName: true,
       tel: true,
       city: true,
@@ -69,7 +71,7 @@ export const UserForm = ({
     });
 
     if (
-      !formData.firstName.trim() ||
+      !formData.name.trim() ||
       !formData.surName.trim() ||
       !formData.tel.trim() ||
       !formData.city.trim() ||
@@ -81,7 +83,7 @@ export const UserForm = ({
     onSubmit(formData);
   };
 
-  const isFirstNameError = touched.firstName && !formData.firstName.trim();
+  const isNameError = touched.name && !formData.name.trim();
   const isSurNameError = touched.surName && !formData.surName.trim();
   const isTelError = touched.tel && !formData.tel.trim();
   const isCityError = touched.city && !formData.city.trim();
@@ -93,20 +95,20 @@ export const UserForm = ({
 
       <div className={styles.rowGroup}>
         <div className={styles.fieldGroup}>
-          <label className={styles.label} htmlFor="firstName">
+          <label className={styles.label} htmlFor="name">
             Ім&apos;я*
           </label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder="Ваше ім'я"
-            className={`${styles.input} ${isFirstNameError ? styles.errorInput : ''}`}
+            className={`${styles.input} ${isNameError ? styles.errorInput : ''}`}
           />
-          {isFirstNameError && <span className={styles.errorMessage}>Error Text</span>}
+          {isNameError && <span className={styles.errorMessage}>Error Text</span>}
         </div>
 
         <div className={styles.fieldGroup}>
@@ -180,20 +182,21 @@ export const UserForm = ({
         </div>
       </div>
 
-      <div className={styles.fieldGroup}>
-        <label className={styles.label} htmlFor="comment">
-          Коментар
-        </label>
-        <textarea
-          id="comment"
-          name="comment"
-          value={formData.comment}
-          onChange={handleChange}
-          placeholder="Введіть ваш коментар"
-          rows={4}
-          className={styles.textarea}
-        />
-      </div>
+      {showComment && (
+        <div className={styles.fieldGroup}>
+          <label className={styles.label} htmlFor="comment">
+            Коментар
+          </label>
+          <textarea
+            id="comment"
+            name="comment"
+            value={formData.comment}
+            onChange={handleChange}
+            placeholder="Введіть ваш коментар"
+            rows={4}
+            className={styles.textarea}
+          />
+        </div>)}
 
       <button type="submit" className={styles.submitButton}>
         {submitButtonText}
