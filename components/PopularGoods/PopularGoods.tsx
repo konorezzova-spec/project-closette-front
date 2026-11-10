@@ -17,8 +17,10 @@ import Image from "next/image";
 import css from "./PopularGoods.module.css";
 import { fetchGoods } from "@/lib/api/clientApi";
 import Link from "next/link";
-import star from "/public/star-filled.svg";
-import comment from "/public/comment.svg";
+import StarIcon from "/assets/icons/star-filled.svg";
+import CommentIcon from "/assets/icons/comment.svg";
+import right from "/public/arrow_forward.svg";
+import left from "/public/arrow_back.svg";
 
 export default function PopularGoods() {
   const swiperRef = useRef<SwiperInstance | null>(null);
@@ -112,23 +114,9 @@ export default function PopularGoods() {
                     <div className={css.left_side}>
                       <p className={css.good_name}>{good.name}</p>
                       <div className={css.img_wrapper}>
-                        <Image
-                          src={star}
-                          alt="Rating"
-                          className={css.image}
-                          width={16}
-
-                          height={16}
-                        ></Image>
+                        <span className={css.star} />
                         <p>{5}</p>
-                        <Image
-                          src={comment}
-                          alt="Comments"
-                          className={css.image}
-                          width={16}
-
-                          height={16}
-                        ></Image>
+                        <span className={css.comment} />
                         <p>{good.feedbacks.length}</p>
                       </div>
                     </div>
@@ -144,7 +132,6 @@ export default function PopularGoods() {
             ))}
           </Swiper>
           <div className={css.popularGoodsNavigation}>
-            {/* <div className={css.pagination} /> */}
             <button
               type="button"
               className={css.btn_left}
@@ -152,7 +139,13 @@ export default function PopularGoods() {
               disabled={isBeginning}
               aria-label="Previous goods"
             >
-              ←
+              <Image
+                src={left}
+                alt="Previous goods"
+                className={css.image}
+                width={24}
+                height={24}
+              ></Image>
             </button>
 
             <button
@@ -162,7 +155,13 @@ export default function PopularGoods() {
               disabled={isEnd}
               aria-label="Next goods"
             >
-              →
+              <Image
+                src={right}
+                alt="Next goods"
+                className={css.image}
+                width={24}
+                height={24}
+              ></Image>
             </button>
           </div>
         </>
