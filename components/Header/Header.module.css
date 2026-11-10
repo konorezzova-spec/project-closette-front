@@ -61,6 +61,8 @@
 
 .link {
   margin-right: auto;
+  display: flex;
+  justify-content: center;
   fill: var(--color-neutral-darkest);
   border-bottom: 1px solid transparent;
   transition: opacity 0.3s ease;
@@ -75,6 +77,8 @@
 } */
 
 .logo {
+  width: 84px;
+  height: 36px;
   fill: var(--color-neutral-darkest);
   stroke: var(--color-neutral-darkest);
 }
@@ -95,6 +99,14 @@
   @media screen and (min-width: 768px) {
     display: none;
   }
+}
+
+.burger_svg,
+.close_svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--color-neutral-darkest);
+  stroke: var(--color-neutral-darkest);
 }
 
 .burger:hover {
@@ -142,6 +154,7 @@
   height: 36px;
   width: 36px;
 }
+
 .amount {
   position: absolute;
   text-align: center;
@@ -154,4 +167,9 @@
   border-radius: 50%;
   color: var(--color-white);
   font-size: 8px;
+}
+
+.basket_svg {
+  width: 36px;
+  height: 36px;
 }

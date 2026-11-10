@@ -7,17 +7,62 @@ import Container from "../Container/Container";
 import logo from "/public/header/company_logo.svg";
 import burger_menu from "/public/header/burger_btn.svg";
 import close from "/public/header/close.svg";
-import { useState, useEffect } from "react";
 import basket from "/public/header/basket.svg";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import { useBasketStore } from "@/lib/store/basketStore";
+import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(prev => !prev);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  const scrollPosition = useRef(0);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    // Запам'ятовуємо позицію скролу
+    scrollPosition.current = window.scrollY;
+
+    const body = document.body;
+
+    // Фіксуємо сторінку
+    body.style.position = "fixed";
+    body.style.top = `-${scrollPosition.current}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+
+    return () => {
+      // Відновлюємо стилі
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      body.style.width = "";
+
+      // Повертаємо попередню позицію
+      window.scrollTo(0, scrollPosition.current);
+    };
+  }, [isMenuOpen]);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
+      if (isMenuOpen) {
+        setIsVisible(true);
+        return;
+      }
+
       const currentScrollY = window.scrollY;
 
       if (currentScrollY < 80) {
@@ -36,21 +81,16 @@ export default function Header() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
-  };
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  }, [isMenuOpen]);
 
   const totalQuantity = useBasketStore(state => state.items.length);
 
   return (
-    <header className={`${css.header} ${isVisible ? css.visible : css.hidden}`}>
+    <header
+      className={`${css.header} ${
+        isVisible || isMenuOpen ? css.visible : css.hidden
+      }`}
+    >
       <Container className={`${css.header_container}`}>
         <Link
           className={css.link}
@@ -102,7 +142,7 @@ export default function Header() {
         >
           {isMenuOpen ? (
             <Image
-              className={css.logo}
+              className={css.close_cvg}
               src={close}
               alt="close"
               width={24}
@@ -110,11 +150,11 @@ export default function Header() {
             />
           ) : (
             <Image
-              className={css.logo}
+              className={css.burger_svg}
               src={burger_menu}
               alt="navigation menu"
-              width={20}
-              height={20}
+              width={24}
+              height={24}
             />
           )}
         </button>
@@ -122,7 +162,7 @@ export default function Header() {
         <nav className={css.mobile_menu}>
           <Link className={css.basket} href="/basket" aria-label="Home">
             <Image
-              className={css.logo}
+              className={css.basket_svg}
               src={basket}
               alt="logo"
               width={36}
@@ -137,7 +177,7 @@ export default function Header() {
           <AuthNavigation onClick={closeMenu} />
           <Link className={css.basket} href="/basket" aria-label="Home">
             <Image
-              className={css.logo}
+              className={css.basket_svg}
               src={basket}
               alt="logo"
               width={36}

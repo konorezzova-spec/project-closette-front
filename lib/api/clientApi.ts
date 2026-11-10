@@ -39,10 +39,14 @@ export const fetchGoods = async (
   return data;
 };
 
+export async function fetchGoodById(id: string): Promise<Good> {
+  const response = await nextServer.get<Good>(`/goods/${id}`);
+  return response.data;
+}
 
 export async function fetchCategories(
   page: number,
-  perPage: number,
+  perPage: number
 ): Promise<CategoriesResponse> {
   const { data } = await nextServer.get("/categories", {
     params: { page, perPage },
