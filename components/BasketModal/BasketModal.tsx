@@ -4,7 +4,6 @@
 import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useBasketStore } from "@/lib/store/basketStore";
 import css from './BasketModal.module.css';
 import GoodsOrderList from '../GoodsOrderList/GoodsOrderList';
@@ -12,12 +11,9 @@ import GoodsOrderList from '../GoodsOrderList/GoodsOrderList';
 // TODO: додати після розробки 
 // import MessageNoInfo from '../MessageNoInfo/MessageNoInfo';
 
-// TODO: Видалити після інтеграції з API каталогу !!>>
-import { mockProductsCatalog } from '@/lib/mockData';
-
 
 // ! ------------------
-// TODO: Видалити після інтеграції з готовим компонентом MessageNoInfo
+// TODO: 1 Видалити після інтеграції з готовим компонентом MessageNoInfo
 
 // Тимчасовий інтерфейс для сумісності з ТЗ
 interface MessageNoInfoProps {
@@ -26,7 +22,7 @@ interface MessageNoInfoProps {
   href: string;
   onClose?: () => void;
 }
-// TODO: Видалити після інтеграції з готовим компонентом MessageNoInfo
+// TODO: 2 Видалити після інтеграції з готовим компонентом MessageNoInfo
 
 const MessageNoInfo = ({ message, btnText, href, onClose }: MessageNoInfoProps) => (
   <div className={css.emptyContainer}>
@@ -44,24 +40,16 @@ export const BasketModal = () => {
 
   // Використовуємо стор
   const basketItems = useBasketStore(state => state.items);
-  const removeItem = useBasketStore(state => state.removeItem);
-  const updateQuantity = useBasketStore(state => state.updateQuantity);
+  
 
-  // const totalQuantity = 0; для тесту пустого кошика
+  // const totalQuantity = 4; для тесту пустого кошика
 
   
   const totalQuantity = useMemo(() => {
     return basketItems.reduce((total, item) => total + item.quantity, 0);
   }, [basketItems]); 
 
-  const subtotal = useMemo(() => {
-    return basketItems.reduce((total, item) => {
-      const product = mockProductsCatalog.find(p => p.id === item.id);
-      return total + (product ? product.price * item.quantity : 0);
-    }, 0);
-  }, [basketItems]);
-
-  const closeModal = () => router.back();
+    const closeModal = () => router.back();
 
   //відключаю скролл на хедері block-scroll
 
@@ -99,7 +87,7 @@ export const BasketModal = () => {
         <div className={css.closeWrapper}>
           <button className={css.closeBtn} onClick={closeModal} aria-label="Закрити кошик">
             <svg className={css.iconClose} width="24" height="24">
-              <use href="/basket/sprite.svg#icon-close" />
+              <use href="/icons/sprite.svg#close" />
             </svg>
           </button>
         </div>
@@ -115,92 +103,9 @@ export const BasketModal = () => {
           />
          ): (
           <>
-            <div className={css.goodsList}>
-              {basketItems.map((item) => {
-                const product = mockProductsCatalog.find(p => p.id === item.id);
+            <GoodsOrderList />
 
-                if (!product) return null;
-
-                const uniqueKey = `${item.id}-${item.size}`;
-
-                return (
-                  <div key={uniqueKey} className={css.card}>
-                    <div className={css.imageThumb}>
-                      <Image
-                        src={product.image}
-                        alt={product.title}
-                        fill
-                        className={css.image}
-                      />
-                    </div>
-                    <div className={css.info}>
-                      <h3 className={css.goodsTitle}>{product.title}</h3>
-
-
-                      {item.size && <p className={css.size}>Розмір: {item.size}</p>}
-
-                      <div className={css.rating}>
-                        <svg className={css.iconStar} width="16" height="16">
-                          <use href="/basket/sprite.svg#icon-star" />
-                        </svg>
-                        <span>{product.rating}</span>
-
-                        <svg className={css.iconComment} width="16" height="16">
-                          <use href="/basket/sprite.svg#icon-comment" />
-                        </svg>
-                        <span>{product.reviewsCount}</span>
-                      </div>
-
-                      <p className={css.price}>{product.price * item.quantity} грн</p>
-
-                      <div className={css.controls}>
-                        <input
-                          type="number"
-                          value={item.quantity}
-                          min="1"
-                          className={css.quantityInput}
-                          aria-label="Кількість товару"
-                          onChange={(e) => {
-                            const newQuantity = parseInt(e.target.value, 10);
-                            if (!isNaN(newQuantity) && newQuantity > 0) {
-
-                              updateQuantity(item.id, item.size, newQuantity);
-                            }
-                          }}
-                        />
-                        <button
-                          className={css.deleteBtn}
-                          aria-label="Видалити товар"
-
-                          onClick={() => removeItem(item.id, item.size)}
-                        >
-                          <svg className={css.iconTrash} width="17" height="19">
-                            <use href="/basket/sprite.svg#icon-trash" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className={css.summaryContainer}>
-              <div className={css.summaryRow}>
-                <span className={css.summaryLabel}>Проміжний підсумок</span>
-                <span className={css.summaryValue}>{subtotal} грн</span>
-              </div>
-              <div className={css.summaryRow}>
-                <span className={css.summaryLabel}>Доставка</span>
-                <span className={css.summaryValue}>За тарифами перевізника</span>
-              </div>
-              <div className={`${css.summaryRow} ${css.totalRow}`}>
-                <span className={css.totalLabel}>Всього</span>
-                <span className={css.totalValue}>{subtotal} грн</span>
-              </div>
-            </div>
-
-            <div className={css.actions}>
+           <div className={css.actions}>
               <Link href="/goods" onClick={closeModal} className={css.continueLink}>
                 Продовжити покупки
               </Link>
@@ -211,8 +116,6 @@ export const BasketModal = () => {
           </>
         )}
       </div>
-
     </div>
-
   );
 };
