@@ -1,0 +1,14 @@
+.page {
+  width: min(480px, 100% - 32px);
+  margin: 0 auto;
+  padding: clamp(32px, 12.8vh, 113px) 0 32px; /* 80px шапки-заглушки вже враховані в layout */
+  color: #000;
+  font: 400 16px/24px var(--font-inter, "Inter"), system-ui, sans-serif;
+}
+
+.title {
+  margin: 30px 0 32px;
+  font: 400 34px/44px var(--font-nunito-sans, "Nunito Sans"), var(--font-inter, "Inter"),
+    system-ui, sans-serif;
+  text-align: center;
+}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { inter, nunito_sans } from "@/app/fonts";
 
@@ -45,6 +46,7 @@ export default async function RootLayout({ children, modal }: Props) {
             {children}
           </main>
           {modal}
+          <Toaster position="top-right" />
 
           {/* </AuthProvider> */}
         </TanStackProvider>
