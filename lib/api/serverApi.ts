@@ -1,11 +1,11 @@
 
 import { cookies } from "next/headers";
-import { FetchParams, GoodsHttpResponse } from "./clientApi";
+import { FetchGoodsParams, GoodsHttpResponse } from "./clientApi";
 import { nextServer } from "./api";
 import { Good } from "@/types/good";
 
 export const fetchGoods = async (
-  fetchParams: FetchParams
+  fetchParams: FetchGoodsParams
 ): Promise<GoodsHttpResponse> => {
    const cookieStore = await cookies();
   const { data } = await nextServer.get<GoodsHttpResponse>("/goods", {
