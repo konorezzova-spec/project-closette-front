@@ -177,7 +177,7 @@ export default function Header() {
           <AuthNavigation onClick={closeMenu} />
           <Link className={css.basket} href="/basket" aria-label="Home">
             <Image
-              className={css.logo}
+              className={css.basket_svg}
               src={basket}
               alt="logo"
               width={36}
