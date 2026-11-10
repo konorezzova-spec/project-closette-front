@@ -23,9 +23,9 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
     refetchOnMount: false,
   });
 
-  if (isLoading) return <p>Loading, please wait...</p>;
+  //   if (isLoading) return <p>Loading, please wait...</p>;
 
-  if (error || !feedbacks) return <p>Something went wrong.</p>;
+  //   if (error || !feedbacks) return <p>Something went wrong.</p>;
 
   const handleAction = () => {
     setIsFormOpen(true);
@@ -34,21 +34,33 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
   return (
     <main className={css.main}>
       <div className={css.container}>
-        <h2 className={css.title}>Відгуки клієнтів</h2>
-        <button
-          className={css.btn}
-          type="button"
-          onClick={() => setIsFormOpen(true)}
-        >
-          Залишити відгук
-        </button>
-        <MessageNoInfo
-          message="У цього товару ще немає відгуків"
-          buttonText="Залишити відгук"
-          onAction={handleAction}
-        />
-        {/* {isFormOpen && <AddReviewForm />} */}
-        {/* {feedbacks.length > 0 ? <ReviewsList /> : <MessageNoInfo />} */}
+        <div className={css.header}>
+          <h2 className={css.title}>Відгуки клієнтів</h2>
+          <button
+            className={css.btn}
+            type="button"
+            onClick={() => setIsFormOpen(true)}
+          >
+            Залишити відгук
+          </button>
+        </div>
+        <div className={css.content}>
+          <MessageNoInfo
+            message="У цього товару ще немає відгуків"
+            buttonText="Залишити відгук"
+            onAction={handleAction}
+          />
+          {/* {feedbacks.length > 0 ? (
+            <ReviewsList />
+          ) : (
+            <MessageNoInfo
+              message="У цього товару ще немає відгуків"
+              buttonText="Залишити відгук"
+              onAction={handleAction}
+            />
+          )} */}
+          {/* {isFormOpen && <AddReviewForm />} */}
+        </div>
       </div>
     </main>
   );
