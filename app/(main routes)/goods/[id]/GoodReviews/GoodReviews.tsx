@@ -48,7 +48,7 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
           <MessageNoInfo
             message="У цього товару ще немає відгуків"
             buttonText="Залишити відгук"
-            onAction={handleAction}
+            onClick={handleAction}
           />
           {/* {feedbacks.length > 0 ? (
             <ReviewsList />
