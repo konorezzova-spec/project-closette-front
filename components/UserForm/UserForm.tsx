@@ -41,11 +41,11 @@ export const UserForm = ({
     const { name, value } = e.target;
     let filteredValue = value;
 
-    if (['firstName', 'lastName', 'city'].includes(name)) {
+    if (['firstName', 'surName', 'city'].includes(name)) {
       filteredValue = value.replace(/[0-9]/g, '');
     }
 
-    if (name === 'phone') {
+    if (name === 'tel') {
       filteredValue = value.replace(/[A-Za-zА-Яа-яЁёІіЇїЄєҐґ]/g, '');
     }
 
@@ -62,10 +62,10 @@ export const UserForm = ({
     
     setTouched({
       firstName: true,
-      lastName: true,
-      phone: true,
+      surName: true,
+      tel: true,
       city: true,
-      branch: true,
+      postOffice: true,
     });
 
     if (
@@ -110,7 +110,7 @@ export const UserForm = ({
         </div>
 
         <div className={styles.fieldGroup}>
-          <label className={styles.label} htmlFor="lastName">
+          <label className={styles.label} htmlFor="surName">
             Прізвище*
           </label>
           <input
@@ -128,7 +128,7 @@ export const UserForm = ({
       </div>
 
       <div className={styles.fieldGroup}>
-        <label className={styles.label} htmlFor="phone">
+        <label className={styles.label} htmlFor="tel">
           Номер телефону*
         </label>
         <input
@@ -163,7 +163,7 @@ export const UserForm = ({
         </div>
 
         <div className={styles.fieldGroup}>
-          <label className={styles.label} htmlFor="branch">
+          <label className={styles.label} htmlFor="postOffice">
             Номер відділення Нової Пошти*
           </label>
           <input
