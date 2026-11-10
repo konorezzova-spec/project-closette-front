@@ -170,6 +170,7 @@
   border: 1px solid transparent;
   background-color: var(--opacity-neutral-darkest-5);
   font: inherit;
+  color: var(--color-neutral-darkest);
 
   font-weight: 500;
   font-size: 16px;
