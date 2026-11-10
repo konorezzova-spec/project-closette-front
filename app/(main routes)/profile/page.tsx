@@ -15,11 +15,6 @@ interface IOrder {
   status: string;
 }
 
-/**
- * ==========================================
- * СТОРІНКА КАБІНЕТУ (CabinetPage)
- * ==========================================
- */
 export default function CabinetPage() {
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [userData, setUserData] = useState<IUserData | undefined>(undefined);
@@ -27,10 +22,8 @@ export default function CabinetPage() {
   const [isLoadingProfile, setIsLoadingProfile] = useState<boolean>(true);
   const router = useRouter();
   
-  // Завантаження початкових даних (замовлення та профіль)
   useEffect(() => {
     async function fetchCabinetData() {
-      // 1. Отримання списку замовлень через проксі /api/orders
       try {
         const ordersRes = await axios.get('/api/orders');
         setOrders(ordersRes.data);
@@ -40,7 +33,6 @@ export default function CabinetPage() {
         setIsLoadingOrders(false);
       }
 
-      // 2. Отримання даних профілю через проксі /api/profile
       try {
         const profileRes = await axios.get('/api/profile');
         setUserData(profileRes.data);
@@ -54,7 +46,6 @@ export default function CabinetPage() {
     fetchCabinetData();
   }, []);
 
-  // Вихід з кабінету
   const handleLogout = async () => {
     try {
       await axios.post('/api/auth/logout');
@@ -65,7 +56,6 @@ export default function CabinetPage() {
     }
   };
 
-  // Оновлення даних користувача через форму
   const handleFormSubmit = async (data: IUserData) => {
     try {
       await axios.put('/api/profile', data);
@@ -83,7 +73,6 @@ export default function CabinetPage() {
           <h1 className={styles.cabinetTitle}>Кабінет</h1>
 
           <div className={styles.cabinetContent}>
-            {/* Блок особистої інформації */}
             <section className={styles.userFormSection}>
               {isLoadingProfile ? (
                 <p>Завантаження даних профілю...</p>
@@ -97,7 +86,6 @@ export default function CabinetPage() {
               )}
             </section>
 
-            {/* Блок замовлень */}
             <section className={styles.ordersSection}>
               <h2 className={styles.ordersTitle}>Мої замовлення</h2>
 
@@ -130,14 +118,13 @@ export default function CabinetPage() {
                   <MessageNoInfo
                     message="У вас ще не було жодних замовлень! Мершій до покупок!"
                     buttonText="До покупок"
-                    onAction={() => router.push('/goods')}
+                    onClick={() => router.push('/goods')}
                   />
                 </div>
               )}
             </section>
           </div>
 
-          {/* Кнопка виходу */}
           <div className={styles.cabinetButton}>
             <button onClick={handleLogout} className={styles.logoutButton}>
               Вийти з кабінету

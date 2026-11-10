@@ -5,10 +5,10 @@ import styles from './UserForm.module.css';
 
 export interface IUserData {
   firstName: string;
-  lastName: string;
-  phone: string;
+  surName: string;
+  tel: string;
   city: string;
-  branch: string;
+  postOffice: string;
   comment: string;
 }
 
@@ -23,10 +23,10 @@ export const UserForm = ({
   title = 'Особиста інформація',
   initialData = {
     firstName: '',
-    lastName: '',
-    phone: '',
+    surName: '',
+    tel: '',
     city: '',
-    branch: '',
+    postOffice: '',
     comment: '',
   },
   onSubmit,
@@ -70,10 +70,10 @@ export const UserForm = ({
 
     if (
       !formData.firstName.trim() ||
-      !formData.lastName.trim() ||
-      !formData.phone.trim() ||
+      !formData.surName.trim() ||
+      !formData.tel.trim() ||
       !formData.city.trim() ||
-      !formData.branch.trim()
+      !formData.postOffice.trim()
     ) {
       return; 
     }
@@ -82,10 +82,10 @@ export const UserForm = ({
   };
 
   const isFirstNameError = touched.firstName && !formData.firstName.trim();
-  const isLastNameError = touched.lastName && !formData.lastName.trim();
-  const isPhoneError = touched.phone && !formData.phone.trim();
+  const isSurNameError = touched.surName && !formData.surName.trim();
+  const isTelError = touched.tel && !formData.tel.trim();
   const isCityError = touched.city && !formData.city.trim();
-  const isBranchError = touched.branch && !formData.branch.trim();
+  const isPostOfficeError = touched.postOffice && !formData.postOffice.trim();
 
   return (
     <form onSubmit={handleSubmit} className={styles.formContainer}>
@@ -115,15 +115,15 @@ export const UserForm = ({
           </label>
           <input
             type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
+            id="surName"
+            name="surName"
+            value={formData.surName}
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder="Ваше прізвище"
-            className={`${styles.input} ${isLastNameError ? styles.errorInput : ''}`}
+            className={`${styles.input} ${isSurNameError ? styles.errorInput : ''}`}
           />
-          {isLastNameError && <span className={styles.errorMessage}>Error Text</span>}
+          {isSurNameError && <span className={styles.errorMessage}>Error Text</span>}
         </div>
       </div>
 
@@ -133,15 +133,15 @@ export const UserForm = ({
         </label>
         <input
           type="tel"
-          id="phone"
-          name="phone"
-          value={formData.phone}
+          id="tel"
+          name="tel"
+          value={formData.tel}
           onChange={handleChange}
           onBlur={handleBlur}
           placeholder="+38 (0__) __-__-___"
-          className={`${styles.input} ${isPhoneError ? styles.errorInput : ''}`}
+          className={`${styles.input} ${isTelError ? styles.errorInput : ''}`}
         />
-        {isPhoneError && <span className={styles.errorMessage}>Error Text</span>}
+        {isTelError && <span className={styles.errorMessage}>Error Text</span>}
       </div>
 
       <div className={styles.rowGroup}>
@@ -168,15 +168,15 @@ export const UserForm = ({
           </label>
           <input
             type="text"
-            id="branch"
-            name="branch"
-            value={formData.branch}
+            id="postOffice"
+            name="postOffice"
+            value={formData.postOffice}
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder="1"
-            className={`${styles.input} ${isBranchError ? styles.errorInput : ''}`}
+            className={`${styles.input} ${isPostOfficeError ? styles.errorInput : ''}`}
           />
-          {isBranchError && <span className={styles.errorMessage}>Error Text</span>}
+          {isPostOfficeError && <span className={styles.errorMessage}>Error Text</span>}
         </div>
       </div>
 
