@@ -6,7 +6,7 @@ import css from "./layout.module.css";
 import TanStackProvider from "../components/TanstackProvider/TanstackProvider";
 
 const SITE_URL = process.env.SITE_URL;
-if (!SITE_URL) {
+ if (!SITE_URL) {
   throw new Error("SITE_URL is not defined in the environment variables");
 }
 

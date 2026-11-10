@@ -1,0 +1,25 @@
+.mobile_menu {
+
+}
+
+.basket {
+
+}
+
+.logo {}
+
+.amount {
+
+}
+.link {
+  display: inline-block;
+  text-align: center;
+
+  margin-bottom: 40px;
+  fill: var(--color-neutral-darkest);
+  transition: opacity 0.3s ease;
+}
+
+.logo {
+  width: 93px;
+}
