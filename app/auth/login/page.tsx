@@ -10,11 +10,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import './login.css';
-import type { Metadata } from "next";
-import AuthHeader from "@/components/AuthHeader/AuthHeader";
-import AuthTab from "@/components/AuthTab/AuthTab";
-import RegistrationForm from "@/components/RegistrationForm/RegistrationForm";
-import AuthFooter from "@/components/AuthFooter/AuthFooter";
+// import type { Metadata } from "next";
+// import AuthHeader from "@/components/AuthHeader/AuthHeader";
+// import AuthTab from "@/components/AuthTab/AuthTab";
+// import RegistrationForm from "@/components/RegistrationForm/RegistrationForm";
+// import AuthFooter from "@/components/AuthFooter/AuthFooter";
 
 
 
@@ -42,12 +42,14 @@ export default function LoginPage() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(values),
+          credentials: 'include',
         });
         const data = await response.json();
 
         if (!response.ok) {
           throw new Error(data.message || 'Помилка авторизації');
         }
+        localStorage.setItem('user', JSON.stringify(data.user));
         toast.success('Успішний вхід! Перенаправлення...');
         setTimeout(() => {
           router.push('/homePage')
