@@ -165,6 +165,7 @@ export default function Header() {
             />
             <p className={css.amount}>{totalQuantity}</p>
           </Link>
+          <ThemeToggle />
         </nav>
 
         <nav className={css.desktop_menu}>
@@ -220,8 +221,8 @@ export default function Header() {
                 Категорії
               </Link>
             </li>
+            <AuthNavigation onClick={closeMenu} />
           </ul>
-          <AuthNavigation onClick={closeMenu} />
         </nav>
       )}
     </header>

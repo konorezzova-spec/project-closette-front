@@ -1,29 +1,9 @@
-// import { Suspense } from "react";
-// import { connection } from "next/server";
-
-// async function DynamicMarker() {
-//   await connection();
-//   return null;
-// }
-
-// export default function GoodPage() {
-//   return (
-//     <>
-//       <Suspense fallback={null}>
-//         <DynamicMarker />
-//       </Suspense>
-//       <div>Good Page</div>
-//     </>
-//   );
-// }
-
 import {
   QueryClient,
   HydrationBoundary,
   dehydrate,
 } from "@tanstack/react-query";
 import { fetchGoodById } from "@/lib/api/serverApi";
-// import NoteDetailsClient from "./GoodPage.client";
 import { Metadata } from "next";
 import GoodPageClient from "./GoodPage.client";
 

@@ -18,7 +18,6 @@ export const useBasketStore = create<BasketStore>()(
   persist(
     set => ({
       items: [],
-
       addItem: newItem =>
         set(state => {
           const exists = state.items.some(item =>

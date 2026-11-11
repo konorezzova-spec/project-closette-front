@@ -1,5 +1,26 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse, NextRequest } from "next/server";
+import { api } from "../api";
+import { isAxiosError } from "axios";
+import { logErrorResponse } from "../_utils/utils";
+import { cookies } from "next/headers"; // ← добавить к импортам
+
+
+
+const handleError = (error: unknown) => {
+  if (isAxiosError(error)) {
+      logErrorResponse(error.response?.data);
+      return NextResponse.json(
+        { error: error.message },
+        {status:error.response?.status??500}
+      );
+    }
+
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+}
+
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
@@ -33,3 +54,19 @@ export async function GET(request: NextRequest) {
 
 /**
  * ========================================== */
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const cookieStore = await cookies();
+
+    const { data, status } = await api.post("/orders", body, {
+      headers: { Cookie: cookieStore.toString() },
+    });
+
+    return NextResponse.json(data, { status });
+
+  } catch (error) {
+      return handleError(error);
+  }
+}
