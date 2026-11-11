@@ -1,0 +1,18 @@
+.footer {
+  margin-top: 40px;
+  padding: 12px 0;
+  text-align: center;
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* tablet */
+@media (min-width: 768px) {
+  .footer {
+    margin-top: 56px;
+  }
+}

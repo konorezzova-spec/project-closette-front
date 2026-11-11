@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import ResetPasswordForm from "@/components/ResetPasswordForm/ResetPasswordForm.tsx";
+import ResetPasswordForm from "@/components/ResetPasswordForm/ResetPasswordForm";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import AuthHeader from "@/components/AuthHeader/AuthHeader";
 import AuthTab from "@/components/AuthTab/AuthTab";
 import RegistrationForm from "@/components/RegistrationForm/RegistrationForm";
+import AuthFooter from "@/components/AuthFooter/AuthFooter";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -9,10 +11,14 @@ export const metadata: Metadata = {
 
 export default function RegisterPage() {
   return (
-    <section className={styles.page}>
-      <AuthTab active="register" />
-      <h1 className={styles.title}>Реєстрація</h1>
-      <RegistrationForm />
-    </section>
+    <>
+      <AuthHeader />
+      <section className={styles.page}>
+        <AuthTab active="register" />
+        <h1 className={styles.title}>Реєстрація</h1>
+        <RegistrationForm />
+        <AuthFooter />
+      </section>
+    </>
   );
 }

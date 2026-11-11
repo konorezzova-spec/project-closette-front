@@ -1,0 +1,109 @@
+.auth_ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-scheme-5-text);
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    margin-right: 16px;
+    font-size: 14px;
+    color: var(--color-neutral-darkest);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .auth_ul {
+    font-size: 16px;
+  }
+}
+
+.auth_li_cabinet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--color-deco);
+  border-radius: 100px;
+  width: 335px;
+  height: 36px;
+  background-color: var(--color-deco);
+  @media screen and (min-width: 768px) {
+    border: 1px solid var(--opacity-transparent);
+    background-color: var(--opacity-neutral-darkest-5);
+    width: 73px;
+    height: 29px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .auth_li_cabinet {
+    width: 81px;
+    height: 32px;
+  }
+}
+
+.auth_li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--opacity-transparent);
+  background-color: var(--opacity-neutral-darkest-5);
+  border-radius: 100px;
+  width: 335px;
+  height: 36px;
+  @media screen and (min-width: 768px) {
+    width: 50px;
+    height: 29px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .auth_li {
+    width: 54px;
+    height: 32px;
+  }
+}
+
+.auth_in_li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--color-deco);
+  border-radius: 100px;
+  width: 335px;
+  height: 36px;
+  background-color: var(--color-deco);
+  @media screen and (min-width: 768px) {
+    width: 98px;
+    height: 29px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .auth_in_li {
+    width: 109px;
+    height: 32px;
+  }
+}
+
+.auth_li:hover,
+.auth_li:focus,
+.auth_in_li:hover,
+.auth_in_li:focus,
+.auth_li_cabinet:hover,
+.auth_li_cabinet:focus {
+  border: 1px solid var(--color-deco-darker);
+  background-color: var(--color-deco-dark);
+}
+
+.auth_li:active,
+.auth_in_li:active,
+.auth_li_cabinet:active {
+  border: 1px solid var(--color-deco);
+  background-color: var(--color-deco-darkest);
+}
