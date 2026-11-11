@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 
     const size = request.nextUrl.searchParams.get("size") ?? "";
     const price = Number(request.nextUrl.searchParams.get("price") ?? "");
-    const gender = request.nextUrl.searchParams.get("size") ?? "";
+    const gender = request.nextUrl.searchParams.get("gender") ?? "";
 
     const res = await api.get("/goods", {
       params: {
