@@ -6,7 +6,11 @@ export default function AuthFooter() {
 
   return (
     <footer className={styles.footer}>
-      <p className={styles.text}>© {year} Clothica. Всі права захищені.</p>
+      <p className={styles.text}>
+        <span>©</span>
+        <span>{year}</span>
+        <span>Clothica. Всі права захищені.</span>
+      </p>
     </footer>
   );
 }
