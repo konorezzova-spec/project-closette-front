@@ -5,7 +5,6 @@ import GoodsOrderList from "@/components/GoodsOrderList/GoodsOrderList";
 import { UserForm, IUserData } from "@/components/UserForm/UserForm";
 import css from "./CreateOrder.module.css";
 import { useRouter } from "next/navigation";
-// import { useState } from "react";
 import { useBasketStore } from "@/lib/store/basketStore";
 import type { CreateOrderParams } from "@/types/order";
 import { createOrder } from "@/lib/api/clientApi";
@@ -36,13 +35,6 @@ export default function OrderPage() {
       postOffice: Number(data.postOffice),
       comment: data.comment || undefined,
       amount,
-      // name: "Анна",
-      // surname: "Коваленко",
-      // tel: "1234567890",
-      // city: "Киъв",
-      // postOffice: 16,
-      // comment: "ааапва" || undefined,
-      // amount,
       goodsOrderList: items.map(item => ({
         goodId: item.id,
         size: item.size,
