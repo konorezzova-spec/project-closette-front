@@ -18,11 +18,11 @@ export default function GoodsPage() {
 
   
   const { data: categoriesData } = useQuery({
-    queryKey: ["categories"],
-    queryFn: fetchCategories,
-  });
+  queryKey: ["categories"],
+  queryFn: () => fetchCategories(1, 20),
+});
 
-  const categories = categoriesData?.data.categories ?? [];
+  const categories = categoriesData?.categories ?? [];
 
     const {
     data,

@@ -1,8 +1,8 @@
 
 import { cookies } from "next/headers";
-import { FetchGoodsParams, GoodsHttpResponse } from "./clientApi";
+import type { FetchGoodsParams } from "./clientApi";
+import type { GoodsHttpResponse, Good } from "@/types/good";
 import { nextServer } from "./api";
-import { Good } from "@/types/good";
 
 export const fetchGoods = async (
   fetchParams: FetchGoodsParams
