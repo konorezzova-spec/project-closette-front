@@ -247,7 +247,7 @@
 }
 
 :global(.swiper-pagination-bullet) {
-  background-color: var(--color-neutral-darkest);
+  background-color: var(--color-scheme-4-text);
   opacity: 0.3;
 }
 

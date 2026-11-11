@@ -29,7 +29,10 @@ export default function ThemeToggle() {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label="Змінити тему"
     >
-      {isDark ? "☀️" : "🌙"}
+      {isDark
+        ? "☀️"
+        : // 🌙
+          "🌚"}
     </button>
   );
 }
