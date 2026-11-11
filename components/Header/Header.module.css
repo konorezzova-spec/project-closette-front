@@ -9,7 +9,7 @@
   font-size: 16px;
   line-height: 150%;
   color: var(--color-scheme-5-text);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease;
   @media screen and (min-width: 768px) {
     font-size: 14px;
   }
@@ -39,7 +39,8 @@
 }
 
 .mobile_menu {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 .desktop_menu {
@@ -57,6 +58,11 @@
 
 .mobile_nav_menu {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 }
 
 .link {
@@ -99,8 +105,8 @@
   align-items: center;
   margin-right: 16px;
   background-color: transparent;
-  transition: background-color 0.2s ease;
-  transition: border 0.2s ease;
+  transition: background-color 0.3s ease;
+  transition: border 0.3s ease;
   @media screen and (min-width: 768px) {
     display: none;
   }
@@ -127,7 +133,6 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  justify-content: center;
   align-items: center;
   margin-top: 40px;
   margin-bottom: 64px;

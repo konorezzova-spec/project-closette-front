@@ -17,8 +17,6 @@ import Image from "next/image";
 import css from "./PopularGoods.module.css";
 import { fetchGoods } from "@/lib/api/clientApi";
 import Link from "next/link";
-import StarIcon from "/assets/icons/star-filled.svg";
-import CommentIcon from "/assets/icons/comment.svg";
 import right from "/public/arrow_forward.svg";
 import left from "/public/arrow_back.svg";
 
