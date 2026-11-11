@@ -1,18 +1,22 @@
 .footer {
-  margin-top: 40px;
-  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 72px;
   text-align: center;
 }
 
 .text {
   margin: 0;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 21px;
 }
 
-/* tablet */
+/* tablet: футер притиснутий до низу сторінки */
 @media (min-width: 768px) {
   .footer {
-    margin-top: 56px;
+    margin-top: auto;
+    height: auto;
+    padding: 56px 0 20px;
   }
 }

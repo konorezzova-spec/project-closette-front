@@ -14,9 +14,11 @@ export default function RegisterPage() {
     <>
       <AuthHeader />
       <section className={styles.page}>
-        <AuthTab active="register" />
-        <h1 className={styles.title}>Реєстрація</h1>
-        <RegistrationForm />
+        <div className={styles.card}>
+          <AuthTab active="register" />
+          <h1 className={styles.title}>Реєстрація</h1>
+          <RegistrationForm />
+        </div>
         <AuthFooter />
       </section>
     </>

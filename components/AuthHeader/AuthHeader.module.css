@@ -1,7 +1,10 @@
 .header {
   position: absolute;
-  top: 17px;
+  top: 0;
   left: 16px;
+  display: flex;
+  align-items: center;
+  height: 72px;
 }
 
 .logo {
@@ -31,12 +34,5 @@
 @media (min-width: 375px) {
   .header {
     left: 20px;
-  }
-}
-
-/* tablet */
-@media (min-width: 768px) {
-  .header {
-    left: 32px;
   }
 }

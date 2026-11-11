@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
@@ -59,15 +58,6 @@ export default function RegistrationForm() {
         error={errorFor("name")}
       />
       <FormField
-        id="email"
-        label="Email*"
-        type="email"
-        placeholder="Ваш email"
-        autoComplete="email"
-        {...formik.getFieldProps("email")}
-        error={errorFor("email")}
-      />
-      <FormField
         id="tel"
         label="Номер телефону*"
         type="tel"
@@ -77,6 +67,15 @@ export default function RegistrationForm() {
         {...formik.getFieldProps("tel")}
         onChange={(e) => formik.setFieldValue("tel", formatPhone(e.target.value))}
         error={errorFor("tel")}
+      />
+      <FormField
+        id="email"
+        label="Email*"
+        type="email"
+        placeholder="Ваш email"
+        autoComplete="email"
+        {...formik.getFieldProps("email")}
+        error={errorFor("email")}
       />
       <FormField
         id="password"
@@ -97,13 +96,6 @@ export default function RegistrationForm() {
         {formik.isSubmitting && <span className={styles.spinner} aria-hidden="true" />}
         {formik.isSubmitting ? "Реєстрація…" : "Зареєструватися"}
       </button>
-
-      <p className={styles.loginText}>
-        Вже маєте акаунт?{" "}
-        <Link className={styles.loginLink} href="/auth/login">
-          Увійти
-        </Link>
-      </p>
     </form>
   );
 }

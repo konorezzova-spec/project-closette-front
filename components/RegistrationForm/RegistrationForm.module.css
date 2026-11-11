@@ -44,24 +44,3 @@
     transform: rotate(360deg);
   }
 }
-
-/* ===== Посилання на вхід ===== */
-.loginText {
-  margin: 20px 0 0;
-  text-align: center;
-}
-
-.loginLink {
-  color: inherit;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.loginLink:hover {
-  text-decoration: none;
-}
-
-.loginLink:focus-visible {
-  outline: 2px solid var(--color-focus, #8cb860);
-  outline-offset: 2px;
-}
