@@ -47,7 +47,7 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
             <p className={css.price}>
               {good.price.value} {good.price.currency}
             </p>
-            <Rating value={4.5} readOnly />
+            <Rating value={3.5} readOnly />
             <p className={css.prevDescription}>{good.prevDescription}</p>
             <div className={css.sizeSelector}>
               <p>Розмір</p>

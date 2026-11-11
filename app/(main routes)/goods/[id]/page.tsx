@@ -20,8 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: good.name,
       description: good.prevDescription,
-      // потрібно буде замінити на задеплоєний url проєкту
-      url: `http://localhost:4000/goods/${id}`,
+      url: `https://project-closette-front.vercel.app/goods/${id}`,
       images: [
         {
           url: good.image,

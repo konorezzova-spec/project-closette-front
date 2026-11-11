@@ -1,6 +1,3 @@
-// export async function GET() {
-//   return Response.json({ message: "OK" });
-// }
 import { NextResponse } from "next/server";
 import { api } from "../../api";
 import { cookies } from "next/headers";
