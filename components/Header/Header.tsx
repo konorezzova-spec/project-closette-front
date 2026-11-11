@@ -11,6 +11,7 @@ import basket from "/public/header/basket.svg";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import { useBasketStore } from "@/lib/store/basketStore";
 import { useEffect, useRef, useState } from "react";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -93,19 +94,12 @@ export default function Header() {
     >
       <Container className={`${css.header_container}`}>
         <Link
-          className={css.link}
+          className={`${css.link} ${css.logo_link}`}
           href="/"
           aria-label="Home"
           onClick={closeMenu}
         >
-          <Image
-            className={css.logo}
-            src={logo}
-            alt="logo"
-            width={84}
-            height={36}
-            priority
-          />
+          <Image className={css.logo} src={logo} alt="logo" fill priority />
         </Link>
 
         <nav className={css.desktop_menu}>
@@ -186,6 +180,7 @@ export default function Header() {
             />
             <p className={css.amount}>{totalQuantity}</p>
           </Link>
+          <ThemeToggle />
         </nav>
       </Container>
 

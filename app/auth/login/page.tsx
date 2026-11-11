@@ -7,9 +7,14 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import './login.css';
+import type { Metadata } from "next";
+import AuthHeader from "@/components/AuthHeader/AuthHeader";
+import AuthTab from "@/components/AuthTab/AuthTab";
+import RegistrationForm from "@/components/RegistrationForm/RegistrationForm";
+import AuthFooter from "@/components/AuthFooter/AuthFooter";
 
 
 
@@ -55,7 +60,7 @@ export default function LoginPage() {
     },
   });
   return (
-    <main>
+    <main className="login-page">
         <div className="logo_wrap">
           <a href="/" aria-label="Home" className="logo-link">
             <button className="logo-btn">
@@ -72,12 +77,15 @@ export default function LoginPage() {
         </link>
       </div>
       
-      <button onClick={() => router.push('/auth/register')}>Реєстрація</button>
-      <h1>Вхід</h1>
+      <div className="buttons">
+        <button className="register-button" onClick={() => router.push('/auth/register')}>Реєстрація</button>
+        <button className="login-button" onClick={() => router.push('/auth/login')}>Вхід</button>
+      </div>
+      <h1 className="login-title">Вхід</h1>
       
       <form onSubmit={formik.handleSubmit}>
         
-        <label>
+        <label className="label">
           Номер телефону*
           <input
             type="tel"
@@ -88,11 +96,11 @@ export default function LoginPage() {
             onBlur={formik.handleBlur}
           />
           {formik.touched.tel && formik.errors.tel ? (
-            <span>{formik.errors.tel}</span>
+            <span className="error">{formik.errors.tel}</span>
           ) : null}
         </label>
 
-        <label>
+        <label className="label">
           Пароль*
           <input
             type="password"
@@ -103,10 +111,11 @@ export default function LoginPage() {
             onBlur={formik.handleBlur}
           />
           {formik.touched.password && formik.errors.password ? (
-            <span>{formik.errors.password}</span>
+            <span className="error">{formik.errors.password}</span>
           ) : null}
         </label>
         <button
+          className="login-btn"
           type="submit" 
           disabled={isLoading}
           >
@@ -120,7 +129,7 @@ export default function LoginPage() {
       </form>
 
       <ToastContainer position="top-right" autoClose={3000} />
-      <p>© 2025 Clothica. Всі права захищені.</p>
+      <p className="copyright">© 2025 Clothica. Всі права захищені.</p>
     </main>
   );
 }

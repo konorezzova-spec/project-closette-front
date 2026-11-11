@@ -6,6 +6,7 @@ import { fetchGoodById } from "@/lib/api/clientApi";
 
 import css from "./GoodPage.client.module.css";
 import GoodForPurchase from "./GoodForPurchase/GoodForPurchase";
+import GoodReviews from "./GoodReviews/GoodReviews";
 
 const GoodPageClient = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,9 +28,8 @@ const GoodPageClient = () => {
   return (
     <main className={css.main}>
       <div className={css.container}>
-        {/* <GoodGallery good={good} /> */}
         <GoodForPurchase good={good} />
-        {/* <GoodReviews /> */}
+        <GoodReviews goodId={good._id} />
       </div>
     </main>
   );

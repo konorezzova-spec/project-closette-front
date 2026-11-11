@@ -22,6 +22,7 @@ export interface GoodsResponse {
   totalItems: number;
   page: number;
   totalPages: number;
+  perPage: number;
 }
 
 export interface GoodsHttpResponse {
