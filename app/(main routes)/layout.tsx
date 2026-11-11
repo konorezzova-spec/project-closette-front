@@ -4,6 +4,7 @@ import Footer from "../../components/Footer/Footer";
 
 type Props = LayoutProps<"/"> & {
   modal: React.ReactNode;
+  children: React.ReactNode;
 };
 
 export default async function RootLayout({ children, modal }: Props) {

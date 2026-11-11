@@ -1,0 +1,17 @@
+.container {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  padding: 64px 20px;
+}
+@media only screen and (min-width: 768px) {
+  .container {
+    padding: 64px 32px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .container {
+    padding: 112px 64px;
+  }
+}

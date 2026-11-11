@@ -5,6 +5,7 @@ import { inter, nunito_sans } from "@/app/fonts";
 
 import css from "./layout.module.css";
 import TanStackProvider from "../components/TanstackProvider/TanstackProvider";
+import ThemeProvider from "@/components/ThemeProvider/ThemeProvider";
 
 const SITE_URL = process.env.SITE_URL;
 if (!SITE_URL) {
@@ -36,10 +37,15 @@ type Props = LayoutProps<"/"> & {
 
 export default async function RootLayout({ children, modal }: Props) {
   return (
-    <html lang="uk" className={`${inter.variable} ${nunito_sans.variable}`}>
+    <html
+      lang="uk"
+      className={`${inter.variable} ${nunito_sans.variable}`}
+      suppressHydrationWarning
+    >
       <body className={css.body}>
-        <TanStackProvider>
-          {/* <AuthProvider> */}
+        <ThemeProvider>
+          <TanStackProvider>
+            {/* <AuthProvider> */}
 
           <main className={css.main}>
             <div className={css.plug}></div>
@@ -48,8 +54,9 @@ export default async function RootLayout({ children, modal }: Props) {
           {modal}
           <Toaster position="top-right" />
 
-          {/* </AuthProvider> */}
-        </TanStackProvider>
+            {/* </AuthProvider> */}
+          </TanStackProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
