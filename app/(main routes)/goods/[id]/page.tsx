@@ -1,31 +1,12 @@
-// import { Suspense } from "react";
-// import { connection } from "next/server";
-
-// async function DynamicMarker() {
-//   await connection();
-//   return null;
-// }
-
-// export default function GoodPage() {
-//   return (
-//     <>
-//       <Suspense fallback={null}>
-//         <DynamicMarker />
-//       </Suspense>
-//       <div>Good Page</div>
-//     </>
-//   );
-// }
-
 import {
   QueryClient,
   HydrationBoundary,
   dehydrate,
 } from "@tanstack/react-query";
+import type { Metadata } from "next";
 import { fetchGoodById } from "@/lib/api/serverApi";
-// import NoteDetailsClient from "./GoodPage.client";
-import { Metadata } from "next";
 import GoodPageClient from "./GoodPage.client";
+import GoodReviewButton from "./GoodReviewButton";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -34,13 +15,13 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const good = await fetchGoodById(id);
+
   return {
     title: good.name,
     description: good.prevDescription,
     openGraph: {
       title: good.name,
       description: good.prevDescription,
-      // потрібно буде замінити на задеплоєний url проєкту
       url: `http://localhost:4000/goods/${id}`,
       images: [
         {
@@ -54,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const GoodPage = async ({ params }: Props) => {
+export default async function GoodPage({ params }: Props) {
   const { id } = await params;
   const queryClient = new QueryClient();
 
@@ -66,8 +47,7 @@ const GoodPage = async ({ params }: Props) => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <GoodPageClient />
+      <GoodReviewButton productId={id} />
     </HydrationBoundary>
   );
-};
-
-export default GoodPage;
+}

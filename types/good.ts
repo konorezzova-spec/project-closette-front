@@ -29,3 +29,22 @@ export interface GoodsHttpResponse {
   message: string;
   data: GoodsResponse;
 }
+
+export interface GoodReviewValues {
+  author: string;
+  description: string;
+  rate: number;
+}
+
+export interface GoodReview {
+  _id: string;
+  author: string;
+  date: string;
+  description: string;
+  rate: number;
+  category: string;
+  productId: string;
+}
+export interface CreateGoodReviewValues extends GoodReviewValues {
+  productId: string;
+}

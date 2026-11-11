@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -9,7 +8,6 @@ import { fetchGoods } from "@/lib/api/clientApi";
 import type { Good } from "@/types/good";
 
 export default function GoodsPage() {
-  
   const {
     data,
     isLoading,
@@ -27,22 +25,21 @@ export default function GoodsPage() {
         perPage: 12,
       }),
     getNextPageParam: (lastPage) =>
-  lastPage.data.page < lastPage.data.totalPages
-    ? lastPage.data.page + 1
-    : undefined,
+      lastPage.data.page < lastPage.data.totalPages
+        ? lastPage.data.page + 1
+        : undefined,
   });
 
-   const goods: Good[] =
+  const goods: Good[] =
     data?.pages.flatMap((page) => page.data.goods) ?? [];
-
-const totalItems = data?.pages[0]?.data.totalItems ?? 0;
+  const totalItems = data?.pages[0]?.data.totalItems ?? 0;
 
   if (isLoading) {
-    return <p>Завантаження товарів...</p>;
+    return <p className={css.message}>Завантаження товарів...</p>;
   }
 
   if (isError) {
-    return <p>Помилка завантаження: {error.message}</p>;
+    return <p className={css.error}>Помилка завантаження: {error.message}</p>;
   }
 
   return (
@@ -63,7 +60,6 @@ const totalItems = data?.pages[0]?.data.totalItems ?? 0;
 
             <section className={css.filterSection}>
               <h3>Категорії</h3>
-
               <ul className={css.filterList}>
                 <li><button type="button">Усі</button></li>
                 <li><button type="button">Футболки та сорочки</button></li>
@@ -81,16 +77,13 @@ const totalItems = data?.pages[0]?.data.totalItems ?? 0;
                 <h3>Розмір</h3>
                 <button type="button">Очистити</button>
               </div>
-
               <div className={css.checkboxList}>
-                {["XXS", "XS", "S", "M", "L", "XL", "XXL"].map(
-                  (size) => (
-                    <label key={size}>
-                      <input type="checkbox" value={size} />
-                      {size}
-                    </label>
-                  )
-                )}
+                {["XXS", "XS", "S", "M", "L", "XL", "XXL"].map((size) => (
+                  <label key={size}>
+                    <input type="checkbox" value={size} />
+                    {size}
+                  </label>
+                ))}
               </div>
             </section>
 
@@ -99,10 +92,8 @@ const totalItems = data?.pages[0]?.data.totalItems ?? 0;
                 <h3>Ціна</h3>
                 <button type="button">Очистити</button>
               </div>
-
               <div className={css.priceFilter}>
                 <input type="range" min="0" max="100" />
-
                 <div className={css.priceValues}>
                   <span>0</span>
                   <span>100</span>
@@ -115,35 +106,25 @@ const totalItems = data?.pages[0]?.data.totalItems ?? 0;
                 <h3>Стать</h3>
                 <button type="button">Очистити</button>
               </div>
-
               <div className={css.checkboxList}>
-                {["Всі", "Жіночий", "Чоловічий", "Унісекс"].map(
-                  (gender) => (
-                    <label key={gender}>
-                      <input
-                        type="radio"
-                        name="gender"
-                        value={gender}
-                      />
-                      {gender}
-                    </label>
-                  )
-                )}
+                {["Всі", "Жіночий", "Чоловічий", "Унісекс"].map((gender) => (
+                  <label key={gender}>
+                    <input type="radio" name="gender" value={gender} />
+                    {gender}
+                  </label>
+                ))}
               </div>
             </section>
           </aside>
 
           <section className={css.productsSection}>
             {goods.length === 0 ? (
-              <p>Товарів поки немає.</p>
+              <p className={css.message}>Товарів поки немає.</p>
             ) : (
               <>
                 <div className={css.productsGrid}>
                   {goods.map((good) => (
-                    <article
-                      key={good._id}
-                      className={css.productCard}
-                    >
+                    <article key={good._id} className={css.productCard}>
                       <Link
                         href={`/goods/${good._id}`}
                         className={css.imageWrapper}
@@ -161,22 +142,15 @@ const totalItems = data?.pages[0]?.data.totalItems ?? 0;
 
                       <div className={css.productInfo}>
                         <div className={css.productDetails}>
-                          <h3 className={css.productName}>
-                            {good.name}
-                          </h3>
-
+                          <h2 className={css.productName}>{good.name}</h2>
                           <p className={css.price}>
                             {good.price.value} {good.price.currency}
                           </p>
                         </div>
-
                         <div className={css.rating}>
-                          <span>★</span>
-                          <span>
-                            {good.feedbacks?.length ?? 0} відгуків
-                          </span>
+                          <span aria-hidden="true">★</span>
+                          <span>{good.feedbacks?.length ?? 0} відгуків</span>
                         </div>
-
                         <Link
                           href={`/goods/${good._id}`}
                           className={css.detailsButton}
@@ -187,13 +161,13 @@ const totalItems = data?.pages[0]?.data.totalItems ?? 0;
                     </article>
                   ))}
                 </div>
-               
+
                 {hasNextPage && (
                   <div className={css.loadMoreWrapper}>
                     <button
                       type="button"
                       className={css.loadMoreButton}
-                      onClick={() => fetchNextPage()}
+                      onClick={() => void fetchNextPage()}
                       disabled={isFetchingNextPage}
                     >
                       {isFetchingNextPage

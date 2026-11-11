@@ -1,4 +1,5 @@
 import type { Good } from "@/types/good";
+import type { CreateGoodReviewValues, GoodReview } from "@/types/good";
 
 import type { CategoriesResponse } from "@/types/category";
 
@@ -58,4 +59,9 @@ export async function fetchCategories(
 export const createOrder = async (params: CreateOrderParams):Promise<Order> => {
   const response = await nextServer.post<Order>("/orders", params);
   return response.data;
+};
+
+export async function addGoodReview(body: CreateGoodReviewValues) {
+  const { data } = await nextServer.post<GoodReview>("/feedbacks", body);
+  return data;
 }
