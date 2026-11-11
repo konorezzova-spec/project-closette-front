@@ -34,7 +34,7 @@ export default function CabinetPage() {
       }
 
       try {
-        const profileRes = await axios.get('/api/profile');
+        const profileRes = await axios.get('/api/users');
         setUserData(profileRes.data);
       } catch (error) {
         console.error('Помилка завантаження профілю:', error);
@@ -58,7 +58,13 @@ export default function CabinetPage() {
 
   const handleFormSubmit = async (data: IUserData) => {
     try {
-      await axios.put('/api/profile', data);
+      await axios.patch('/api/users', {
+        name: data.name,
+        surname: data.surName, 
+        tel: data.tel,
+        city: data.city,
+        postOffice: Number(data.postOffice),
+      });
       alert('Дані профілю успішно оновлено!');
     } catch (error) {
       console.error('Помилка оновлення профілю:', error);
@@ -82,6 +88,7 @@ export default function CabinetPage() {
                   submitButtonText="Зберегти зміни"
                   initialData={userData}
                   onSubmit={handleFormSubmit}
+                  showComment={false}
                 />
               )}
             </section>

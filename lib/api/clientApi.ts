@@ -1,61 +1,67 @@
-import type { Good } from "@/types/good";
 
-import type { CategoriesResponse } from "@/types/category";
+import type { Good, GoodsHttpResponse } from '@/types/good'
+import type { CategoriesResponse } from '@/types/category'
+import type { CreateOrderParams, Order } from '@/types/order'
 
-import type { CreateOrderParams, Order } from "@/types/order";
+import { nextServer } from './api'
 
-import { nextServer } from "./api";
-
-export interface FetchParams {
-  page: number;
-  perPage: number;
-  category?: string;
-  size?: string;
-  price?: number;
-  gender?: string;
+export interface FetchGoodsParams {
+  page: number
+  perPage: number
+  category?: string
+  size?: string
+  gender?: string
+  minPrice?: number
+  maxPrice?: number
 }
 
-// 🟩 Структура відповіді API
-export interface GoodsHttpResponse {
-  status: number;
-  message: string;
+export interface Category {
+  _id: string
+  name: string
+  image?: string
+}
+
+export interface CategoriesHttpResponse {
+  status: number
+  message: string
   data: {
-    goods: Good[];
-    page: number;
-    perPage: number;
-    totalPages: number;
-    totalItems: number;
-  };
+    categories: Category[]
+    totalItems: number
+    page: number
+    perPage: number
+    totalPages: number
+  }
 }
 
-// 🟩 Запит товарів
 export const fetchGoods = async (
-  fetchParams: FetchParams
+  params: FetchGoodsParams
 ): Promise<GoodsHttpResponse> => {
-  const { data } = await nextServer.get<GoodsHttpResponse>("/goods", {
-    params: fetchParams,
-  });
+  const { data } = await nextServer.get<GoodsHttpResponse>('/goods', {
+    params,
+  })
 
-  return data;
-};
+  return data
+}
 
 export async function fetchGoodById(id: string): Promise<Good> {
-  const response = await nextServer.get<Good>(`/goods/${id}`);
-  return response.data;
+  const response = await nextServer.get<Good>(`/goods/${id}`)
+  return response.data
 }
 
 export async function fetchCategories(
   page: number,
   perPage: number
 ): Promise<CategoriesResponse> {
-  const { data } = await nextServer.get("/categories", {
+  const { data } = await nextServer.get('/categories', {
     params: { page, perPage },
-  });
-  return data.data;
+  })
+
+  return data.data
 }
 
-
-export const createOrder = async (params: CreateOrderParams):Promise<Order> => {
-  const response = await nextServer.post<Order>("/orders", params);
-  return response.data;
+export const createOrder = async (
+  params: CreateOrderParams
+): Promise<Order> => {
+  const response = await nextServer.post<Order>('/orders', params)
+  return response.data
 }

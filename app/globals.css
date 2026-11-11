@@ -82,6 +82,14 @@
   --opacity-neutral-darkest-50: var(--color-deco-darkest);
 }
 
+ @media (prefers-color-scheme: dark) {
+  :root {
+    --color-scheme-1-background: var(--color-deco-darkest);
+    --color-scheme-1-text: var(--color-white);
+  } 
+ } 
+
+
 html,
 body {
   overflow-x: hidden;
