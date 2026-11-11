@@ -1,0 +1,67 @@
+/* Mobile First: 320px (гумова) → 375px → 768px (tablet) → 1440px (desktop)*/
+.page {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 480px;
+  margin: -8px auto 0;
+  padding: 0 16px 72px;
+  color: #000;
+  font:
+    400 16px/24px var(--font-inter, "Inter"),
+    system-ui,
+    sans-serif;
+}
+
+.card {
+  box-sizing: border-box;
+  min-height: 662px;
+  padding-top: 79px;
+}
+
+.title {
+  margin: 34px 0 32px;
+  font-family:
+    var(--font-nunito-sans, "Nunito Sans"), var(--font-inter, "Inter"),
+    system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
+}
+
+/* mobile: від 375px верстка адаптивна (відступи по 20px) */
+@media (min-width: 375px) {
+  .page {
+    padding-inline: 20px;
+  }
+}
+
+/* tablet: від 768px — футер притиснутий до низу сторінки */
+@media (min-width: 768px) {
+  .page {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 80px);
+    min-height: calc(100svh - 80px);
+    margin-top: 0;
+    padding: clamp(32px, 12.8vh, 113px) 0 72px;
+  }
+
+  .card {
+    min-height: 0;
+    padding-top: 0;
+  }
+
+  .title {
+    margin: 30px 0 32px;
+    font-size: 34px;
+    line-height: 44px;
+  }
+}
+
+/* desktop: від 1440px */
+@media (min-width: 1440px) {
+  .page {
+    padding: clamp(64px, 12.8vh, 113px) 0 0;
+  }
+}

@@ -1,0 +1,38 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  height: 72px;
+}
+
+.logo {
+  display: inline-block;
+  color: #000;
+  font-family:
+    var(--font-nunito-sans, "Nunito Sans"), var(--font-inter, "Inter"),
+    system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 30px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.logo:hover {
+  color: var(--color-focus, #8cb860);
+}
+
+.logo:focus-visible {
+  outline: 2px solid var(--color-focus, #8cb860);
+  outline-offset: 2px;
+}
+
+/* mobile: від 375px */
+@media (min-width: 375px) {
+  .header {
+    left: 20px;
+  }
+}
