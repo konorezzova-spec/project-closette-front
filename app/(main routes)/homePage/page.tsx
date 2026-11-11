@@ -5,14 +5,10 @@ import {
 } from "@tanstack/react-query";
 import PopularGoods from "@/components/PopularGoods/PopularGoods";
 import { fetchGoods } from "@/lib/api/serverApi";
+import Hero from "@/components/Hero/Hero";
 // ..............................................
 import Style from "@/components/Style/Style";
-<<<<<<< HEAD
-import Hero from "@/components/Hero/Hero";
-// ...............................................
-=======
 import PopularCategories from "@/components/PopularCategories/PopularCategories";
->>>>>>> main
 
 export default async function HomePage() {
   const queryClient = new QueryClient();
@@ -25,18 +21,10 @@ export default async function HomePage() {
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-<<<<<<< HEAD
-        {<Hero />/*
-<Style/>
-<PopularCategories/> */}
-        <Style />
-        {/* <PopularGoods /> */}
-=======
-        {/* <Hero /> */}
+        <Hero />
         <Style />
         <PopularCategories />
         <PopularGoods />
->>>>>>> main
         {/* <LastReviews/> */}
       </HydrationBoundary>
     </>
