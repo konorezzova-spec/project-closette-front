@@ -19,7 +19,7 @@ export default function AuthNavigation({ onClick }: AuthNavigationProps) {
           <li>
             <Link
               className={css.auth_li_cabinet}
-              href="/order"
+              href="/profile"
               prefetch={false}
               onClick={onClick}
             >
