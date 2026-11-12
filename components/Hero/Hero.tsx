@@ -24,7 +24,7 @@ export default function Hero() {
               <Link href="#goods">До товарів</Link>
             </li>
             <li className={css["hero__btn--right"]}>
-              <Link href="#categories">Дізнатися більше</Link>
+              <Link href="#categories">Дослідити категорії</Link>
             </li>
           </ul>
         </div>
