@@ -48,7 +48,7 @@ export default function PopularGoods() {
   };
 
   return (
-    <Container className={css.container}>
+    <Container id="goods" className={css.container}>
       <div className={css.header}>
         <h2>Популярні товари</h2>
 
