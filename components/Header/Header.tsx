@@ -174,7 +174,7 @@ export default function Header() {
             <Image
               className={css.basket_svg}
               src={basket}
-              alt="logo"
+              alt="basket"
               width={36}
               height={36}
               priority

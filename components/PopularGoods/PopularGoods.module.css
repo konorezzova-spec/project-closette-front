@@ -50,6 +50,10 @@
   background-color: var(--opacity-neutral-darkest-15);
 }
 
+.header_link:active {
+  background-color: var(--opacity-neutral-darkest-50);
+}
+
 .image_container {
   position: relative;
   width: 335px;
@@ -86,10 +90,10 @@
 .left_side {
   display: flex;
   flex-direction: column;
-  width: 160px;
+  width: 231px;
 
-  @media screen and (min-width: 768px) {
-    width: 232px;
+  @media screen and (min-width: 1440px) {
+    width: 230px;
   }
 }
 
@@ -100,7 +104,6 @@
   overflow: hidden;
   @media screen and (min-width: 768px) {
     -webkit-line-clamp: 1;
-    margin-bottom: 16px;
   }
 }
 
@@ -113,7 +116,7 @@
   align-items: center;
   p {
     display: inline-block;
-    margin-right: 12px;
+    margin: 0 12px 0 4px;
     font-weight: 400;
     font-size: 12px;
   }
