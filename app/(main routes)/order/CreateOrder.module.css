@@ -1,6 +1,7 @@
 .section{
   padding-top: 48px;
   padding-bottom: 64px;
+  color: var(--color-scheme-1-text);
 }
 
 .title{
