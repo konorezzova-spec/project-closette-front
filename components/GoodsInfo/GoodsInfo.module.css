@@ -1,0 +1,153 @@
+
+/* PRODUCTS GRID */
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 20px;
+}
+
+.productCard {
+  min-width: 0;
+}
+
+.imageWrapper {
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.productImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.imageWrapper:hover .productImage {
+  transform: scale(1.04);
+}
+
+.productInfo {
+  padding-top: 12px;
+}
+
+.productDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.productName {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.price {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #777;
+}
+
+.rating span:first-child {
+  color: #899c7e;
+}
+
+.detailsButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 40px;
+  margin-top: 12px;
+  border-radius: 100px;
+  background-color: #c5e1a5;
+  color: #171717;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.detailsButton:hover {
+  background-color: #d4dfcc;
+}
+
+/* LOAD MORE */
+
+.loadMoreWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.loadMoreButton {
+  width: 158px;
+  height: 36px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 100px;
+  background: #c5e1a5;
+  border: 1px solid #c5e1a5;
+  cursor: pointer;
+}
+
+.loadMoreButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* TABLET */
+
+@media (max-width: 1024px) {
+  .productsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 640px) {
+  .productsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+  }
+
+  .productName,
+  .price {
+    font-size: 12px;
+  }
+
+  .detailsButton {
+    min-height: 34px;
+    font-size: 12px;
+  }
+
+  .imageWrapper {
+    border-radius: 9px;
+  }
+}
+
+@media (max-width: 380px) {
+  .productsGrid {
+    grid-template-columns: 1fr;
+  }
+}
