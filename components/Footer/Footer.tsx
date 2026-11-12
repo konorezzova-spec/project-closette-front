@@ -11,13 +11,14 @@ export default function Footer() {
         <div className={css.footer_top}>
           <div className={css.logo_wrap}>
             <Link className={css.link} href="/homePage" aria-label="Home">
-              <Image
+              <svg
                 className={css.logo}
-                src="/header/company_logo.svg"
-                alt="logo"
                 width={84}
                 height={36}
-              />
+                aria-hidden="true"
+              >
+                <use href="/header/company_logo.svg" />
+              </svg>
             </Link>
           </div>
           <div className={css.wrap_list}>
