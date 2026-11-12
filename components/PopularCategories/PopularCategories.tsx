@@ -18,7 +18,7 @@ export default function PopularCategories() {
   const categories = data?.categories ?? [];
 
   return (
-    <Container className={css.section}>
+    <Container id="categories" className={css.section}>
       <div className={css.header_wrap}>
         <h2 className={css.title}>Популярні категорії</h2>
 
