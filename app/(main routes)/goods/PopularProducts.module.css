@@ -27,7 +27,6 @@
   align-items: start;
 }
 
-/* FILTERS */
 
 .sidebar {
   width: 100%;
@@ -143,20 +142,17 @@
   font-size: 12px;
 }
 
-/* PRODUCTS SECTION */
 
 .productsSection {
   min-width: 0;
 }
 
-/* ACTIVE FILTER */
 
 .activeFilter {
   color: #526b45;
   font-weight: 700;
 }
 
-/* PRICE INPUTS */
 
 .priceInputs {
   display: flex;
@@ -185,7 +181,6 @@
   border-color: #526b45;
 }
 
-/* PRICE ERROR */
 
 .priceError {
   color: #c0392b;
@@ -206,7 +201,6 @@
   }
 }
 
-/* MOBILE */
 
 @media (max-width: 640px) {
   .page {
