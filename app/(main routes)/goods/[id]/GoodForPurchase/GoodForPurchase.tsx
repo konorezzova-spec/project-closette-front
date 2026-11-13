@@ -67,6 +67,14 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
   };
  
   const handleBuyNow = () => {
+    const alreadyInBasket = useBasketStore.getState()
+      .items.some(item => item.id === good._id && item.size === selectedSize);
+    
+    if (alreadyInBasket) {
+      router.push("/basket");
+      return;
+    }
+
     if (addToBasket()) {
       router.push("/basket");
     }
