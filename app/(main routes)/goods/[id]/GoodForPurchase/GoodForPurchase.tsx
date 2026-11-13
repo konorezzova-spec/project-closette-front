@@ -4,8 +4,9 @@ import css from "./GoodForPurchase.module.css";
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import { useState } from "react";
-import type { Good } from "@/types/good";
+import type { Good, Size } from "@/types/good";
 import Rating from "@/components/Rating/Rating";
+import { useBasketStore } from "@/lib/store/basketStore";
 
 const splitDescription = (description: string) => {
   const sentences = description.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
@@ -24,12 +25,26 @@ type GoodForPurchaseProps = {
 };
 
 const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
-  const [selectedSize, setSelectedSize] = useState("L");
+  const [selectedSize, setSelectedSize] = useState<Size>("L");
   const [quantity, setQuantity] = useState<string>("1");
 
   // потім потрібно видалити
   const rating = 4.5;
   const reviewsCount = 12;
+  const addItem = useBasketStore(state => state.addItem);
+  const handleAddToCart = () => {
+    addItem({
+      id: good._id,
+      name: good.name,
+      image: good.image,
+      price: good.price.value,
+      size: selectedSize,
+      quantity: Number(quantity),
+      rating,
+      reviewsCount,
+    });
+  };
+  // ......
 
   return (
     <div className={css.container}>
@@ -64,7 +79,7 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
               <select
                 className={css.sizeSelect}
                 value={selectedSize}
-                onChange={event => setSelectedSize(event.target.value)}
+                onChange={event => setSelectedSize(event.target.value as Size)}
               >
                 {good.size.map(size => (
                   <option key={size} value={size}>
@@ -78,7 +93,7 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
           </div>
           <div className={css.cartActions}>
             {/* <button type="button" onClick={handleAddToCart}></button> */}
-            <button className={css.btn} type="button">
+            <button className={css.btn} type="button" onClick={handleAddToCart}>
               Додати в кошик
             </button>
             <div className={css.quantity}>

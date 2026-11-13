@@ -178,18 +178,22 @@ p + .characteristics {
   background-color: transparent;
 }
 
-/* Chrome, Safari, Edge */
-.quantity input::-webkit-inner-spin-button,
-.quantity input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+/* За замовчуванням ховаємо стрілочки */
+.quantity::-webkit-inner-spin-button,
+.quantity::-webkit-outer-spin-button {
+  opacity: 0;
 }
 
-/* Firefox */
-.quantity input {
-  -moz-appearance: textfield;
-  appearance: textfield;
+/* Показуємо при наведенні */
+.quantity:hover::-webkit-inner-spin-button,
+.quantity:hover::-webkit-outer-spin-button {
+  opacity: 1;
 }
+
+.quantity:hover {
+  border-color: var(--color-deco-dark);
+}
+
 .quantity input:focus,
 .quantity input:active {
   outline: none;
