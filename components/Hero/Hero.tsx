@@ -30,7 +30,7 @@ export default function Hero() {
         </div>
         <div className={css["hero__right-img"]}>
           <Image
-            src="/imagehero.jpg"
+            src="/imagehero1.jpg"
             alt="image mask group"
             // fill
             width={335}
