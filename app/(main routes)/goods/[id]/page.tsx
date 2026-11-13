@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const good = await fetchGoodById(id);
   const title = good.name;
   const description = good.prevDescription;
+  const img = good.image;
   return {
     title: title,
     description: description,
@@ -24,14 +25,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: title,
       description: description,
       url: `https://project-closette-front.vercel.app/goods/${id}`,
-      // images: [
-      //   {
-      //     url: good.image,
-      //     width: 1200,
-      //     height: 630,
-      //     alt: title,
-      //   },
-      // ],
+      images: [
+        {
+          url: img,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
     },
   };
 }
