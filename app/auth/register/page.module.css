@@ -5,7 +5,7 @@
   max-width: 480px;
   margin: -8px auto 0;
   padding: 0 16px 72px;
-  color: #000;
+  color: var(--color-scheme-1-text);
   font:
     400 16px/24px var(--font-inter, "Inter"),
     system-ui,
