@@ -13,22 +13,25 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
+
   const good = await fetchGoodById(id);
+  const title = good.name;
+  const description = good.prevDescription;
   return {
-    title: good.name,
-    description: good.prevDescription,
+    title: title,
+    description: description,
     openGraph: {
-      title: good.name,
-      description: good.prevDescription,
+      title: title,
+      description: description,
       url: `https://project-closette-front.vercel.app/goods/${id}`,
-      images: [
-        {
-          url: good.image,
-          width: 1200,
-          height: 630,
-          alt: good.name,
-        },
-      ],
+      // images: [
+      //   {
+      //     url: good.image,
+      //     width: 1200,
+      //     height: 630,
+      //     alt: title,
+      //   },
+      // ],
     },
   };
 }
