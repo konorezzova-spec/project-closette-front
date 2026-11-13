@@ -6,6 +6,7 @@ import { MessageNoInfo } from '@/components/MessageNoInfo/MessageNoInfo';
 import axios from 'axios';
 import styles from './page.module.css';
 import { UserForm, IUserData } from '@/components/UserForm/UserForm';
+import { nextServer } from '@/lib/api/api';
 
 interface IOrder {
   _id: string;
@@ -25,7 +26,7 @@ export default function CabinetPage() {
   useEffect(() => {
     async function fetchCabinetData() {
       try {
-        const ordersRes = await axios.get('/api/orders');
+        const ordersRes = await nextServer.get('/orders');
         setOrders(ordersRes.data);
       } catch (error) {
         console.error('Помилка завантаження замовлень:', error);
@@ -34,7 +35,7 @@ export default function CabinetPage() {
       }
 
       try {
-        const profileRes = await axios.get('/api/users');
+        const profileRes = await nextServer.get('/users');
         setUserData(profileRes.data.user);
       } catch (error) {
         console.error('Помилка завантаження профілю:', error);
