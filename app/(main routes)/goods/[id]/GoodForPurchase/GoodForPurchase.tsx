@@ -4,8 +4,11 @@ import css from "./GoodForPurchase.module.css";
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import { useState } from "react";
-import type { Good } from "@/types/good";
+import { useRouter } from "next/navigation";
+import type { Good, Size } from "@/types/good";
+import { useBasketStore } from "@/lib/store/basketStore";
 import Rating from "@/components/Rating/Rating";
+import toast from "react-hot-toast";
 
 const splitDescription = (description: string) => {
   const sentences = description.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
@@ -24,8 +27,47 @@ type GoodForPurchaseProps = {
 };
 
 const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
-  const [selectedSize, setSelectedSize] = useState("L");
+  const [selectedSize, setSelectedSize] = useState<Size>(
+    good.size.includes("L")?"L":good.size[0]
+  );
   const [quantity, setQuantity] = useState<string>("1");
+  const router = useRouter();
+  const addItem = useBasketStore(state => state.addItem);
+
+  const addToBasket = () => {
+    const count = Number(quantity);
+
+    if (!Number.isInteger(count) || count < 1) {
+      toast.error("Вкажіть кількість: ціле число від 1");
+      return;
+    }
+
+    addItem({
+      id: good._id,
+      name: good.name,
+      image: good.image,
+      size: selectedSize,
+      price: good.price.value,
+      rating: 3.5, // TODO: заменить на реальный рейтинг, когда он появится
+      reviewsCount: good.feedbacks.length,
+      quantity: count,
+    });
+
+    setQuantity("1");
+    return true;
+  };
+
+  const handleAddToCart = () => { 
+    if (addToBasket()) {
+      toast.success(`"${good.name}" (${selectedSize}) додано в кошик`)
+    }
+  };
+
+  const handleBuyNow = () => {
+    if (addToBasket()) {
+      router.push("/basket");
+    }
+  };
 
   return (
     <main className={css.main}>
@@ -55,7 +97,7 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
                 <select
                   className={css.sizeSelect}
                   value={selectedSize}
-                  onChange={event => setSelectedSize(event.target.value)}
+                  onChange={event => setSelectedSize(event.target.value as Size)}
                 >
                   {good.size.map(size => (
                     <option key={size} value={size}>
@@ -68,8 +110,7 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
               </div>
             </div>
             <div className={css.cartActions}>
-              {/* <button type="button" onClick={handleAddToCart}></button> */}
-              <button className={css.btn} type="button">
+              <button className={css.btn} type="button" onClick={handleAddToCart}>
                 Додати в кошик
               </button>
               <div className={css.quantity}>
@@ -82,7 +123,7 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
                 />
               </div>
             </div>
-            <button className={css.btn} type="button">
+            <button className={css.btn} type="button" onClick={handleBuyNow}>
               Купити зараз
             </button>
             <p className={css.delivery}>
