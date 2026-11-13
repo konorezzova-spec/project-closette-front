@@ -35,7 +35,7 @@ export default function CabinetPage() {
 
       try {
         const profileRes = await axios.get('/api/users');
-        setUserData(profileRes.data);
+        setUserData(profileRes.data.user);
       } catch (error) {
         console.error('Помилка завантаження профілю:', error);
       } finally {
