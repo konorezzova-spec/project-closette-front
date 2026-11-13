@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/Container/Container";
 import css from "./Footer.module.css";
@@ -10,7 +9,7 @@ export default function Footer() {
       <Container>
         <div className={css.footer_top}>
           <div className={css.logo_wrap}>
-            <Link className={css.link} href="/homePage" aria-label="Home">
+            <Link className={css.link} href="/" aria-label="Home">
               <svg
                 className={css.logo}
                 width={84}
@@ -25,7 +24,7 @@ export default function Footer() {
             <h3 className={css.list_title}>Меню</h3>
             <ul className={css.list}>
               <li>
-                <Link className={css.list_item} href={"/homePage"}>
+                <Link className={css.list_item} href={"/"}>
                   Головна
                 </Link>
               </li>
