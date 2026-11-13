@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { MessageNoInfo } from '@/components/MessageNoInfo/MessageNoInfo';
-import axios from 'axios';
 import styles from './page.module.css';
 import { UserForm, IUserData } from '@/components/UserForm/UserForm';
+import { nextServer } from '@/lib/api/api';
 
 interface IOrder {
   _id: string;
@@ -25,7 +25,7 @@ export default function CabinetPage() {
   useEffect(() => {
     async function fetchCabinetData() {
       try {
-        const ordersRes = await axios.get('/api/orders');
+        const ordersRes = await nextServer.get('/orders');
         setOrders(ordersRes.data);
       } catch (error) {
         console.error('Помилка завантаження замовлень:', error);
@@ -34,7 +34,7 @@ export default function CabinetPage() {
       }
 
       try {
-        const profileRes = await axios.get('/api/users');
+        const profileRes = await nextServer.get('/users');
         setUserData(profileRes.data.user);
       } catch (error) {
         console.error('Помилка завантаження профілю:', error);
@@ -48,7 +48,7 @@ export default function CabinetPage() {
 
   const handleLogout = async () => {
     try {
-      await axios.post('/api/auth/logout');
+      await nextServer.post('/auth/logout');
       localStorage.removeItem('token');
       router.push('/login');
     } catch (error) {
@@ -58,7 +58,7 @@ export default function CabinetPage() {
 
   const handleFormSubmit = async (data: IUserData) => {
     try {
-      await axios.patch('/api/users', {
+      await nextServer.patch('/users', {
         name: data.name,
         surname: data.surName, 
         tel: data.tel,
