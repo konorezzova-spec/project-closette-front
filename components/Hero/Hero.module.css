@@ -46,23 +46,23 @@
 
 
 .hero__right-img {
-    position: relative;
+    /* position: relative;
     width: 335px;
     height: 335px;
-    border-radius: 16px;
+    border-radius: 16px; */
     /* overflow: hidden; */
 
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .hero__right-img {
-        /* display: block; */
-        /* width: 100%;
+        display: block; 
+        width: 100%;
         max-width: 335px;
-        height: 425px; */
-        /* object-fit: cover; */
+        height: 425px; 
+        object-fit: cover;
     }
-}
+} */
 
 /* @media (min-width: 1440px) {
     .hero__right-img {

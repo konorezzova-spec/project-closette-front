@@ -32,9 +32,9 @@ export default function Hero() {
           <Image
             src="/imagehero.jpg"
             alt="image mask group"
-            fill
-            // width={335}
-            // height={335}
+            // fill
+            width={335}
+            height={335}
             priority
             className={css.hero__image}
           />
