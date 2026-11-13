@@ -1,160 +1,239 @@
-.wrapper{
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  /* color: var(--color-scheme-1-text); */
-}
-
-.list{
+.wrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  color: var(--color-scheme-1-text);
+
+  --gol-border: var(--opacity-neutral-darkest-20);
 }
 
-.item{
+:global(html[data-theme="dark"]) .wrapper {
+  --gol-border: var(--opacity-white-30);
+}
+
+.list {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.image{
+.item {
+  display: flex;
+  /* align-items: flex-start; */
+  align-items: center;
+  gap: 16px;
+}
+
+.image {
   flex-shrink: 0;
-  border-radius: 8px;
+  width: 82px;
+  height: 101px;
+  border-radius: 16px;
   object-fit: cover;
+  background-color: var(--color-neutral-lightest);
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   flex-grow: 1;
+  /* min-width: 0; */
 }
 
-.details{
+.details {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  /* min-width: 0; */
 }
 
-.name{
-  margin: 0 0 4px;
-  font-size: 14px;
+.name {
+  font-family: var(--font-family);
+  font-size: 18px;
   font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
-.meta{
+.meta {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-weight: 400;
   font-size: 12px;
+  line-height: 1.5;
 }
 
-.metaItem{
-  display: flex;
+.metaItem {
+  display: inline-flex;
   align-items: center;
   gap: 4px;
 }
 
-.price{
-  margin: 0;
-  font-size: 14px;
+.metaItem svg {
+  flex-shrink: 0;
 }
 
-.actions{
+.price {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: var(--font-family);
+  white-space: nowrap;
+}
+
+.actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
-  margin-top: 0;
+  gap: 16px;
 }
 
-.quantity{
-  width: 72px;
-  padding: 8px 12px;
-  border: 1px solid var(--color-scheme-1-border);
-  border-radius: 8px;
-  background-color: var(--color-scheme-1-foreground);
-  color: var(--color-scheme-1-text);
+.quantity {
+  width: 64px;
+  height: 40px;
+  padding: 8px;
+  border: 1px solid var(--opacity-neutral-darkest-15);
+  border-radius: 16px;
+  background-color: transparent;
+  background: var(--opacity-transparent);
   color: inherit;
   font: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.deleteBtn{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  border: none;
-  border-radius: 8px;
-  color: var(--color-scheme-1-text);
-  background-color: transparent;
+/* За замовчуванням ховаємо стрілочки */
+.quantity::-webkit-inner-spin-button,
+.quantity::-webkit-outer-spin-button {
+  opacity: 0;
+}
+
+/* Показуємо при наведенні */
+.quantity:hover::-webkit-inner-spin-button,
+.quantity:hover::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.quantity:hover {
+  border-color: var(--color-deco-dark);
+}
+
+.quantity:focus-visible {
+  outline: none;
+  border-color: var(--color-deco-dark);
+  box-shadow: 0 0 0 2px var(--color-deco-light);
+}
+
+.deleteBtn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  border: 1px solid var(--opacity-transparent);
+  border-radius: 50%;
+  background-color: var(--opacity-neutral-darkest-5);
+  color: var(--color-neutral-darkest);
   cursor: pointer;
-  transition: background-color 250ms ease;
+  transition:
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.deleteBtn svg {
+  width: 20px;
+  height: 20px;
 }
 
 .deleteBtn:hover,
-.deleteBtn:focus-visible{
-  background-color:var(--color-deco-light);
+.deleteBtn:focus-visible {
+  outline: none;
+  border-color: var(--opacity-neutral-darkest-50);
+  background-color: var(--color-neutral-lighter);
 }
 
-.summary{
+.deleteBtn:active {
+  border-color: transparent;
+  background-color: var(--color-neutral);
+  color: var(--color-white);
+}
+
+.deleteBtn:disabled {
+  border-color: transparent;
+  background-color: var(--color-neutral-lightest);
+  color: var(--color-neutral-light);
+  cursor: not-allowed;
+}
+
+.summary {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin: 0;
+  gap: 8px;
   padding-top: 16px;
-  border-top: 1px solid var(--color-scheme-1-border);
+  border-top: 1px solid var(--gol-border);
 }
 
-.row{
+.row {
   display: flex;
   justify-content: space-between;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.row dt,
+.row dd {
+  margin: 0;
   font-size: 14px;
 }
 
-.row dd{
-  margin: 0;
+.total {
+  margin: 8px 0;
+  font-weight: 600;
 }
 
-.total{
+.total dt {
+  font-size: 18px;
+}
+
+.total dd {
   font-size: 16px;
-  font-weight: 700;
 }
 
 @media screen and (min-width: 768px) {
-  .item{
-    align-items: center;
-    gap: 16px;
+  .item {
+    gap: 24px;
+    /* align-items: center; */
   }
 
-  .content{
+  .content {
     flex-direction: row;
     align-items: center;
-    gap: 24px;
+    gap: 32px;
   }
 
-  .details{
+  .details {
     flex-grow: 1;
   }
-  
-  .price{
+
+  /* .price {
     flex-shrink: 0;
-  }
+    min-width: 80px;
+    text-align: right;
+  } */
 
-  .name,
-  .price,
-  .row{
-    font-size: 16px;
-  }
-
-  .total{
-    font-size: 18px;
+  .actions {
+    gap: 32px;
   }
 }
 
-@media screen and (min-width: 1440px){
-  .list{
+@media screen and (min-width: 1440px) {
+  .list {
     gap: 24px;
   }
 }

@@ -27,27 +27,23 @@ const benefits = [
 
 export default function Style() {
   return (
-    <Container>
-      <div className={css.styleContainer}>
-        <h2 className={css.styleHeading}>
-          Обери свій унікальний стиль сьогодні
-        </h2>
-        <ul className={css.list}>
-          {benefits.map(benefit => (
-            <li key={benefit.id} className={css.item}>
-              <img
-                className={css.image}
-                src={benefit.image}
-                alt=""
-                height={56}
-                width={56}
-              />
-              <h3 className={css.title}>{benefit.title}</h3>
-              <p className={css.desc}>{benefit.description}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <Container className={css.styleContainer}>
+      <h2 className={css.styleHeading}>Обери свій унікальний стиль сьогодні</h2>
+      <ul className={css.list}>
+        {benefits.map(benefit => (
+          <li key={benefit.id} className={css.item}>
+            <img
+              className={css.image}
+              src={benefit.image}
+              alt=""
+              height={56}
+              width={56}
+            />
+            <h3 className={css.title}>{benefit.title}</h3>
+            <p className={css.desc}>{benefit.description}</p>
+          </li>
+        ))}
+      </ul>
     </Container>
   );
 }
