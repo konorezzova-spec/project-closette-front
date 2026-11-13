@@ -5,10 +5,13 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px 20px;
+  align-items: stretch;
 }
 
 .productCard {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .imageWrapper {
@@ -32,6 +35,10 @@
 
 .productInfo {
   padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
 }
 
 .productDetails {
@@ -39,12 +46,15 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 8px;
+  min-height: 36px;
 }
 
 .productName {
   margin: 0;
   font-size: 14px;
   font-weight: 500;
+  line-height: 18px;
+  min-width: 0;
 }
 
 .price {
@@ -59,6 +69,7 @@
   align-items: center;
   gap: 6px;
   margin-top: 8px;
+  min-height: 18px;
   font-size: 12px;
   color: #777;
 }
@@ -73,7 +84,8 @@
   justify-content: center;
   width: 100%;
   min-height: 40px;
-  margin-top: 12px;
+  margin-top: auto;
+  flex-shrink: 0;
   border-radius: 100px;
   background-color: #c5e1a5;
   color: #171717;
@@ -86,7 +98,6 @@
   background-color: #d4dfcc;
 }
 
-/* LOAD MORE */
 
 .loadMoreWrapper {
   display: flex;
@@ -114,26 +125,47 @@
   cursor: not-allowed;
 }
 
-/* TABLET */
 
-@media (max-width: 1024px) {
+@media (min-width: 641px) and (max-width: 1024px) {
   .productsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 24px 16px;
   }
 }
 
-/* MOBILE */
 
 @media (max-width: 640px) {
   .productsGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 12px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .productCard {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .productDetails {
+    min-height: 21px;
   }
 
   .productName,
   .price {
     font-size: 12px;
+    line-height: 21px;
+  }
+
+  .rating {
+    min-height: 16px;
+    font-size: 11px;
+  }
+
+  .imageWrapper {
+    border-radius: 9px;
+  }
+
+  .productImage {
+    aspect-ratio: 1 / 1;
   }
 
   .detailsButton {
@@ -141,13 +173,7 @@
     font-size: 12px;
   }
 
-  .imageWrapper {
-    border-radius: 9px;
-  }
-}
-
-@media (max-width: 380px) {
-  .productsGrid {
-    grid-template-columns: 1fr;
+  .loadMoreWrapper {
+    margin-top: 40px;
   }
 }

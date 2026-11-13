@@ -4,9 +4,11 @@ import css from "./GoodForPurchase.module.css";
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import type { Good, Size } from "@/types/good";
-import Rating from "@/components/Rating/Rating";
 import { useBasketStore } from "@/lib/store/basketStore";
+import Rating from "@/components/Rating/Rating";
+import toast from "react-hot-toast";
 
 const splitDescription = (description: string) => {
   const sentences = description.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
@@ -25,8 +27,47 @@ type GoodForPurchaseProps = {
 };
 
 const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
-  const [selectedSize, setSelectedSize] = useState<Size>("L");
+  const [selectedSize, setSelectedSize] = useState<Size>(
+    good.size.includes("L")?"L":good.size[0]
+  );
   const [quantity, setQuantity] = useState<string>("1");
+  const router = useRouter();
+  const addItem = useBasketStore(state => state.addItem);
+
+  const addToBasket = () => {
+    const count = Number(quantity);
+
+    if (!Number.isInteger(count) || count < 1) {
+      toast.error("Вкажіть кількість: ціле число від 1");
+      return;
+    }
+
+    addItem({
+      id: good._id,
+      name: good.name,
+      image: good.image,
+      size: selectedSize,
+      price: good.price.value,
+      rating: 3.5, // TODO: заменить на реальный рейтинг, когда он появится
+      reviewsCount: good.feedbacks.length,
+      quantity: count,
+    });
+
+    setQuantity("1");
+    return true;
+  };
+
+  const handleAddToCart = () => { 
+    if (addToBasket()) {
+      toast.success(`"${good.name}" (${selectedSize}) додано в кошик`)
+    }
+  };
+
+  const handleBuyNow = () => {
+    if (addToBasket()) {
+      router.push("/basket");
+    }
+  };
 
   // потім потрібно видалити
   const rating = 4.5;
@@ -90,11 +131,22 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
 
               <span className={css.selectArrow}></span>
             </div>
-          </div>
-          <div className={css.cartActions}>
-            {/* <button type="button" onClick={handleAddToCart}></button> */}
-            <button className={css.btn} type="button" onClick={handleAddToCart}>
-              Додати в кошик
+            <div className={css.cartActions}>
+              <button className={css.btn} type="button" onClick={handleAddToCart}>
+                Додати в кошик
+              </button>
+              <div className={css.quantity}>
+                <input
+                  type="number"
+                  min="1"
+                  step="1"
+                  value={quantity}
+                  onChange={e => setQuantity(e.target.value)}
+                />
+              </div>
+            </div>
+            <button className={css.btn} type="button" onClick={handleBuyNow}>
+              Купити зараз
             </button>
             <div className={css.quantity}>
               <input
