@@ -28,7 +28,13 @@
   text-align: center;
   width: 100%;
 }
+
+.userFormSection {
+  order: 1;
+  width: 100%;
+}
 .ordersSection {
+  order: 2;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -164,9 +170,18 @@
   }
 
   .cabinetContent {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    flex-direction: row-reverse;
     gap: 32px;
     align-items: stretch;
+  }
+
+  .userFormSection {
+    order: 2;
+  }
+
+  .ordersSection {
+    order: 1;
   }
 }
