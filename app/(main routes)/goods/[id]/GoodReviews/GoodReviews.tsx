@@ -32,25 +32,24 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
   };
 
   return (
-    <main className={css.main}>
-      <div className={css.container}>
-        <div className={css.header}>
-          <h2 className={css.title}>Відгуки клієнтів</h2>
-          <button
-            className={css.btn}
-            type="button"
-            onClick={() => setIsFormOpen(true)}
-          >
-            Залишити відгук
-          </button>
-        </div>
-        <div className={css.content}>
-          <MessageNoInfo
-            message="У цього товару ще немає відгуків"
-            buttonText="Залишити відгук"
-            onClick={handleAction}
-          />
-          {/* {feedbacks.length > 0 ? (
+    <div className={css.container}>
+      <div className={css.header}>
+        <h2 className={css.title}>Відгуки клієнтів</h2>
+        <button
+          className={css.btn}
+          type="button"
+          onClick={() => setIsFormOpen(true)}
+        >
+          Залишити відгук
+        </button>
+      </div>
+      <div className={css.content}>
+        <MessageNoInfo
+          message="У цього товару ще немає відгуків"
+          buttonText="Залишити відгук"
+          onClick={handleAction}
+        />
+        {/* {feedbacks.length > 0 ? (
             <ReviewsList />
           ) : (
             <MessageNoInfo
@@ -59,10 +58,9 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
               onAction={handleAction}
             />
           )} */}
-          {/* {isFormOpen && <AddReviewForm />} */}
-        </div>
+        {/* {isFormOpen && <AddReviewForm />} */}
       </div>
-    </main>
+    </div>
   );
 };
 
