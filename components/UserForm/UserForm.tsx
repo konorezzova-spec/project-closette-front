@@ -4,6 +4,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styles from './UserForm.module.css';
+import Loader  from '@/components/Loader/Loader';
 
 export interface IUserData {
   name: string;
@@ -17,19 +18,20 @@ export interface IUserData {
 interface UserFormProps {
   title?: string;
   initialData?: IUserData;
-  onSubmit: (data: IUserData) => void;
+  onSubmit: (data: IUserData) => void | Promise<void>;
   submitButtonText?: string;
   showComment?: boolean;
+  isLoading?: boolean;
 }
 
-const phoneRegExp = /^(?:\+?38)?0[0-9]{9}$/;
+const phoneRegExp = /^\+380\d{9}$/;
 
 const validationSchema = Yup.object({
   name: Yup.string()
-    .matches(/^[А-Яа-яЁёІіЇїЄєҐґA-Za-z\s]+$/, "Тільки букви")
+    .matches(/^[А-Яа-яЁёІіЇїЄєҐґA-Za-z\s]+$/, "Тільки літери")
     .required("Введіть ім'я"),
   surName: Yup.string()
-    .matches(/^[А-Яа-яЁёІіЇїЄєҐґA-Za-z\s]+$/, "Тільки букви")
+    .matches(/^[А-Яа-яЁёІіЇїЄєҐґA-Za-z\s]+$/, "Тільки літери")
     .required("Введіть прізвище"),
   tel: Yup.string()
     .matches(phoneRegExp, "Введіть коректний український номер (+380...)")
@@ -51,24 +53,39 @@ export const UserForm = ({
     postOffice: '',
     comment: '',
   },
+
   onSubmit,
   submitButtonText = 'Оформити замовлення',
   showComment = true,
+  isLoading = false,
 }: UserFormProps) => {
-  
+
+ const safeInitialData = initialData || {
+    name: '',
+    surName: '',
+    tel: '',
+    city: '',
+    postOffice: '',
+    comment: '',
+  };
+
   const formik = useFormik({
     initialValues: {
-      name: initialData.name || '',
-      surName: initialData.surName || '',
-      tel: initialData.tel || '',
-      city: initialData.city || '',
-      postOffice: initialData.postOffice || '',
-      comment: initialData.comment || '',
+      name: safeInitialData.name || '',
+      surName: safeInitialData.surName || '',
+      tel: safeInitialData.tel || '',
+      city: safeInitialData.city || '',
+      postOffice: safeInitialData.postOffice || '',
+      comment: safeInitialData.comment || '',
     },
     enableReinitialize: true,
     validationSchema,
-    onSubmit: (values) => {
-      onSubmit(values);
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        await onSubmit(values);
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -78,12 +95,14 @@ export const UserForm = ({
   const isCityError = formik.touched.city && Boolean(formik.errors.city);
   const isPostOfficeError = formik.touched.postOffice && Boolean(formik.errors.postOffice);
 
+  const isSubmitting = formik.isSubmitting || isLoading;
+  const isButtonDisabled = isSubmitting || !formik.isValid || !formik.dirty;
+
   return (
     <form onSubmit={formik.handleSubmit} className={styles.formContainer}>
       {title && <h2 className={styles.formTitle}>{title}</h2>}
 
       <div className={styles.rowGroup}>
-        {/* Поле Ім'я */}
         <div className={styles.fieldGroup}>
           <label className={styles.label} htmlFor="name">
             Ім&apos;я*
@@ -96,6 +115,7 @@ export const UserForm = ({
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder="Ваше ім'я"
+            disabled={isSubmitting}
             className={`${styles.input} ${isNameError ? styles.errorInput : ''}`}
           />
           {isNameError && (
@@ -115,8 +135,10 @@ export const UserForm = ({
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder="Ваше прізвище"
+            disabled={isSubmitting}
             className={`${styles.input} ${isSurNameError ? styles.errorInput : ''}`}
           />
+
           {isSurNameError && (
             <span className={styles.errorMessage}>{formik.errors.surName}</span>
           )}
@@ -127,23 +149,39 @@ export const UserForm = ({
         <label className={styles.label} htmlFor="tel">
           Номер телефону*
         </label>
-        <input
-          type="tel"
-          id="tel"
-          name="tel"
-          value={formik.values.tel}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          placeholder="+38 (0__) __-__-___"
-          className={`${styles.input} ${isTelError ? styles.errorInput : ''}`}
-        />
+
+       <input
+    type="tel"
+    id="tel"
+    name="tel"
+    value={formik.values.tel}
+    onChange={(e) => {
+      let value = e.target.value;
+
+      value = value.replace(/[^\d+]/g, '');
+
+      if (value.startsWith('0') && !value.startsWith('+38')) {
+        value = '+38' + value;
+      }
+
+      if (value.startsWith('380') && !value.startsWith('+')) {
+        value = '+' + value;
+      }
+
+      formik.setFieldValue('tel', value);
+    }}
+    onBlur={formik.handleBlur}
+    placeholder="+38 (0__) __-__-___"
+    disabled={isSubmitting}
+    className={`${styles.input} ${isTelError ? styles.errorInput : ''}`}
+  />
         {isTelError && (
           <span className={styles.errorMessage}>{formik.errors.tel}</span>
         )}
+
       </div>
 
       <div className={styles.rowGroup}>
-        
         <div className={styles.fieldGroup}>
           <label className={styles.label} htmlFor="city">
             Місто доставки*
@@ -156,8 +194,10 @@ export const UserForm = ({
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder="Ваше місто"
+            disabled={isSubmitting}
             className={`${styles.input} ${isCityError ? styles.errorInput : ''}`}
           />
+
           {isCityError && (
             <span className={styles.errorMessage}>{formik.errors.city}</span>
           )}
@@ -167,6 +207,7 @@ export const UserForm = ({
           <label className={styles.label} htmlFor="postOffice">
             Номер відділення Нової Пошти*
           </label>
+
           <input
             type="text"
             id="postOffice"
@@ -175,8 +216,10 @@ export const UserForm = ({
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder="1"
+            disabled={isSubmitting}
             className={`${styles.input} ${isPostOfficeError ? styles.errorInput : ''}`}
           />
+
           {isPostOfficeError && (
             <span className={styles.errorMessage}>{formik.errors.postOffice}</span>
           )}
@@ -188,6 +231,7 @@ export const UserForm = ({
           <label className={styles.label} htmlFor="comment">
             Коментар
           </label>
+
           <textarea
             id="comment"
             name="comment"
@@ -196,14 +240,27 @@ export const UserForm = ({
             onBlur={formik.handleBlur}
             placeholder="Введіть ваш коментар"
             rows={4}
+            disabled={isSubmitting}
             className={styles.textarea}
           />
         </div>
       )}
+      <button
+  type="submit"
+  className={styles.submitButton}
+  disabled={isButtonDisabled}
+>
 
-      <button type="submit" className={styles.submitButton}>
-        {submitButtonText}
-      </button>
+  {isSubmitting ? (
+    <span className={styles.buttonLoaderWrapper}>
+      <Loader />
+      <span>Надсилаємо...</span>
+    </span>
+  ) : (
+    submitButtonText
+  )}
+
+</button>
     </form>
   );
 };
