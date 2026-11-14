@@ -14,10 +14,10 @@ import GoodsInfo from "@/components/GoodsInfo/GoodsInfo";
 export default function GoodsPage() {
 
   const [category, setCategory] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
+ const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [gender, setGender] = useState("");
   const [maxPrice, setMaxPrice] = useState(10000);
-
+  const [appliedMaxPrice, setAppliedMaxPrice] = useState(10000);
   
   const { data: categoriesData } = useQuery({
     queryKey: ["categories"],
@@ -38,9 +38,9 @@ export default function GoodsPage() {
     queryKey: [
       "goods",
       category,
-      selectedSize,
+      selectedSizes,
       gender,
-      maxPrice,
+     appliedMaxPrice,
     ],
     initialPageParam: 1,
     queryFn: ({ pageParam }) =>
@@ -48,9 +48,9 @@ export default function GoodsPage() {
         page: pageParam,
         perPage: 12,
         ...(category && { category }),
-        ...(selectedSize && { size: selectedSize }),
+         ...(selectedSizes.length > 0 && { size: selectedSizes }),
         ...(gender && { gender }),
-        ...(maxPrice < 10000 && { maxPrice }),
+        ...(appliedMaxPrice < 10000 && { maxPrice: appliedMaxPrice }), 
       }),
     getNextPageParam: (lastPage) =>
       lastPage.data.page < lastPage.data.totalPages
@@ -61,11 +61,9 @@ export default function GoodsPage() {
   const goods: Good[] =
     data?.pages.flatMap((page) => page.data.goods) ?? [];
 
-  // Загальна кількість товарів
-  const totalItems = data?.pages[0]?.data.totalItems ?? 0;
+   const totalItems = data?.pages[0]?.data.totalItems ?? 0;
 
-  // Вибір категорії за назвою
-  const handleCategory = (name: string) => {
+   const handleCategory = (name: string) => {
     const selectedCategory = categories.find(
       (item: { _id: string; name: string }) =>
         item.name.trim().toLowerCase() ===
@@ -78,7 +76,7 @@ export default function GoodsPage() {
   // Очищення всіх фільтрів
   const clearAllFilters = () => {
     setCategory("");
-    setSelectedSize("");
+    setSelectedSizes([]);
     setGender("");
     setMaxPrice(10000);
   };
@@ -207,32 +205,33 @@ export default function GoodsPage() {
 
                 <button
                   type="button"
-                  onClick={() => setSelectedSize("")}
+                  onClick={() => setSelectedSizes([])}
                 >
                   Очистити
                 </button>
               </div>
 
-              <div className={css.checkboxList}>
-                {["XXS", "XS", "S", "M", "L", "XL", "XXL"].map(
-                  (size) => (
-                    <label key={size}>
-                      <input
-                        type="checkbox"
-                        value={size}
-                        checked={selectedSize === size}
-                        onChange={() =>
-                          setSelectedSize(
-                            selectedSize === size ? "" : size
-                          )
-                        }
-                      />
+             
+<div className={css.checkboxList}>
+  {['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
+    <label key={size}>
+      <input
+        type="checkbox"
+        value={size}
+        checked={selectedSizes.includes(size)}
+        onChange={() =>
+          setSelectedSizes((prev) =>
+            prev.includes(size)
+              ? prev.filter((item) => item !== size)
+              : [...prev, size]
+          )
+        }
+      />
+      {size}
+    </label>
+  ))}
+</div>
 
-                      {size}
-                    </label>
-                  )
-                )}
-              </div>
             </section>
             
             <section className={css.filterSection}>
@@ -256,6 +255,9 @@ export default function GoodsPage() {
                   onChange={(event) =>
                     setMaxPrice(Number(event.target.value))
                   }
+                   onPointerUp={() => setAppliedMaxPrice(maxPrice)} 
+      onTouchEnd={() => setAppliedMaxPrice(maxPrice)} 
+      onKeyUp={() => setAppliedMaxPrice(maxPrice)} 
                 />
 
                 <div className={css.priceValues}>
