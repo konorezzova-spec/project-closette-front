@@ -129,7 +129,8 @@
   }
 
   .submitButton {
-    width: auto;
+    width: fit-content;
     display: inline-block;
+    align-self: center;
   }
 }
