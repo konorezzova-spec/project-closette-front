@@ -1,9 +1,10 @@
 
-import type { Good, GoodsHttpResponse } from '@/types/good'
-import type { CategoriesResponse } from '@/types/category'
-import type { CreateOrderParams, Order } from '@/types/order'
+import type { Good, GoodsHttpResponse } from "@/types/good"
+import type { CategoriesResponse } from "@/types/category"
+import type { CreateOrderParams, Order } from "@/types/order"
+import type { Feedback, FeedbacksResponse, CreateFeedbackParams } from "@/types/feedback";
 
-import { nextServer } from './api'
+import { nextServer } from "./api"
 
 export interface FetchGoodsParams {
   page: number
@@ -71,7 +72,7 @@ export async function fetchCategories(
   page: number,
   perPage: number
 ): Promise<CategoriesResponse> {
-  const { data } = await nextServer.get('/categories', {
+  const { data } = await nextServer.get("/categories", {
     params: { page, perPage },
   })
 
@@ -81,6 +82,28 @@ export async function fetchCategories(
 export const createOrder = async (
   params: CreateOrderParams
 ): Promise<Order> => {
-  const response = await nextServer.post<Order>('/orders', params)
+  const response = await nextServer.post<Order>("/orders", params)
   return response.data
+}
+
+export const fetchFeedbacks = async (
+  productId: string,
+  page = 1,
+  perPage = 20
+): Promise<FeedbacksResponse> => {
+  const { data } = await nextServer.get<{ data: FeedbacksResponse }>(
+    "/feedbacks",
+    { params: { productId, page, perPage } }
+  )
+  return data.data
+}
+
+export const createFeedback = async (
+  params: CreateFeedbackParams
+): Promise<Feedback> => {
+  const { data } = await nextServer.post<{ data: Feedback }>(
+    "/feedbacks",
+    params
+  )
+  return data.data
 }
