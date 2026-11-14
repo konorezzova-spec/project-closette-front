@@ -16,7 +16,7 @@
   font-size: 18px;
   line-height: 1.5;
   text-align: center;
-  color: var(--color-neutral-darkest);
+  color: var(--color-scheme-1-text);
 }
 
 .button {

@@ -25,13 +25,23 @@ interface UserFormProps {
 }
 
 const phoneRegExp = /^\+380\d{9}$/;
+const filterUkrainianName = (value: string) => {
+  return value.replace(/[^А-Яа-яІіЇїЄєҐґ\s'’ʼ-]/g, '');
+};
 
 const validationSchema = Yup.object({
   name: Yup.string()
-    .matches(/^[А-Яа-яЁёІіЇїЄєҐґA-Za-z\s]+$/, "Тільки літери")
+    .matches(
+      /^[А-Яа-яІіЇїЄєҐґ\s'’ʼ-]+$/,
+      'Тільки українські літери'
+    )
     .required("Введіть ім'я"),
+
   surName: Yup.string()
-    .matches(/^[А-Яа-яЁёІіЇїЄєҐґA-Za-z\s]+$/, "Тільки літери")
+    .matches(
+      /^[А-Яа-яІіЇїЄєҐґ\s'’ʼ-]+$/,
+      'Тільки українські літери'
+    )
     .required("Введіть прізвище"),
   tel: Yup.string()
     .matches(phoneRegExp, "Введіть коректний український номер (+380...)")
@@ -112,7 +122,12 @@ export const UserForm = ({
             id="name"
             name="name"
             value={formik.values.name}
-            onChange={formik.handleChange}
+            onChange={(e) => {
+  formik.setFieldValue(
+    'name',
+    filterUkrainianName(e.target.value)
+  );
+}}
             onBlur={formik.handleBlur}
             placeholder="Ваше ім'я"
             disabled={isSubmitting}
@@ -132,7 +147,12 @@ export const UserForm = ({
             id="surName"
             name="surName"
             value={formik.values.surName}
-            onChange={formik.handleChange}
+            onChange={(e) => {
+  formik.setFieldValue(
+    'surName',
+    filterUkrainianName(e.target.value)
+  );
+}}
             onBlur={formik.handleBlur}
             placeholder="Ваше прізвище"
             disabled={isSubmitting}
