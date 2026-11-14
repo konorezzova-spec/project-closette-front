@@ -22,7 +22,7 @@ export default function RegistrationForm() {
   const setUser = useAuthStore((state) => state.setUser);
 
   const formik = useFormik<RegistrationValues>({
-    initialValues: { name: "", email: "", tel: "", password: "" },
+    initialValues: { name: "", tel: "", email: "", password: "" },
     validationSchema: registrationSchema,
     onSubmit: async (values) => {
       try {

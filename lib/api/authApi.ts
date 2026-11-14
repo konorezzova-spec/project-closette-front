@@ -3,8 +3,8 @@ import { nextServer } from "./api";
 
 export interface RegisterPayload {
   name: string;
-  tel: string;
   email: string;
+  tel: string;
   password: string;
 }
 
@@ -17,7 +17,10 @@ export interface RegisteredUser {
 }
 
 export const registerUser = async (payload: RegisterPayload) => {
-  const { data } = await nextServer.post<RegisteredUser>("/auth/register", payload);
+  const { data } = await nextServer.post<RegisteredUser>(
+    "/auth/register",
+    payload,
+  );
   return data;
 };
 
@@ -46,8 +49,26 @@ export function getApiErrorMessage(error: unknown): string {
     if (!error.response) {
       return "Не вдалося з’єднатися із сервером. Спробуйте пізніше.";
     }
-    const raw = error.response.data?.error ?? error.response.data?.message ?? "";
+    const raw =
+      error.response.data?.error ?? error.response.data?.message ?? "";
     return MESSAGES[raw] ?? (raw || FALLBACK);
   }
   return FALLBACK;
 }
+
+// Перевірка сесії. Бекенд видаляє стару сесію під час refresh, тому паралельні
+// виклики об'єднуються в один запит (інакше другий отримає 401).
+let sessionCheck: Promise<boolean> | null = null;
+
+export const checkSession = (): Promise<boolean> => {
+  if (!sessionCheck) {
+    sessionCheck = nextServer
+      .get<{ success: boolean }>("/auth/session")
+      .then((res) => res.data.success)
+      .catch(() => false)
+      .finally(() => {
+        sessionCheck = null;
+      });
+  }
+  return sessionCheck;
+};
