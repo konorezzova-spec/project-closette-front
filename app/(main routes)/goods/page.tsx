@@ -1,24 +1,31 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react"; 
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import css from "./PopularProducts.module.css";
 
 import { fetchGoods, fetchCategories } from "@/lib/api/clientApi";
 import type { Good } from "@/types/good";
 
-
 import GoodsInfo from "@/components/GoodsInfo/GoodsInfo";
 
 export default function GoodsPage() {
-
   const [category, setCategory] = useState("");
- const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
+  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [gender, setGender] = useState("");
   const [maxPrice, setMaxPrice] = useState(10000);
-  const [appliedMaxPrice, setAppliedMaxPrice] = useState(10000);
+    const [debouncedPrice, setDebouncedPrice] = useState(10000);
+
   
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedPrice(maxPrice);
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [maxPrice]);
+
   const { data: categoriesData } = useQuery({
     queryKey: ["categories"],
     queryFn: () => fetchCategories(1, 20),
@@ -26,7 +33,7 @@ export default function GoodsPage() {
 
   const categories = categoriesData?.categories ?? [];
 
-    const {
+  const {
     data,
     isLoading,
     isError,
@@ -40,7 +47,7 @@ export default function GoodsPage() {
       category,
       selectedSizes,
       gender,
-     appliedMaxPrice,
+      debouncedPrice, 
     ],
     initialPageParam: 1,
     queryFn: ({ pageParam }) =>
@@ -48,40 +55,39 @@ export default function GoodsPage() {
         page: pageParam,
         perPage: 12,
         ...(category && { category }),
-         ...(selectedSizes.length > 0 && { size: selectedSizes }),
+        ...(selectedSizes.length > 0 && { size: selectedSizes }),
         ...(gender && { gender }),
-        ...(appliedMaxPrice < 10000 && { maxPrice: appliedMaxPrice }), 
+        ...(debouncedPrice < 10000 && {
+          maxPrice: debouncedPrice, // 🟩
+        }),
       }),
     getNextPageParam: (lastPage) =>
       lastPage.data.page < lastPage.data.totalPages
         ? lastPage.data.page + 1
         : undefined,
   });
-  
+
   const goods: Good[] =
     data?.pages.flatMap((page) => page.data.goods) ?? [];
 
-   const totalItems = data?.pages[0]?.data.totalItems ?? 0;
+  const totalItems = data?.pages[0]?.data.totalItems ?? 0;
 
-   const handleCategory = (name: string) => {
+  const handleCategory = (name: string) => {
     const selectedCategory = categories.find(
       (item: { _id: string; name: string }) =>
-        item.name.trim().toLowerCase() ===
-        name.trim().toLowerCase()
+        item.name.trim().toLowerCase() === name.trim().toLowerCase()
     );
 
     setCategory(selectedCategory?._id ?? "");
   };
 
-  // Очищення всіх фільтрів
-  const clearAllFilters = () => {
+    const clearAllFilters = () => {
     setCategory("");
     setSelectedSizes([]);
     setGender("");
     setMaxPrice(10000);
   };
 
-  // Стани завантаження
   if (isLoading) {
     return <p>Завантаження товарів...</p>;
   }
@@ -96,15 +102,11 @@ export default function GoodsPage() {
         <h1 className={css.title}>Всі товари</h1>
 
         <div className={css.catalog}>
-          {/* FILTERS */}
           <aside className={css.sidebar}>
             <div className={css.filterHeader}>
               <h2>Фільтри</h2>
 
-              <button
-                type="button"
-                onClick={clearAllFilters}
-              >
+              <button type="button" onClick={clearAllFilters}>
                 Очистити всі
               </button>
             </div>
@@ -113,14 +115,10 @@ export default function GoodsPage() {
               Показано {goods.length} із {totalItems} товарів
             </p>
 
-            {/* CATEGORY */}
-            <section className={css.filterSection}>
+                        <section className={css.filterSection}>
               <ul className={css.filterList}>
                 <li>
-                  <button
-                    type="button"
-                    onClick={() => setCategory("")}
-                  >
+                  <button type="button" onClick={() => setCategory("")}>
                     Усі
                   </button>
                 </li>
@@ -128,9 +126,7 @@ export default function GoodsPage() {
                 <li>
                   <button
                     type="button"
-                    onClick={() =>
-                      handleCategory("Футболки та сорочки")
-                    }
+                    onClick={() => handleCategory("Футболки та сорочки")}
                   >
                     Футболки та сорочки
                   </button>
@@ -139,9 +135,7 @@ export default function GoodsPage() {
                 <li>
                   <button
                     type="button"
-                    onClick={() =>
-                      handleCategory("Штани та джинси")
-                    }
+                    onClick={() => handleCategory("Штани та джинси")}
                   >
                     Штани та джинси
                   </button>
@@ -168,9 +162,7 @@ export default function GoodsPage() {
                 <li>
                   <button
                     type="button"
-                    onClick={() =>
-                      handleCategory("Сукні та спідниці")
-                    }
+                    onClick={() => handleCategory("Сукні та спідниці")}
                   >
                     Сукні та спідниці
                   </button>
@@ -179,9 +171,7 @@ export default function GoodsPage() {
                 <li>
                   <button
                     type="button"
-                    onClick={() =>
-                      handleCategory("Домашній та спортивний одяг")
-                    }
+                    onClick={() => handleCategory("Домашній та спортивний одяг")}
                   >
                     Домашній та спортивний одяг
                   </button>
@@ -211,30 +201,28 @@ export default function GoodsPage() {
                 </button>
               </div>
 
-             
-<div className={css.checkboxList}>
-  {['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-    <label key={size}>
-      <input
-        type="checkbox"
-        value={size}
-        checked={selectedSizes.includes(size)}
-        onChange={() =>
-          setSelectedSizes((prev) =>
-            prev.includes(size)
-              ? prev.filter((item) => item !== size)
-              : [...prev, size]
-          )
-        }
-      />
-      {size}
-    </label>
-  ))}
-</div>
-
+              <div className={css.checkboxList}>
+                {["XXS", "XS", "S", "M", "L", "XL", "XXL"].map((size) => (
+                  <label key={size}>
+                    <input
+                      type="checkbox"
+                      value={size}
+                      checked={selectedSizes.includes(size)}
+                      onChange={() =>
+                        setSelectedSizes((prev) =>
+                          prev.includes(size)
+                            ? prev.filter((item) => item !== size)
+                            : [...prev, size]
+                        )
+                      }
+                    />
+                    {size}
+                  </label>
+                ))}
+              </div>
             </section>
-            
-            <section className={css.filterSection}>
+
+                       <section className={css.filterSection}>
               <div className={css.filterTitle}>
                 <h3>Ціна</h3>
 
@@ -251,13 +239,11 @@ export default function GoodsPage() {
                   type="range"
                   min="0"
                   max="10000"
+                  step="100"
                   value={maxPrice}
                   onChange={(event) =>
                     setMaxPrice(Number(event.target.value))
                   }
-                   onPointerUp={() => setAppliedMaxPrice(maxPrice)} 
-      onTouchEnd={() => setAppliedMaxPrice(maxPrice)} 
-      onKeyUp={() => setAppliedMaxPrice(maxPrice)} 
                 />
 
                 <div className={css.priceValues}>
@@ -267,7 +253,8 @@ export default function GoodsPage() {
               </div>
             </section>
 
-                       <section className={css.filterSection}>
+            {/* GENDER */}
+            <section className={css.filterSection}>
               <div className={css.filterTitle}>
                 <h3>Стать</h3>
 
@@ -302,7 +289,7 @@ export default function GoodsPage() {
             </section>
           </aside>
 
-                    <section className={css.productsSection}>
+          <section className={css.productsSection}>
             <GoodsInfo
               goods={goods}
               hasNextPage={hasNextPage}
