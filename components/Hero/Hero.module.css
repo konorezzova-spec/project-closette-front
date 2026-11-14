@@ -62,7 +62,8 @@
 
 @media (min-width: 1440px) {
     .hero__right-img {
-        width: calc((100% - 32px) / 2);
+        /* width: calc((100% - 32px) / 2); */
+        max-width: 100%;
     }
 }
 
