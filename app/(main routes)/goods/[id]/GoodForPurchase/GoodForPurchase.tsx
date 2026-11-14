@@ -1,5 +1,5 @@
 "use client";
- 
+
 import css from "./GoodForPurchase.module.css";
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
@@ -9,23 +9,32 @@ import type { Good, Size } from "@/types/good";
 import { useBasketStore } from "@/lib/store/basketStore";
 import Rating from "@/components/Rating/Rating";
 import toast from "react-hot-toast";
- 
+import { Feedback } from "@/types/feedback";
+
 const splitDescription = (description: string) => {
   const sentences = description.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
- 
+
   const paragraphs = [];
- 
+
   for (let i = 0; i < sentences.length; i += 3) {
     paragraphs.push(sentences.slice(i, i + 3).join(" "));
   }
- 
+
   return paragraphs;
 };
- 
+
 type GoodForPurchaseProps = {
   good: Good;
 };
- 
+
+const getAverageRating = (reviews: Feedback[]) => {
+  if (reviews.length === 0) return 0;
+
+  const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+
+  return Number((totalRating / reviews.length).toFixed(1));
+};
+
 const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
   const [selectedSize, setSelectedSize] = useState<Size>(
     good.size.includes("L") ? "L" : good.size[0]
@@ -33,18 +42,18 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
   const [quantity, setQuantity] = useState<string>("1");
   const router = useRouter();
   const addItem = useBasketStore(state => state.addItem);
- 
-  const rating = 4.5; // TODO: замінити на реальний рейтинг, коли бекенд його віддаватиме
+
+  const rating = getAverageRating(good.feedbacks);
   const reviewsCount = good.feedbacks.length;
- 
+
   const addToBasket = (): boolean => {
     const count = Number(quantity);
- 
+
     if (!Number.isInteger(count) || count < 1) {
       toast.error("Вкажіть кількість: ціле число від 1");
       return false;
     }
- 
+
     addItem({
       id: good._id,
       name: good.name,
@@ -55,21 +64,22 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
       reviewsCount,
       quantity: count,
     });
- 
+
     setQuantity("1");
     return true;
   };
- 
+
   const handleAddToCart = () => {
     if (addToBasket()) {
       toast.success(`"${good.name}" (${selectedSize}) додано в кошик`);
     }
   };
- 
+
   const handleBuyNow = () => {
-    const alreadyInBasket = useBasketStore.getState()
+    const alreadyInBasket = useBasketStore
+      .getState()
       .items.some(item => item.id === good._id && item.size === selectedSize);
-    
+
     if (alreadyInBasket) {
       router.push("/basket");
       return;
@@ -79,7 +89,7 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
       router.push("/basket");
     }
   };
- 
+
   return (
     <div className={css.container}>
       <div className={css.item}>
@@ -92,7 +102,7 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
             height={700}
           />
         </div>
- 
+
         <div className={css.wrapper}>
           <Breadcrumbs productName={good.name} />
           <h3 className={css.title}>{good.name}</h3>
@@ -121,7 +131,7 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
                   </option>
                 ))}
               </select>
- 
+
               <span className={css.selectArrow}></span>
             </div>
           </div>
@@ -163,5 +173,5 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
     </div>
   );
 };
- 
+
 export default GoodForPurchase;
