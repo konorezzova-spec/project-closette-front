@@ -9,7 +9,7 @@ export interface FetchGoodsParams {
   page: number
   perPage: number
   category?: string
-  size?: string
+  size?: string[]
   gender?: string
   minPrice?: number
   maxPrice?: number
@@ -33,15 +33,34 @@ export interface CategoriesHttpResponse {
   }
 }
 
+
 export const fetchGoods = async (
   params: FetchGoodsParams
 ): Promise<GoodsHttpResponse> => {
   const { data } = await nextServer.get<GoodsHttpResponse>('/goods', {
     params,
+        paramsSerializer: {
+      serialize: (params) => {
+        const searchParams = new URLSearchParams()
+
+        Object.entries(params).forEach(([key, value]) => {
+          if (Array.isArray(value)) {
+            value.forEach((item) => {
+              searchParams.append(key, String(item))
+            })
+          } else if (value !== undefined && value !== null) {
+            searchParams.append(key, String(value))
+          }
+        })
+
+        return searchParams.toString()
+      },
+    },
   })
 
   return data
 }
+
 
 export async function fetchGoodById(id: string): Promise<Good> {
   const response = await nextServer.get<Good>(`/goods/${id}`)
