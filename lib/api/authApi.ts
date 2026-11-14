@@ -1,5 +1,6 @@
 import { isAxiosError } from "axios";
 import { nextServer } from "./api";
+import type { User } from "@/types/user";
 
 export interface RegisterPayload {
   name: string;
@@ -19,7 +20,7 @@ export interface RegisteredUser {
 export const registerUser = async (payload: RegisterPayload) => {
   const { data } = await nextServer.post<RegisteredUser>(
     "/auth/register",
-    payload,
+    payload
   );
   return data;
 };
@@ -64,11 +65,37 @@ export const checkSession = (): Promise<boolean> => {
   if (!sessionCheck) {
     sessionCheck = nextServer
       .get<{ success: boolean }>("/auth/session")
-      .then((res) => res.data.success)
+      .then(res => res.data.success)
       .catch(() => false)
       .finally(() => {
         sessionCheck = null;
       });
   }
   return sessionCheck;
+};
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export const login = async (data: LoginRequest): Promise<User> => {
+  const response = await nextServer.post<User>("/auth/login", data);
+  return response.data;
+};
+
+export const logout = async (): Promise<void> => {
+  await nextServer.post("/auth/logout");
+};
+
+export const getMe = async (): Promise<User> => {
+  const response = await nextServer.get<User>("/users/me");
+  return response.data;
+};
+
+export const updateMe = async (name: string) => {
+  const response = await nextServer.patch<User>("/users/me", {
+    username: name,
+  });
+  return response.data;
 };
