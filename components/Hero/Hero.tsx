@@ -30,11 +30,13 @@ export default function Hero() {
         </div>
         <div className={css["hero__right-img"]}>
           <Image
-            src="/imagehero.jpg"
+            src="/imagehero1.jpg"
             alt="image mask group"
-            fill
+            // fill
+            width={335}
+            height={335}
             priority
-            className="object-cover"
+            className={css.hero__image}
           />
         </div>
       </div>
