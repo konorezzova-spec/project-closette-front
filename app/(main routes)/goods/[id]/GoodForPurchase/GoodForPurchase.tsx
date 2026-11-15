@@ -176,8 +176,10 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
             <p className={css.delivery}>
               Безкоштовна доставка для замовлень від 1000 грн
             </p>
-            <p className={css.descrpt}>Опис</p>
-            {/* <p className={css.description}>{mockGood.description}</p> */}
+            <div className={css.descriptionHeader}>
+              <p className={css.descrpt}>Опис</p>
+              <span className={css.dividerDescrpt}></span>
+            </div>
             <div className={css.description}>
               {splitDescription(good.description).map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
