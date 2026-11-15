@@ -105,98 +105,96 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
   };
 
   return (
-    <>
-      <Container>
-        <div className={css.container}>
-          <div className={css.item}>
-            <div className={css.thumb}>
-              <Image
-                className={css.img}
-                src={good.image}
-                alt={good.name}
-                width={640}
-                height={700}
-              />
-            </div>
+    <Container>
+      <div className={css.container}>
+        <div className={css.item}>
+          <div className={css.thumb}>
+            <Image
+              className={css.img}
+              src={good.image}
+              alt={good.name}
+              width={640}
+              height={700}
+            />
+          </div>
 
-            <div className={css.wrapper}>
-              <Breadcrumbs productName={good.name} />
-              <h3 className={css.title}>{good.name}</h3>
-              <div className={css.priceRating}>
-                <p className={css.price}>
-                  {good.price.value} {good.price.currency}
-                </p>
-                <span className={css.divider}></span>
-                <Rating value={rating} readOnly />
-                <p className={css.reviewsInfo}>
-                  ({rating}) • {reviewsCount} відгуків
-                </p>
-              </div>
-              <p className={css.prevDescription}>{good.prevDescription}</p>
-              <div className={css.sizeSelector}>
-                <p>Розмір</p>
-                <div className={css.selectWrapper}>
-                  <select
-                    className={css.sizeSelect}
-                    value={selectedSize}
-                    onChange={event =>
-                      setSelectedSize(event.target.value as Size)
-                    }
-                  >
-                    {good.size.map(size => (
-                      <option key={size} value={size}>
-                        {size}
-                      </option>
-                    ))}
-                  </select>
-
-                  <span className={css.selectArrow}></span>
-                </div>
-              </div>
-              <div className={css.cartActions}>
-                <button
-                  className={css.btn}
-                  type="button"
-                  onClick={handleAddToCart}
-                >
-                  Додати в кошик
-                </button>
-                <div className={css.quantity}>
-                  <input
-                    type="number"
-                    min="1"
-                    step="1"
-                    value={quantity}
-                    onChange={e => setQuantity(e.target.value)}
-                  />
-                </div>
-              </div>
-              <button className={css.btn} type="button" onClick={handleBuyNow}>
-                Купити зараз
-              </button>
-              <p className={css.delivery}>
-                Безкоштовна доставка для замовлень від 1000 грн
+          <div className={css.wrapper}>
+            <Breadcrumbs productName={good.name} />
+            <h3 className={css.title}>{good.name}</h3>
+            <div className={css.priceRating}>
+              <p className={css.price}>
+                {good.price.value} {good.price.currency}
               </p>
-              <div className={css.descriptionHeader}>
-                <p className={css.descrpt}>Опис</p>
-                <span className={css.dividerDescrpt}></span>
-              </div>
-              <div className={css.description}>
-                {splitDescription(good.description).map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </div>
-              <p>Основні характеристики</p>
-              <ul className={css.characteristics}>
-                {good.characteristics.map(characteristic => (
-                  <li key={characteristic}>{characteristic}</li>
-                ))}
-              </ul>
+              <span className={css.divider}></span>
+              <Rating value={rating} readOnly />
+              <p className={css.reviewsInfo}>
+                ({rating}) • {reviewsCount} відгуків
+              </p>
             </div>
+            <p className={css.prevDescription}>{good.prevDescription}</p>
+            <div className={css.sizeSelector}>
+              <p>Розмір</p>
+              <div className={css.selectWrapper}>
+                <select
+                  className={css.sizeSelect}
+                  value={selectedSize}
+                  onChange={event =>
+                    setSelectedSize(event.target.value as Size)
+                  }
+                >
+                  {good.size.map(size => (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  ))}
+                </select>
+
+                <span className={css.selectArrow}></span>
+              </div>
+            </div>
+            <div className={css.cartActions}>
+              <button
+                className={css.btn}
+                type="button"
+                onClick={handleAddToCart}
+              >
+                Додати в кошик
+              </button>
+              <div className={css.quantity}>
+                <input
+                  type="number"
+                  min="1"
+                  step="1"
+                  value={quantity}
+                  onChange={e => setQuantity(e.target.value)}
+                />
+              </div>
+            </div>
+            <button className={css.btn} type="button" onClick={handleBuyNow}>
+              Купити зараз
+            </button>
+            <p className={css.delivery}>
+              Безкоштовна доставка для замовлень від 1000 грн
+            </p>
+            <div className={css.descriptionHeader}>
+              <p className={css.descrpt}>Опис</p>
+              <span className={css.dividerDescrpt}></span>
+            </div>
+            <div className={css.description}>
+              {splitDescription(good.description).map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+            <p>Основні характеристики</p>
+            <ul className={css.characteristics}>
+              {good.characteristics.map(characteristic => (
+                <li key={characteristic}>{characteristic}</li>
+              ))}
+            </ul>
           </div>
         </div>
-      </Container>
-    </>
+      </div>
+    </Container>
   );
 };
 
