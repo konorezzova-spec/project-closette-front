@@ -26,12 +26,10 @@ const GoodPageClient = () => {
   if (error || !good) return <p>Something went wrong.</p>;
 
   return (
-    <main>
       <div>
         <GoodForPurchase good={good} />
         <GoodReviews goodId={good._id} />
       </div>
-    </main>
   );
 };
 
