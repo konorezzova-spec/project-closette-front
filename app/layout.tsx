@@ -31,11 +31,11 @@ export const metadata: Metadata = {
   },
 };
 
-type Props = LayoutProps<"/"> & {
-  modal: React.ReactNode;
+type Props = {
+  children: React.ReactNode;
 };
 
-export default async function RootLayout({ children, modal }: Props) {
+export default function RootLayout({ children }: Props) {
   return (
     <html
       lang="uk"
@@ -45,16 +45,10 @@ export default async function RootLayout({ children, modal }: Props) {
       <body className={css.body}>
         <ThemeProvider>
           <TanStackProvider>
-            {/* <AuthProvider> */}
-
-          <main className={css.main}>
-            <div className={css.plug}></div>
+      {/* <AuthProvider> */}
             {children}
-          </main>
-          {modal}
-          <Toaster position="top-right" />
-
-            {/* </AuthProvider> */}
+            <Toaster position="top-right" />
+      {/* </AuthProvider> */}
           </TanStackProvider>
         </ThemeProvider>
       </body>

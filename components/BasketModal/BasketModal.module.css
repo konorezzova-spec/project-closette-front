@@ -87,13 +87,13 @@
   line-height: 1.5;
   text-decoration: none;
   transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease;
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .continueLink {
-  border: 1px solid var(--opacity-transparent-dark-10, #ccc);
+  border: 1px solid var(--opacity-transparent-dark-10);
   background: transparent;
   color: var(--color-scheme-1-text);
 }
@@ -103,16 +103,22 @@
 }
 
 .orderLink {
-  border: 1px solid var(--color-deco);
-  background: var(--color-deco);
+  border: 1px solid var(--color-scheme-6-background);
+  background-color: var(--color-scheme-6-background);
   color: var(--color-neutral-darkest);
 }
 
 .orderLink:hover {
-  background: var(--color-deco-darkest);
-  border-color: var(--color-deco-darkest);
-  color: var(--color-white);
+  border: 1px solid var( --color-deco-darker);
+  background-color: var( --color-scheme-6-foreground);
 }
+
+.orderLink:active {
+  border: 1px solid var(--color-scheme-6-background);
+  background-color: var(--color-deco-darkest);
+  color: var(--color-scheme-2-text);
+}
+
 /* #endregion */
 
 /* #region Планшет: бічна панель справа */
