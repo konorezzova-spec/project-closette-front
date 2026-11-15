@@ -10,7 +10,6 @@ import { createFeedback } from "@/lib/api/clientApi";
 import { getApiErrorMessage } from "@/lib/api/authApi";
 import css from "./AddReviewForm.module.css";
 
-
 interface FeedbackValues {
   author: string;
   description: string;
@@ -26,10 +25,7 @@ const feedbackSchema: Yup.ObjectSchema<FeedbackValues> = Yup.object({
     .trim()
     .max(260, "Максимум 260 символів")
     .required("Напишіть відгук"),
-  rate: Yup.number()
-    .min(1, "Оберіть оцінку")
-    .max(5)
-    .required("Оберіть оцінку"),
+  rate: Yup.number().min(1, "Оберіть оцінку").max(5).required("Оберіть оцінку"),
 });
 // #endregion
 
@@ -38,7 +34,10 @@ type AddReviewFormProps = {
   onSuccess: () => void;
 };
 
-export default function AddReviewForm({ goodId, onSuccess }: AddReviewFormProps) {
+export default function AddReviewForm({
+  goodId,
+  onSuccess,
+}: AddReviewFormProps) {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
@@ -72,15 +71,17 @@ export default function AddReviewForm({ goodId, onSuccess }: AddReviewFormProps)
     <form className={css.form} onSubmit={formik.handleSubmit} noValidate>
       <h2 className={css.title}>Залишити відгук</h2>
 
-      <FormField
-        id="author"
-        label="Ваше ім’я"
-        type="text"
-        placeholder="Ваше ім’я"
-        autoComplete="name"
-        {...formik.getFieldProps("author")}
-        error={errorFor("author")}
-      />
+      <div className={css.input}>
+        <FormField
+          id="author"
+          label="Ваше ім’я"
+          type="text"
+          placeholder="Ваше ім’я"
+          autoComplete="name"
+          {...formik.getFieldProps("author")}
+          error={errorFor("author")}
+        />
+      </div>
 
       <div className={css.field}>
         <label className={css.label} htmlFor="description">
@@ -99,7 +100,7 @@ export default function AddReviewForm({ goodId, onSuccess }: AddReviewFormProps)
         )}
       </div>
 
-      <div className={css.field}>
+      <div className={`${css.field} ${css.rating}`}>
         <Rating
           value={formik.values.rate}
           onChange={value => formik.setFieldValue("rate", value)}
