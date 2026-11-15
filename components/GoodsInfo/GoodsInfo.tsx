@@ -1,8 +1,6 @@
 
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import type { Good } from "@/types/good";
 import css from "./GoodsInfo.module.css";
 import GoodInfo from "../GoodInfo/GoodInfo";
