@@ -1,3 +1,5 @@
+"use client";
+
 import css from "./GoodReviews.module.css";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -5,6 +7,8 @@ import { MessageNoInfo } from "@/components/MessageNoInfo/MessageNoInfo";
 import ReviewsList from "@/components/ReviewsList/ReviewsList";
 import { fetchFeedbacks } from "@/lib/api/clientApi";
 import Container from "@/components/Container/Container";
+import Modal from "@/components/Modal/Modal";
+import AddReviewForm from "@/components/AddReviewForm/AddReviewForm";
 
 type GoodReviewsProps = {
   goodId: string;
@@ -33,35 +37,38 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
 
   return (
     <Container>
-      {/* <div className={css.container}> */}
-      <div className={css.header}>
-        <h2 className={css.title}>Відгуки клієнтів</h2>
-        <button
-          className={css.btn}
-          type="button"
-          onClick={() => setIsFormOpen(true)}
-        >
-          Залишити відгук
-        </button>
+      <div className={css.container}>
+        <div className={css.header}>
+          <h2 className={css.title}>Відгуки клієнтів</h2>
+          <button className={css.btn} type="button" onClick={handleAction}>
+            Залишити відгук
+          </button>
+        </div>
+        <div className={css.content}>
+          {reviews.feedbacks.length > 0 ? (
+            <ReviewsList
+              reviews={reviews.feedbacks}
+              title="Відгуки клієнтів"
+              showButton
+              onLeaveReview={handleAction}
+            />
+          ) : (
+            <MessageNoInfo
+              message="У цього товару ще немає відгуків"
+              buttonText="Залишити відгук"
+              onClick={handleAction}
+            />
+          )}
+          {isFormOpen && (
+            <Modal onClose={() => setIsFormOpen(false)}>
+              <AddReviewForm
+                goodId={goodId}
+                onSuccess={() => setIsFormOpen(false)}
+              />
+            </Modal>
+          )}
+        </div>
       </div>
-      <div className={css.content}>
-        {reviews.feedbacks.length > 0 ? (
-          <ReviewsList
-            reviews={reviews.feedbacks}
-            title="Відгуки клієнтів"
-            showButton
-            onLeaveReview={handleAction}
-          />
-        ) : (
-          <MessageNoInfo
-            message="У цього товару ще немає відгуків"
-            buttonText="Залишити відгук"
-            onClick={handleAction}
-          />
-        )}
-        {/* {isFormOpen && <AddReviewForm />} */}
-      </div>
-      {/* </div> */}
     </Container>
   );
 };
