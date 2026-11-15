@@ -9,7 +9,7 @@ import ThemeProvider from "@/components/ThemeProvider/ThemeProvider";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const SITE_URL = process.env.SITE_URL;
-if (!SITE_URL) {
+ if (!SITE_URL) {
   throw new Error("SITE_URL is not defined in the environment variables");
 }
 
