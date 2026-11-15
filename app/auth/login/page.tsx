@@ -15,7 +15,8 @@ import AuthFooter from "@/components/AuthFooter/AuthFooter";
 
 const validationSchema = Yup.object({
   tel: Yup.string()
-    .required('Номер телефону обовʼязковий'),
+.matches(/^+380\d{9}$/, 'Невірний формат номера телефону')
+.required('Номер телефону обов’язковий'),
   password: Yup.string()
     .min(8, 'Пароль має містити щонайменше 8 символів')
     .required('Пароль обовʼязковий'),
@@ -34,7 +35,7 @@ export default function LoginPage() {
     onSubmit: async (values) => {
       setIsLoading(true);
       try {
-        const response = await fetch('http://localhost:3000/api/auth/login', {
+        const response = await fetch("/api/auth/login", {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(values),
@@ -43,8 +44,10 @@ export default function LoginPage() {
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.message || 'Помилка авторизації');
-        }
+          throw new Error(
+          data.error || data.message || 'Помилка авторизації'
+          );
+          }
         if (data.token) {
           localStorage.setItem('token', data.token);
         }
@@ -54,7 +57,7 @@ export default function LoginPage() {
 
         toast.success('Успішний вхід! Перенаправлення...');
         setTimeout(() => {
-          router.push('/home');
+          router.push('/homePage');
         }, 1000);
       } catch (error: unknown) {
         toast.error((error as { message?: string }).message || 'Щось пішло не так');
