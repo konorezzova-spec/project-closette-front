@@ -6,6 +6,7 @@ import { inter, nunito_sans } from "@/app/fonts";
 import css from "./layout.module.css";
 import TanStackProvider from "../components/TanstackProvider/TanstackProvider";
 import ThemeProvider from "@/components/ThemeProvider/ThemeProvider";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const SITE_URL = process.env.SITE_URL;
 if (!SITE_URL) {
@@ -45,10 +46,10 @@ export default function RootLayout({ children }: Props) {
       <body className={css.body}>
         <ThemeProvider>
           <TanStackProvider>
-      {/* <AuthProvider> */}
+      <AuthProvider>
             {children}
             <Toaster position="top-right" />
-      {/* </AuthProvider> */}
+      </AuthProvider>
           </TanStackProvider>
         </ThemeProvider>
       </body>
