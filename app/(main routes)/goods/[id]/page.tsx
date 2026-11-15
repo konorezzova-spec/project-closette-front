@@ -3,10 +3,9 @@ import {
   HydrationBoundary,
   dehydrate,
 } from "@tanstack/react-query";
-import type { Metadata } from "next";
 import { fetchGoodById } from "@/lib/api/serverApi";
+import { Metadata } from "next";
 import GoodPageClient from "./GoodPage.client";
-import GoodReviewButton from "./GoodReviewButton";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -14,28 +13,31 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const good = await fetchGoodById(id);
 
+  const good = await fetchGoodById(id);
+  const title = good.name;
+  const description = good.prevDescription;
+  const img = good.image;
   return {
-    title: good.name,
-    description: good.prevDescription,
+    title: title,
+    description: description,
     openGraph: {
-      title: good.name,
-      description: good.prevDescription,
-      url: `http://localhost:4000/goods/${id}`,
+      title: title,
+      description: description,
+      url: `https://project-closette-front.vercel.app/goods/${id}`,
       images: [
         {
-          url: good.image,
+          url: img,
           width: 1200,
           height: 630,
-          alt: good.name,
+          alt: title,
         },
       ],
     },
   };
 }
 
-export default async function GoodPage({ params }: Props) {
+const GoodPage = async ({ params }: Props) => {
   const { id } = await params;
   const queryClient = new QueryClient();
 
@@ -47,7 +49,8 @@ export default async function GoodPage({ params }: Props) {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <GoodPageClient />
-      <GoodReviewButton productId={id} />
     </HydrationBoundary>
   );
-}
+};
+
+export default GoodPage;
