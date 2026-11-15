@@ -143,6 +143,10 @@
   margin-top: 24px;
 }
 
+.navCenterMobile {
+  justify-content: center;
+}
+
 .navButton {
   display: flex;
   align-items: center;

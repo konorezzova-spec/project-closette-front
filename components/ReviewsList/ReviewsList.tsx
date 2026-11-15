@@ -140,7 +140,9 @@ export default function ReviewsList({
               ))}
             </Swiper>
 
-            <div className={css.navigationWrapper}>
+            <div
+              className={`${css.navigationWrapper} ${!showProduct ? css.navCenterMobile : ""}`}
+            >
               <button
                 type="button"
                 className={css.navButton}
