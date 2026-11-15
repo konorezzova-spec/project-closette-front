@@ -38,6 +38,12 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
   return (
     <Container>
       <div className={css.container}>
+        <div className={css.header}>
+          <h2 className={css.title}>Відгуки клієнтів</h2>
+          <button className={css.btn} type="button" onClick={handleAction}>
+            Залишити відгук
+          </button>
+        </div>
         <div className={css.content}>
           {reviews.feedbacks.length > 0 ? (
             <ReviewsList
