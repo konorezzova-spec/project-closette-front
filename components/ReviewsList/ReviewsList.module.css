@@ -1,6 +1,15 @@
 .reviewsSection {
-  width: 100%;
-  padding: 40px 16px;
+  --rl-text: var(--color-scheme-1-text);
+  --rl-accent: var(--color-scheme-1-accent);
+  --rl-accent-hover: var(--color-deco-dark);
+  --rl-border-hover: var(--color-deco-darker);
+  --rl-accent-active: var(--color-deco-darkest);
+  --rl-on-accent: var(--color-neutral-darkest);
+  --rl-on-active: var(--color-white);
+  --rl-empty-bg: var(--color-scheme-5-background);
+
+  padding-block: 24px 40px;
+  color: var(--rl-text);
 }
 
 .headerWrapper {
@@ -16,10 +25,11 @@
 }
 
 .title {
+  font-family: var(--second-family);
   font-size: 28px;
   font-weight: 400;
   line-height: 1.2;
-  color: #000;
+  color: var(--rl-text);
 }
 
 .reviewButton {
@@ -31,11 +41,11 @@
   padding: 0 16px;
   border: 1px solid transparent;
   border-radius: 20px;
-  background-color: var(--green);
+  background-color: var(--rl-accent);
   font-family: inherit;
   font-size: 14px;
   font-weight: 500;
-  color: #000;
+  color: var(--rl-on-accent);
   cursor: pointer;
   transition:
     background-color 0.3s ease,
@@ -45,43 +55,15 @@
 
 .reviewButton:hover,
 .reviewButton:focus-visible {
-  background-color: var(--green-hover);
-  border-color: var(--border-dark);
-  outline: none;
-}
-
-.reviewButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 156px;
-  height: 36px;
-  padding: 0 16px;
-  border: 1px solid transparent;
-  border-radius: 20px;
-  background-color: rgba(197, 225, 165, 1);
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  color: #000;
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    color 0.3s ease;
-}
-
-.reviewButton:hover,
-.reviewButton:focus-visible {
-  background-color: var(--green-hover);
-  border-color: var(--border-dark);
+  background-color: var(--rl-accent-hover);
+  border-color: var(--rl-border-hover);
   outline: none;
 }
 
 .reviewButton:active {
-  background-color: var(--green-active);
-  border-color: var(--green-active);
-  color: var(--text-on-dark);
+  background-color: var(--rl-accent-active);
+  border-color: var(--rl-accent-active);
+  color: var(--rl-on-active);
 }
 
 .reviewButton:disabled {
@@ -98,13 +80,14 @@
   width: 100%;
   padding: 24px 16px;
   border-radius: 16px;
-  background-color: rgba(214, 234, 192, 1);
+  background-color: var(--rl-empty-bg);
   text-align: center;
 }
 
 .emptyText {
   font-size: 14px;
   font-weight: 700;
+  color: var(--rl-text);
 }
 
 .emptyButton {
@@ -126,28 +109,42 @@
 .reviewCard {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   height: 100%;
 }
 
 .reviewText {
   font-size: 14px;
   line-height: 1.4;
-  color: #000;
+  color: var(--rl-text);
 }
 
 .author {
   margin-top: auto;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
-  color: #000;
+  text-transform: none;
+  color: var(--rl-text);
+}
+
+.product {
+  align-self: flex-start;
+  margin-top: -12px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--rl-text);
+  text-decoration: underline;
 }
 
 .navigationWrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 12px;
   margin-top: 24px;
+}
+
+.navCenterMobile {
+  justify-content: center;
 }
 
 .navButton {
@@ -156,27 +153,38 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 50%;
-  background-color: rgba(197, 225, 165, 1);
-  color: #000;
+  background-color: var(--rl-accent);
+  color: var(--rl-on-accent);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
-.navButton:hover:not(:disabled) {
-  background-color: #bcdbb4;
+.navButton:hover:not(:disabled),
+.navButton:focus-visible:not(:disabled) {
+  background-color: var(--rl-accent-hover);
+  border-color: var(--rl-border-hover);
+  outline: none;
+}
+
+.navButton:active:not(:disabled) {
+  background-color: var(--rl-accent-active);
+  border-color: var(--rl-accent-active);
+  color: var(--rl-on-active);
 }
 
 .navButton:disabled {
-  background-color: #e0e0e0;
-  color: #9e9e9e;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 @media screen and (min-width: 768px) {
   .reviewsSection {
-    padding: 60px 32px;
+    padding-block: 32px 48px;
   }
 
   .headerWrapper {
@@ -201,15 +209,11 @@
   .emptyButton {
     align-self: center;
   }
-
-  .navigationWrapper {
-    justify-content: flex-end;
-  }
 }
 
 @media screen and (min-width: 1440px) {
   .reviewsSection {
-    padding: 112px 64px;
+    padding-block: 48px 80px;
   }
 
   .emptyContainer {

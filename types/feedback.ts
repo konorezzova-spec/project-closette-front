@@ -1,10 +1,12 @@
+export type FeedbackProduct = { _id: string; name?: string; title?: string };
+
 export type Feedback = {
   _id?: string;
   id?: string;
-  rating: number;
-  comment: string;
+  rate: number;
+  description: string;
   author?: string;
-  name?: string;
+  productId?: string | FeedbackProduct;
   createdAt?: string;
 };
 
