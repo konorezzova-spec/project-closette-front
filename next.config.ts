@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
   // cacheComponents: true,
   // partialPrefetching: true,
   reactCompiler: true,
+  deprecated: { looseRouteMatching: true }
 };
 
 export default nextConfig;

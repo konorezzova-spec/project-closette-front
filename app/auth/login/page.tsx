@@ -1,19 +1,17 @@
 'use client';
 
-
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, Loader2 } from 'lucide-react';
-import Image from 'next/image';
-import './login.css';
-import AuthHeader from '@/components/AuthHeader/AuthHeader';
-import AuthFooter from '@/components/AuthFooter/AuthFooter';
+import { Loader2 } from 'lucide-react';
 
-
+import AuthHeader from "@/components/AuthHeader/AuthHeader";
+import AuthTab from "@/components/AuthTab/AuthTab";
+import AuthFooter from "@/components/AuthFooter/AuthFooter";
 
 const validationSchema = Yup.object({
   tel: Yup.string()
@@ -26,6 +24,7 @@ const validationSchema = Yup.object({
 export default function LoginPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       tel: '',
@@ -47,100 +46,88 @@ export default function LoginPage() {
           throw new Error(data.message || 'Помилка авторизації');
         }
         if (data.token) {
-          localStorage.setItem('token', data.token); // або твоя функція saveUserToken(data.token)
+          localStorage.setItem('token', data.token);
         }
-        localStorage.setItem('user', JSON.stringify(data.user));
+        if (data.user) {
+          localStorage.setItem('user', JSON.stringify(data.user));
+        }
+
         toast.success('Успішний вхід! Перенаправлення...');
         setTimeout(() => {
-          router.push('/homePage')
+          router.push('/home');
         }, 1000);
       } catch (error: unknown) {
-    toast.error((error as { message?: string }).message || 'Щось пішло не так');
-  }  finally {
+        toast.error((error as { message?: string }).message || 'Щось пішло не так');
+      } finally {
         setIsLoading(false);
       }
     },
   });
+
   return (
-  <>
-    <AuthHeader />
-    <section className={styles.page}>
-      <div className="card">
-        <div className="logo_wrap">
-          <Link href="/" aria-label="Home" className="logo-link">
-              <Image
-                className="logo"
-                src="/public/header/company_logo.svg"
-                alt="logo"
-                width={84}
-                height={36}
+    <>
+      <AuthHeader />
+      <section className="page">
+        <div className="card">
+
+          <AuthTab active="login" />
+
+          <h1 className="login-title">Вхід</h1>
+          
+          <form onSubmit={formik.handleSubmit}>
+            <label className="label">
+              Номер телефону*
+              <input
+                type="tel"
+                name="tel"
+                placeholder="+38 (0__) ___-__-__"
+                value={formik.values.tel}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
-            </Link>
-        <link href="/components/Header/Header.tsx" className="logo-link">
-        </link>
+              {formik.touched.tel && formik.errors.tel ? (
+                <span className="error">{formik.errors.tel}</span>
+              ) : null}
+            </label>
+
+            <label className="label">
+              Пароль*
+              <input
+                type="password"
+                name="password"
+                placeholder="********"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.touched.password && formik.errors.password ? (
+                <span className="error">{formik.errors.password}</span>
+              ) : null}
+            </label>
+
+            <div className="forgot-password">
+              <Link href="/auth/forgot-password" className="forgot-password-link">
+                Забули пароль?
+              </Link>
+            </div>
+
+            <button
+              className="login-btn"
+              type="submit" 
+              disabled={isLoading}
+            >
+              <span>Увійти</span>
+              {isLoading && (
+                <div className="loader">
+                  <Loader2 className="animate-spin" /> Завантаження
+                </div>
+              )}
+            </button>
+          </form>
+
+          <ToastContainer position="top-right" autoClose={3000} />
+          <p className="copyright">© 2025 Clothica. Всі права захищені.</p>
         </div>
-        </div>
-      
-      <div className="buttons">
-        <button className="register-button" onClick={() => router.push('/auth/register')}>Реєстрація</button>
-        <button className="login-button" onClick={() => router.push('/auth/login')}>Вхід</button>
-      </div>
-      <h1 className="login-title">Вхід</h1>
-      
-      <form onSubmit={formik.handleSubmit}>
-        
-        <label className="label">
-          Номер телефону*
-          <input
-            type="tel"
-            name="tel"
-            placeholder="+38 (0__) ___-__-__"
-            value={formik.values.tel}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.tel && formik.errors.tel ? (
-            <span className="error">{formik.errors.tel}</span>
-          ) : null}
-        </label>
-
-        <label className="label">
-          Пароль*
-          <input
-            type="password"
-            name="password"
-            placeholder="********"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.password && formik.errors.password ? (
-            <span className="error">{formik.errors.password}</span>
-          ) : null}
-        </label>
-
-        <div className="forgot-password">
-          <Link href="../../../app/auth/forgot-password/page.tsx" className="forgot-password-link">
-            Забули пароль?
-          </Link>
-        </div>
-
-        <button
-          className="login-btn"
-          type="submit" 
-          disabled={isLoading}
-          >
-  <span>Увійти</span>
-{isLoading && (
-  <div className="loader">
-    <Loader2 className="animate-spin">Завантаження</Loader2>
-  </div>
-)}
-        </button>
-      </form>
-
-      <ToastContainer position="top-right" autoClose={3000} />
-      <p className="copyright">© 2025 Clothica. Всі права захищені.</p>
         <AuthFooter />
       </section>
     </>
