@@ -15,7 +15,7 @@ import AuthFooter from "@/components/AuthFooter/AuthFooter";
 
 const validationSchema = Yup.object({
   tel: Yup.string()
-.matches(/^+380\d{9}$/, 'Невірний формат номера телефону')
+.matches(/^\+380\d{9}$/, 'Невірний формат номера телефону')
 .required('Номер телефону обов’язковий'),
   password: Yup.string()
     .min(8, 'Пароль має містити щонайменше 8 символів')
