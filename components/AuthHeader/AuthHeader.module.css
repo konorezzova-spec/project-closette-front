@@ -9,7 +9,7 @@
 
 .logo {
   display: inline-block;
-  color: #000;
+  color: var(--color-neutral-darkest);
   font-family:
     var(--font-nunito-sans, "Nunito Sans"), var(--font-inter, "Inter"),
     system-ui, sans-serif;
@@ -22,11 +22,13 @@
 }
 
 .logo:hover {
-  color: var(--color-focus, #8cb860);
+  /* color: var(--color-focus, #8cb860); */
+  color: var(--color-deco-dark);
 }
 
 .logo:focus-visible {
-  outline: 2px solid var(--color-focus, #8cb860);
+  /* outline: 2px solid var(--color-focus, #8cb860); */
+  outline: 2px solid var(--color-deco-dark);
   outline-offset: 2px;
 }
 

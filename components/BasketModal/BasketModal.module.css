@@ -1,0 +1,156 @@
+/* BasketModal.module.css */
+
+/* #region Мобілка: модалка на весь екран */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--color-scheme-1-background);
+  padding: 24px 20px;
+  box-sizing: border-box;
+  user-select: none;
+}
+/* #endregion */
+
+.closeWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.iconClose {
+  width: 24px;
+  height: 24px;
+  fill: var(--color-scheme-1-text);
+}
+
+.title {
+  margin-bottom: 24px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-scheme-1-text);
+}
+
+/* #region Кнопки */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.continueLink,
+.orderLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 36px;
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.continueLink {
+  border: 1px solid var(--opacity-transparent-dark-10);
+  background: transparent;
+  color: var(--color-scheme-1-text);
+}
+
+.continueLink:hover {
+  background: rgba(128, 128, 128, 0.2);
+}
+
+.orderLink {
+  border: 1px solid var(--color-scheme-6-background);
+  background-color: var(--color-scheme-6-background);
+  color: var(--color-neutral-darkest);
+}
+
+.orderLink:hover {
+  border: 1px solid var( --color-deco-darker);
+  background-color: var( --color-scheme-6-foreground);
+}
+
+.orderLink:active {
+  border: 1px solid var(--color-scheme-6-background);
+  background-color: var(--color-deco-darkest);
+  color: var(--color-scheme-2-text);
+}
+
+/* #endregion */
+
+/* #region Планшет: бічна панель справа */
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 552px;
+    max-width: 100%;
+    padding: 40px 32px 16px;
+  }
+
+  .actions {
+    flex-direction: row;
+    gap: 24px;
+    margin-bottom: 75px;
+  }
+
+  .continueLink,
+  .orderLink {
+    flex: 1;
+  }
+}
+/* #endregion */
+
+/* #region Десктоп */
+@media screen and (min-width: 1440px) {
+  .modal {
+    width: 589px;
+    padding: 40px 64px 16px 32px;
+  }
+
+  .title {
+    font-size: 48px;
+  }
+}
+/* #endregion */

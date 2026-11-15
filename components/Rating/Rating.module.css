@@ -1,0 +1,25 @@
+.starButton {
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.starButton:disabled {
+  background: transparent;
+  opacity: 1;
+  cursor: default;
+}
+
+.starIcon {
+  color: var(--color-scheme-1-text);
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}

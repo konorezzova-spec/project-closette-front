@@ -1,221 +1,309 @@
+
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { use, useEffect, useState } from "react"; 
+import { keepPreviousData, useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import css from "./PopularProducts.module.css";
 
+import { fetchGoods, fetchCategories } from "@/lib/api/clientApi";
+import type { Good } from "@/types/good";
 
-interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
-  category: string;
-  rating: number;
-  reviewsCount: number;
-}
+import GoodsInfo from "@/components/GoodsInfo/GoodsInfo";
 
-interface ProductsResponse {
-  products: Product[];
-  total: number;
-}
-
-export default function PopularProducts() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [activePage, setActivePage] = useState(0);
-
-  const sliderRef = useRef<HTMLDivElement>(null);
+export default function GoodsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>;
+}) {
+  const { category: categoryFromUrl = "" } = use(searchParams);
+  const [category, setCategory] = useState(categoryFromUrl);
+  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
+  const [gender, setGender] = useState("");
+  const [maxPrice, setMaxPrice] = useState(10000);
+  const [debouncedPrice, setDebouncedPrice] = useState(10000);
 
   
   useEffect(() => {
-    async function getPopularProducts() {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/products/popular`,
-        );
+    const timer = setTimeout(() => {
+      setDebouncedPrice(maxPrice);
+    }, 200);
 
-        if (!response.ok) {
-          throw new Error(`Помилка завантаження: HTTP ${response.status}`);
-        }
+    return () => clearTimeout(timer);
+  }, [maxPrice]);
 
-        const data: ProductsResponse = await response.json();
-        setProducts(data.products);
-      } catch (error) {
-        setError(
-          error instanceof Error
-            ? error.message
-            : "Не вдалося завантажити товари",
-        );
-      } finally {
-        setLoading(false);
-      }
-    }
+  const { data: categoriesData } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => fetchCategories(1, 20),
+  });
 
-    getPopularProducts();
-  }, []);
+  const categories = categoriesData?.categories ?? [];
 
-  
-  const updatePagination = () => {
-    const slider = sliderRef.current;
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: [
+      "goods",
+      category,
+      selectedSizes,
+      gender,
+      debouncedPrice, 
+    ],
+    initialPageParam: 1,
+    placeholderData: keepPreviousData,
+    retry: 1,
+    queryFn: ({ pageParam }) =>
+      fetchGoods({
+        page: pageParam,
+        perPage: 12,
+        ...(category && { category }),
+        ...(selectedSizes.length > 0 && { size: selectedSizes }),
+        ...(gender && { gender }),
+        ...(debouncedPrice < 10000 && {
+          maxPrice: debouncedPrice, // 🟩
+        }),
+      }),
+    getNextPageParam: (lastPage) =>
+      lastPage.data.page < lastPage.data.totalPages
+        ? lastPage.data.page + 1
+        : undefined,
+  });
 
-    if (!slider) return;
+  const goods: Good[] =
+    data?.pages.flatMap((page) => page.data.goods) ?? [];
 
-    const page = Math.round(slider.scrollLeft / slider.clientWidth);
-    setActivePage(page);
+  const totalItems = data?.pages[0]?.data.totalItems ?? 0;
+
+  const handleCategory = (name: string) => {
+    const selectedCategory = categories.find(
+      (item: { _id: string; name: string }) =>
+        item.name.trim().toLowerCase() === name.trim().toLowerCase()
+    );
+
+    setCategory(selectedCategory?._id ?? "");
   };
 
-  const getPageCount = () => {
-    const slider = sliderRef.current;
-
-    if (!slider || !slider.clientWidth) return 1;
-
-    return Math.max(1, Math.ceil(slider.scrollWidth / slider.clientWidth));
+    const clearAllFilters = () => {
+    setCategory("");
+    setSelectedSizes([]);
+    setGender("");
+    setMaxPrice(10000);
   };
-
-  
-  const scrollToPage = (page: number) => {
-    const slider = sliderRef.current;
-
-    if (!slider) return;
-
-    slider.scrollTo({
-      left: page * slider.clientWidth,
-      behavior: "smooth",
-    });
-
-    setActivePage(page);
-  };
-
-  const formatPrice = (price: number) =>
-    new Intl.NumberFormat("uk-UA").format(price);
 
   return (
-    <section className={css.section}>
+    <main className={css.page}>
       <div className={css.container}>
-        {/* 🟩 Заголовок секції */}
-        <div className={css.header}>
-          <h2 className={css.title}>Популярні товари</h2>
+        <h1 className={css.title}>Всі товари</h1>
 
-          <Link href="/products" className={css.allProducts}>
-            Всі товари
-          </Link>
-        </div>
+        <div className={css.catalog}>
+          <aside className={css.sidebar}>
+            <div className={css.filterHeader}>
+              <h2>Фільтри</h2>
 
-        
-        {loading && <p className={css.message}>Завантаження товарів...</p>}
-
-       
-        {error && <p className={css.error}>{error}</p>}
-
-        
-        {!loading && !error && products.length > 0 && (
-          <>
-            <div className={css.sliderWrapper}>
-              <div
-                className={css.productsList}
-                ref={sliderRef}
-                onScroll={updatePagination}
-              >
-                {products.map((product) => (
-                  <article className={css.productCard} key={product._id}>
-                    <Link
-                      href={`/products/${product._id}`}
-                      className={css.imageLink}
-                    >
-                      <div className={css.imageWrapper}>
-                        <img
-                          src={product.imageUrl}
-                          alt={product.name}
-                          className={css.productImage}
-                        />
-                      </div>
-                    </Link>
-
-                    <div className={css.productInfo}>
-                      <div className={css.productTop}>
-                        <div>
-                          <h3 className={css.productName}>{product.name}</h3>
-                          <p className={css.category}>{product.category}</p>
-                        </div>
-
-                        <p className={css.price}>
-                          {formatPrice(product.price)} грн
-                        </p>
-                      </div>
-
-                      <div className={css.rating}>
-                        <span className={css.stars}>
-                          {"★".repeat(Math.round(product.rating))}
-                        </span>
-
-                        <span className={css.reviews}>
-                          <span aria-hidden="true">▤</span>
-                          {product.reviewsCount}
-                        </span>
-                      </div>
-
-                      <Link
-                        href={`/products/${product._id}`}
-                        className={css.detailsButton}
-                      >
-                        Детальніше
-                      </Link>
-                    </div>
-                  </article>
-                ))}
-              </div>
-
-              
-              <button
-                type="button"
-                className={`${css.arrow} ${css.prev}`}
-                onClick={() =>
-                  scrollToPage(Math.max(0, activePage - 1))
-                }
-                disabled={activePage === 0}
-                aria-label="Попередні товари"
-              >
-                ←
-              </button>
-
-              <button
-                type="button"
-                className={`${css.arrow} ${css.next}`}
-                onClick={() =>
-                  scrollToPage(
-                    Math.min(getPageCount() - 1, activePage + 1),
-                  )
-                }
-                disabled={activePage >= getPageCount() - 1}
-                aria-label="Наступні товари"
-              >
-                →
+              <button type="button" onClick={clearAllFilters}>
+                Очистити всі
               </button>
             </div>
 
-           
-            <div className={css.pagination}>
-              {Array.from({ length: getPageCount() }).map((_, index) => (
+            <p className={css.resultsCount}>
+              Показано {goods.length} із {totalItems} товарів
+            </p>
+
+                        <section className={css.filterSection}>
+              <ul className={css.filterList}>
+                <li>
+                  <button type="button" onClick={() => setCategory("")}>
+                    Усі
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => handleCategory("Футболки та сорочки")}
+                  >
+                    Футболки та сорочки
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => handleCategory("Штани та джинси")}
+                  >
+                    Штани та джинси
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => handleCategory("Верхній одяг")}
+                  >
+                    Верхній одяг
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => handleCategory("Топи та майки")}
+                  >
+                    Топи та майки
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => handleCategory("Сукні та спідниці")}
+                  >
+                    Сукні та спідниці
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => handleCategory("Домашній та спортивний одяг")}
+                  >
+                    Домашній та спортивний одяг
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => handleCategory("Худі та кофти")}
+                  >
+                    Худі та кофти
+                  </button>
+                </li>
+              </ul>
+            </section>
+
+            {/* SIZE */}
+            <section className={css.filterSection}>
+              <div className={css.filterTitle}>
+                <h3>Розмір</h3>
+
                 <button
                   type="button"
-                  key={index}
-                  className={`${css.dot} ${
-                    activePage === index ? css.activeDot : ""
-                  }`}
-                  onClick={() => scrollToPage(index)}
-                  aria-label={`Сторінка ${index + 1}`}
-                />
-              ))}
-            </div>
-          </>
-        )}
+                  onClick={() => setSelectedSizes([])}
+                >
+                  Очистити
+                </button>
+              </div>
 
-        {!loading && !error && products.length === 0 && (
-          <p className={css.message}>Популярних товарів поки немає.</p>
-        )}
+              <div className={css.checkboxList}>
+                {["XXS", "XS", "S", "M", "L", "XL", "XXL"].map((size) => (
+                  <label key={size}>
+                    <input
+                      type="checkbox"
+                      value={size}
+                      checked={selectedSizes.includes(size)}
+                      onChange={() =>
+                        setSelectedSizes((prev) =>
+                          prev.includes(size)
+                            ? prev.filter((item) => item !== size)
+                            : [...prev, size]
+                        )
+                      }
+                    />
+                    {size}
+                  </label>
+                ))}
+              </div>
+            </section>
+
+                       <section className={css.filterSection}>
+              <div className={css.filterTitle}>
+                <h3>Ціна</h3>
+
+                <button
+                  type="button"
+                  onClick={() => setMaxPrice(10000)}
+                >
+                  Очистити
+                </button>
+              </div>
+
+              <div className={css.priceFilter}>
+                <input
+                  type="range"
+                  min="0"
+                  max="10000"
+                  step="100"
+                  value={maxPrice}
+                  onChange={(event) =>
+                    setMaxPrice(Number(event.target.value))
+                  }
+                />
+
+                <div className={css.priceValues}>
+                  <span>0</span>
+                  <span>{maxPrice}</span>
+                </div>
+              </div>
+            </section>
+
+            {/* GENDER */}
+            <section className={css.filterSection}>
+              <div className={css.filterTitle}>
+                <h3>Стать</h3>
+
+                <button
+                  type="button"
+                  onClick={() => setGender("")}
+                >
+                  Очистити
+                </button>
+              </div>
+
+              <div className={css.checkboxList}>
+                {[
+                  { label: "Всі", value: "" },
+                  { label: "Жіночий", value: "women" },
+                  { label: "Чоловічий", value: "man" },
+                  { label: "Унісекс", value: "unisex" },
+                ].map((item) => (
+                  <label key={item.value || "all"}>
+                    <input
+                      type="radio"
+                      name="gender"
+                      value={item.value}
+                      checked={gender === item.value}
+                      onChange={() => setGender(item.value)}
+                    />
+
+                    {item.label}
+                  </label>
+                ))}
+              </div>
+            </section>
+          </aside>
+
+          <section className={css.productsSection}>
+            {isLoading ? (
+              <p>Завантаження товарів...</p>
+            ) : isError ? (
+              <p>Помилка завантаження: {error.message}</p>
+            ) : (
+              <GoodsInfo
+                goods={goods}
+                hasNextPage={hasNextPage}
+                isFetchingNextPage={isFetchingNextPage}
+                fetchNextPage={fetchNextPage}
+              />
+            )}
+          </section>
+        </div>
       </div>
-    </section>
+    </main>
   );
 }
