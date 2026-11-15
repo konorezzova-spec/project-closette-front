@@ -19,14 +19,13 @@ const REDIRECT_AFTER_REGISTER = "/";
 
 export default function RegistrationForm() {
   const router = useRouter();
-  const setUser = useAuthStore((state) => state.setUser);
+  const setUser = useAuthStore(state => state.setUser);
 
   const formik = useFormik<RegistrationValues>({
     initialValues: { name: "", tel: "", email: "", password: "" },
     validationSchema: registrationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       try {
-        // при успіху бекенд сам ставить cookie сесії, тобто користувач вже авторизований
         const user = await registerUser({
           name: values.name.trim(),
           email: values.email.trim(),
@@ -35,6 +34,7 @@ export default function RegistrationForm() {
         });
         // бекенд уже поставив cookie сесії, тож записуємо користувача у стор
         setUser({ id: user._id, name: user.name, email: user.email });
+        toast.success("Реєстрація успішна!", { duration: 4000 });
         router.push(REDIRECT_AFTER_REGISTER);
       } catch (err) {
         toast.error(getApiErrorMessage(err));
@@ -65,7 +65,7 @@ export default function RegistrationForm() {
         placeholder="+38 (0__) ___-__-__"
         autoComplete="tel"
         {...formik.getFieldProps("tel")}
-        onChange={(e) => formik.setFieldValue("tel", formatPhone(e.target.value))}
+        onChange={e => formik.setFieldValue("tel", formatPhone(e.target.value))}
         error={errorFor("tel")}
       />
       <FormField
@@ -93,7 +93,9 @@ export default function RegistrationForm() {
         disabled={formik.isSubmitting}
         aria-busy={formik.isSubmitting}
       >
-        {formik.isSubmitting && <span className={styles.spinner} aria-hidden="true" />}
+        {formik.isSubmitting && (
+          <span className={styles.spinner} aria-hidden="true" />
+        )}
         {formik.isSubmitting ? "Реєстрація…" : "Зареєструватися"}
       </button>
     </form>

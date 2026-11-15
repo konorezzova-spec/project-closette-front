@@ -3,18 +3,14 @@
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0;
-  /* padding: 64px 20px; */
+  padding: 64px 0;
 }
-/* @media only screen and (min-width: 768px) {
-  .container {
-    padding: 64px 32px;
-  }
-}
+
 @media only screen and (min-width: 1440px) {
   .container {
-    padding: 112px 64px;
+    padding: 112px 0;
   }
-} */
+}
 
 .title {
   font-family: var(--second-family);
@@ -116,9 +112,15 @@ p + .characteristics {
   padding: 6px;
   border-radius: 100px;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--opacity-neutral-darkest-5);
 
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
   font-size: 16px;
+  letter-spacing: 0;
+  line-height: 1.5;
+  color: var(--color-neutral-darkest);
+  cursor: pointer;
 }
 @media only screen and (min-width: 1440px) {
   .btn {
@@ -128,16 +130,16 @@ p + .characteristics {
 
 .btn:hover,
 .btn:focus {
-  background-color: rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  background-color: var(--opacity-neutral-darkest-15);
+  border: 1px solid var(--opacity-neutral-darkest-50);
 }
 .btn:active {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--opacity-neutral-darkest-50);
   border-color: transparent;
-  color: #fff;
+  color: var(--color-white);
 }
 .btn:disabled {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--opacity-neutral-darkest-5);
   border-color: transparent;
 }
 
@@ -149,22 +151,30 @@ p + .characteristics {
 }
 
 .cartActions .btn {
-  background-color: #c5e1a5;
+  background-color: var(--color-deco);
+
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 1.5;
+  color: var(--color-neutral-darkest);
+  cursor: pointer;
 }
 
 .cartActions .btn:hover,
 .cartActions .btn:focus {
-  background-color: #9db484;
-  border: 1px solid #4e5a42;
+  background-color: var(--color-deco-dark);
+  border: 1px solid var(--color-deco-darker);
 }
 .cartActions .btn:active {
-  background-color: #3b4331;
-  border: 1px solid #c5e1a5;
+  background-color: var(--color-deco-darkest);
+  border: 1px solid var(--color-deco);
   color: #fff;
 }
 .cartActions .btn:disabled {
-  background-color: #c5e1a5;
-  border: 1px solid #c5e1a5;
+  background-color: var(--color-deco);
+  border: 1px solid var(--color-deco);
 }
 
 .quantity input {
@@ -174,31 +184,29 @@ p + .characteristics {
   box-sizing: border-box;
   border-radius: 16px;
   text-align: left;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--opacity-neutral-darkest-15);
   background-color: transparent;
 }
 
 /* За замовчуванням ховаємо стрілочки */
-.quantity::-webkit-inner-spin-button,
-.quantity::-webkit-outer-spin-button {
+.quantity input::-webkit-inner-spin-button,
+.quantity input::-webkit-outer-spin-button {
   opacity: 0;
 }
 
 /* Показуємо при наведенні */
-.quantity:hover::-webkit-inner-spin-button,
-.quantity:hover::-webkit-outer-spin-button {
+.quantity:hover input::-webkit-inner-spin-button,
+.quantity:hover input::-webkit-outer-spin-button {
   opacity: 1;
 }
 
-.quantity:hover {
-  border-color: var(--color-deco-dark);
+.quantity input:focus,
+.quantity input:active,
+.quantity input:hover {
+  outline: none;
+  border-color: var(--color-deco);
 }
 
-.quantity input:focus,
-.quantity input:active {
-  outline: none;
-  border-color: #c5e1a5;
-}
 .delivery {
   font-size: 12px;
   text-align: center;
@@ -233,7 +241,7 @@ p + .characteristics {
   border-radius: 16px;
   text-align: left;
 
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--opacity-neutral-darkest-15);
   background-color: transparent;
   font-family: inherit;
   font-size: 16px;
@@ -243,22 +251,32 @@ p + .characteristics {
   appearance: none;
 }
 
+.sizeSelect:focus {
+  outline: none;
+  border-color: var(--opacity-neutral-darkest-15);
+  box-shadow: none;
+}
+
+.sizeSelect:hover {
+  border-color: var(--color-deco);
+}
+
+.sizeSelect:focus-visible {
+  outline: none;
+}
+
 .selectArrow {
   position: absolute;
   right: 15px;
   top: 50%;
   width: 8px;
   height: 8px;
-  border-right: 1.5px solid rgba(0, 0, 0, 0.6);
-  border-bottom: 1.5px solid rgba(0, 0, 0, 0.6);
+  border-right: 1.5px solid var(--opacity-neutral-darkest-60);
+  border-bottom: 1.5px solid var(--opacity-neutral-darkest-60);
   transform: translateY(-70%) rotate(45deg);
   pointer-events: none;
 }
 
-.wrapper > .descrpt {
-  margin-top: 40px;
-  margin-bottom: 32px;
-}
 .priceRating {
   display: flex;
   align-items: center;
@@ -281,4 +299,20 @@ p + .characteristics {
   font-size: 14px;
 
   margin-left: 8px;
+}
+
+.descriptionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.dividerDescrpt {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--opacity-neutral-darkest-20);
 }
