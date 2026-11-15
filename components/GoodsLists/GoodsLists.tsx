@@ -6,9 +6,6 @@ import { Keyboard, A11y, Pagination } from "swiper/modules";
 import type { Swiper as SwiperInstance } from "swiper/types";
 import "swiper/css";
 import "swiper/css/pagination";
-import Image from "next/image";
-import right from "/public/arrow_forward.svg";
-import left from "/public/arrow_back.svg";
 import css from "./GoodsLists.module.css";
 import { Good } from "@/types/good";
 import GoodInfo from "@/components/GoodInfo/GoodInfo";
@@ -69,7 +66,7 @@ export default function GoodsLists({ goods }: GoodsListsProps) {
       >
         {goods.map(good => (
           <SwiperSlide key={good._id}>
-            <GoodInfo good={good} />
+            <GoodInfo good={good}/>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -81,13 +78,9 @@ export default function GoodsLists({ goods }: GoodsListsProps) {
           disabled={isBeginning}
           aria-label="Previous goods"
         >
-          <Image
-            src={left}
-            alt="Previous goods"
-            className={css.image}
-            width={24}
-            height={24}
-          ></Image>
+            <svg width="24" height="24">
+                  <use href="/icons/symbol-defs.svg#icon-arrow_back" />
+            </svg>
         </button>
 
         <button
@@ -97,13 +90,9 @@ export default function GoodsLists({ goods }: GoodsListsProps) {
           disabled={isEnd}
           aria-label="Next goods"
         >
-          <Image
-            src={right}
-            alt="Next goods"
-            className={css.image}
-            width={24}
-            height={24}
-          ></Image>
+             <svg width="24" height="24">
+                  <use href="/icons/symbol-defs.svg#icon-arrow_forward" />
+            </svg>
         </button>
       </div>
     </>

@@ -5,9 +5,10 @@ import { Good } from "@/types/good";
 
 interface GoodInfoProps {
   good: Good;
+  rating?: number;
 }
 
-export default function GoodInfo({ good }: GoodInfoProps) {
+export default function GoodInfo({ good, rating}: GoodInfoProps) {
   return (
     <>
       {" "}
@@ -28,17 +29,17 @@ export default function GoodInfo({ good }: GoodInfoProps) {
           <div className={css.left_side}>
             <p className={css.good_name}>{good.name}</p>
             <div className={css.svg_wrapper}>
-              <span className={css.star}>
-                <svg width="16" height="16" aria-hidden="true">
+
+                <svg className={css.star}width="16" height="16" aria-hidden="true">
                   <use href="/icons/sprite.svg#star-filled" />
                 </svg>
-              </span>
-              <p>{5}</p>
-              <span className={css.comment}>
-                <svg width="16" height="16" aria-hidden="true">
+
+              <p>{rating ?? 5}</p>
+
+                <svg className={css.comment}width="16" height="16" aria-hidden="true">
                   <use href="/icons/sprite.svg#comment" />
                 </svg>
-              </span>
+
               <p>{good.feedbacks.length}</p>
             </div>
           </div>

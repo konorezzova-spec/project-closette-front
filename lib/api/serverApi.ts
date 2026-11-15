@@ -39,3 +39,4 @@ export async function fetchCategories(
 
   return data.data;
 }
+
