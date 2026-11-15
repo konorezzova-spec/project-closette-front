@@ -1,37 +1,31 @@
-// "use client";
+"use client";
 
-// import { checkSession, getMe } from "@/lib/api/clientApi";
-// import { useAuthStore } from "@/lib/store/authStore";
+import { useEffect } from "react";
+import { checkSession } from "@/lib/api/authApi";
+import { useAuthStore } from "@/lib/store/authStore";
 
-// import { useEffect } from "react";
+type Props = {
+  children: React.ReactNode;
+};
 
-// type Props = {
-//   children: React.ReactNode;
-// };
+const AuthProvider = ({ children }: Props) => {
+  const clearIsAuthenticated = useAuthStore(
+    state => state.clearIsAuthenticated
+  );
 
-// const AuthProvider = ({ children }: Props) => {
-//   const setUser = useAuthStore(state => state.setUser);
-//   const clearIsAuthenticated = useAuthStore(
-//     state => state.clearIsAuthenticated
-//   );
+  useEffect(() => {
+    const verify = async () => {
+      // 1. Відновлюємо користувача із localStorage
+      await useAuthStore.persist.rehydrate();
 
-//   useEffect(() => {
-//     const fetchUser = async () => {
-//       // Перевіряємо сесію
-//       const isAuthenticated = await checkSession();
-//       if (isAuthenticated) {
-//         // Якщо сесія валідна — отримуємо користувача
-//         // const user = await getMe();
-//         if (user) setUser(user);
-//       } else {
-//         // Якщо сесія невалідна — чистимо стан
-//         clearIsAuthenticated();
-//       }
-//     };
-//     fetchUser();
-//   }, [setUser, clearIsAuthenticated]);
+      // 2. Перевіряємо сесію; якщо вона недійсна, очищаємо стан
+      const isValid = await checkSession();
+      if (!isValid) clearIsAuthenticated();
+    };
+    verify();
+  }, [clearIsAuthenticated]);
 
-//   return children;
-// };
+  return <>{children}</>;
+};
 
-// export default AuthProvider;
+export default AuthProvider;
