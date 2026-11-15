@@ -7,7 +7,7 @@ type Props = { category: Category };
 
 export default function CategoryCard({ category }: Props) {
   return (
-    <Link href={`/goods?category=${category._id}`} className={css.card}>
+    <Link href={`/goods?category=${category._id}`} prefetch={ false } className={css.card}>
       <div className={css.thumb}>
         {category.image && (
           <Image

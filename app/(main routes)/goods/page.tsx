@@ -1,8 +1,8 @@
 
 "use client";
 
-import { useEffect, useState } from "react"; 
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { use, useEffect, useState } from "react"; 
+import { keepPreviousData, useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import css from "./PopularProducts.module.css";
 
 import { fetchGoods, fetchCategories } from "@/lib/api/clientApi";
@@ -10,12 +10,17 @@ import type { Good } from "@/types/good";
 
 import GoodsInfo from "@/components/GoodsInfo/GoodsInfo";
 
-export default function GoodsPage() {
-  const [category, setCategory] = useState("");
+export default function GoodsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>;
+}) {
+  const { category: categoryFromUrl = "" } = use(searchParams);
+  const [category, setCategory] = useState(categoryFromUrl);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [gender, setGender] = useState("");
   const [maxPrice, setMaxPrice] = useState(10000);
-    const [debouncedPrice, setDebouncedPrice] = useState(10000);
+  const [debouncedPrice, setDebouncedPrice] = useState(10000);
 
   
   useEffect(() => {
@@ -50,6 +55,8 @@ export default function GoodsPage() {
       debouncedPrice, 
     ],
     initialPageParam: 1,
+    placeholderData: keepPreviousData,
+    retry: 1,
     queryFn: ({ pageParam }) =>
       fetchGoods({
         page: pageParam,
@@ -87,14 +94,6 @@ export default function GoodsPage() {
     setGender("");
     setMaxPrice(10000);
   };
-
-  if (isLoading) {
-    return <p>Завантаження товарів...</p>;
-  }
-
-  if (isError) {
-    return <p>Помилка завантаження: {error.message}</p>;
-  }
 
   return (
     <main className={css.page}>
@@ -290,12 +289,18 @@ export default function GoodsPage() {
           </aside>
 
           <section className={css.productsSection}>
-            <GoodsInfo
-              goods={goods}
-              hasNextPage={hasNextPage}
-              isFetchingNextPage={isFetchingNextPage}
-              fetchNextPage={fetchNextPage}
-            />
+            {isLoading ? (
+              <p>Завантаження товарів...</p>
+            ) : isError ? (
+              <p>Помилка завантаження: {error.message}</p>
+            ) : (
+              <GoodsInfo
+                goods={goods}
+                hasNextPage={hasNextPage}
+                isFetchingNextPage={isFetchingNextPage}
+                fetchNextPage={fetchNextPage}
+              />
+            )}
           </section>
         </div>
       </div>
