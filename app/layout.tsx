@@ -7,9 +7,11 @@ import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 import css from "./layout.module.css";
 import TanStackProvider from "../components/TanstackProvider/TanstackProvider";
+import ThemeProvider from "@/components/ThemeProvider/ThemeProvider";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const SITE_URL = process.env.SITE_URL;
-if (!SITE_URL) {
+ if (!SITE_URL) {
   throw new Error("SITE_URL is not defined in the environment variables");
 }
 
@@ -32,13 +34,17 @@ export const metadata: Metadata = {
   },
 };
 
-type Props = LayoutProps<"/"> & {
-  modal: React.ReactNode;
+type Props = {
+  children: React.ReactNode;
 };
 
-export default async function RootLayout({ children, modal }: Props) {
+export default function RootLayout({ children }: Props) {
   return (
-    <html lang="uk" className={`${inter.variable} ${nunito_sans.variable}`}>
+    <html
+      lang="uk"
+      className={`${inter.variable} ${nunito_sans.variable}`}
+      suppressHydrationWarning
+    >
       <body className={css.body}>
         <TanStackProvider>
   <AuthProvider>

@@ -1,7 +1,10 @@
+
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+
+  allowedDevOrigins: ["192.168.0.249"],
+
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "res.cloudinary.com" },
@@ -11,6 +14,7 @@ const nextConfig: NextConfig = {
   // cacheComponents: true,
   // partialPrefetching: true,
   reactCompiler: true,
+  deprecated: { looseRouteMatching: true }
 };
 
 export default nextConfig;

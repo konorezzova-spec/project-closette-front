@@ -13,19 +13,21 @@ export async function GET(request: NextRequest) {
     const rawTag = request.nextUrl.searchParams.get("category") ?? "";
     const category = rawTag === "All" ? "" : rawTag;
 
-    const size = request.nextUrl.searchParams.get("size") ?? "";
-    const price = Number(request.nextUrl.searchParams.get("price") ?? "");
-    const gender = request.nextUrl.searchParams.get("size") ?? "";
+    const sizes = request.nextUrl.searchParams.getAll("size");
+    const maxPrice = Number(request.nextUrl.searchParams.get("maxPrice") ?? "");
+    const gender = request.nextUrl.searchParams.get("gender") ?? "";
 
     const res = await api.get("/goods", {
       params: {
         page,
         perPage,
         ...(category && { category }),
-        ...(size && { size }),
-        ...(price && { price }),
+        ...(sizes.length > 0 && { size: sizes }),
+        ...(maxPrice && { maxPrice }),
         ...(gender && { gender }),
       },
+      paramsSerializer: { indexes: null },
+
       headers: {
         Cookie: cookieStore.toString(),
       },
@@ -37,7 +39,7 @@ export async function GET(request: NextRequest) {
       logErrorResponse(error.response?.data);
       return NextResponse.json(
         { error: error.message, response: error.response?.data },
-        { status: error.status }
+        { status: error.response?.status ?? 500 }
       );
     }
     logErrorResponse({ message: (error as Error).message });
