@@ -10,7 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import './login.css';
-import forgotPassword from "@/auth/forgot-password/page.tsx";
+import AuthHeader from '@/components/AuthHeader/AuthHeader';
+import AuthFooter from '@/components/AuthFooter/AuthFooter';
 
 
 
@@ -53,15 +54,17 @@ export default function LoginPage() {
         setTimeout(() => {
           router.push('/homePage')
         }, 1000);
-      } catch (error: any) {
-        toast.error(error.message || 'Щось пішло не так');
-      } finally {
+      } catch (error: unknown) {
+    toast.error((error as { message?: string }).message || 'Щось пішло не так');
+  }  finally {
         setIsLoading(false);
       }
     },
   });
   return (
-    <main className="login-page">
+  <>
+    <AuthHeader />
+    <section className={styles.page}>
       <div className="card">
         <div className="logo_wrap">
           <Link href="/" aria-label="Home" className="logo-link">
@@ -138,6 +141,8 @@ export default function LoginPage() {
 
       <ToastContainer position="top-right" autoClose={3000} />
       <p className="copyright">© 2025 Clothica. Всі права захищені.</p>
-    </main>
+        <AuthFooter />
+      </section>
+    </>
   );
 }
