@@ -22,7 +22,7 @@ export default function RegistrationForm() {
   const setUser = useAuthStore(state => state.setUser);
 
   const formik = useFormik<RegistrationValues>({
-    initialValues: { name: "", email: "", tel: "", password: "" },
+    initialValues: { name: "", tel: "", email: "", password: "" },
     validationSchema: registrationSchema,
     onSubmit: async values => {
       try {
@@ -58,15 +58,6 @@ export default function RegistrationForm() {
         error={errorFor("name")}
       />
       <FormField
-        id="email"
-        label="Email*"
-        type="email"
-        placeholder="Ваш email"
-        autoComplete="email"
-        {...formik.getFieldProps("email")}
-        error={errorFor("email")}
-      />
-      <FormField
         id="tel"
         label="Номер телефону*"
         type="tel"
@@ -76,6 +67,15 @@ export default function RegistrationForm() {
         {...formik.getFieldProps("tel")}
         onChange={e => formik.setFieldValue("tel", formatPhone(e.target.value))}
         error={errorFor("tel")}
+      />
+      <FormField
+        id="email"
+        label="Email*"
+        type="email"
+        placeholder="Ваш email"
+        autoComplete="email"
+        {...formik.getFieldProps("email")}
+        error={errorFor("email")}
       />
       <FormField
         id="password"
