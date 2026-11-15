@@ -119,7 +119,13 @@ p + .characteristics {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.05);
 
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
   font-size: 16px;
+  letter-spacing: 0;
+  line-height: 1.5;
+  color: rgb(0 0 0);
+  cursor: pointer;
 }
 @media only screen and (min-width: 1440px) {
   .btn {
@@ -151,6 +157,14 @@ p + .characteristics {
 
 .cartActions .btn {
   background-color: #c5e1a5;
+
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 1.5;
+  color: rgb(0 0 0);
+  cursor: pointer;
 }
 
 .cartActions .btn:hover,
@@ -180,26 +194,24 @@ p + .characteristics {
 }
 
 /* За замовчуванням ховаємо стрілочки */
-.quantity::-webkit-inner-spin-button,
-.quantity::-webkit-outer-spin-button {
+.quantity input::-webkit-inner-spin-button,
+.quantity input::-webkit-outer-spin-button {
   opacity: 0;
 }
 
 /* Показуємо при наведенні */
-.quantity:hover::-webkit-inner-spin-button,
-.quantity:hover::-webkit-outer-spin-button {
+.quantity:hover input::-webkit-inner-spin-button,
+.quantity:hover input::-webkit-outer-spin-button {
   opacity: 1;
 }
 
-.quantity:hover {
-  border-color: var(--color-deco-dark);
-}
-
 .quantity input:focus,
-.quantity input:active {
+.quantity input:active,
+.quantity input:hover {
   outline: none;
   border-color: #c5e1a5;
 }
+
 .delivery {
   font-size: 12px;
   text-align: center;
@@ -245,6 +257,20 @@ p + .characteristics {
   appearance: none;
 }
 
+.sizeSelect:focus {
+  outline: none;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: none;
+}
+
+.sizeSelect:hover {
+  border-color: #c5e1a5;
+}
+
+.sizeSelect:focus-visible {
+  outline: none;
+}
+
 .selectArrow {
   position: absolute;
   right: 15px;
@@ -257,10 +283,10 @@ p + .characteristics {
   pointer-events: none;
 }
 
-.wrapper > .descrpt {
+/* .wrapper > .descrpt {
   margin-top: 40px;
   margin-bottom: 32px;
-}
+} */
 .priceRating {
   display: flex;
   align-items: center;
@@ -283,4 +309,20 @@ p + .characteristics {
   font-size: 14px;
 
   margin-left: 8px;
+}
+
+.descriptionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.dividerDescrpt {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--opacity-neutral-darkest-20);
 }
