@@ -19,24 +19,23 @@ const REDIRECT_AFTER_REGISTER = "/";
 
 export default function RegistrationForm() {
   const router = useRouter();
-  const setUser = useAuthStore((state) => state.setUser);
+  const setUser = useAuthStore(state => state.setUser);
 
   const formik = useFormik<RegistrationValues>({
-    initialValues: { name: "", tel: "", email: "", password: "" },
+    initialValues: { name: "", email: "", tel: "", password: "" },
     validationSchema: registrationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       try {
-        // при успіху бекенд сам ставить cookie сесії, тобто користувач вже авторизований
         const user = await registerUser({
-  name: values.name.trim(),
-  email: values.email.trim(),
-  tel: toApiPhone(values.tel),
-  password: values.password,
-});
-
-setUser({ id: user._id, name: user.name, email: user.email });
-toast.success("Реєстрація успішна!");
-router.push(REDIRECT_AFTER_REGISTER);
+          name: values.name.trim(),
+          email: values.email.trim(),
+          tel: toApiPhone(values.tel),
+          password: values.password,
+        });
+        // бекенд уже поставив cookie сесії, тож записуємо користувача у стор
+        setUser({ id: user._id, name: user.name, email: user.email });
+        toast.success("Реєстрація успішна!", { duration: 4000 });
+        router.push(REDIRECT_AFTER_REGISTER);
       } catch (err) {
         toast.error(getApiErrorMessage(err));
       }
@@ -59,17 +58,6 @@ router.push(REDIRECT_AFTER_REGISTER);
         error={errorFor("name")}
       />
       <FormField
-        id="tel"
-        label="Номер телефону*"
-        type="tel"
-        inputMode="tel"
-        placeholder="+38 (0__) ___-__-__"
-        autoComplete="tel"
-        {...formik.getFieldProps("tel")}
-        onChange={(e) => formik.setFieldValue("tel", formatPhone(e.target.value))}
-        error={errorFor("tel")}
-      />
-      <FormField
         id="email"
         label="Email*"
         type="email"
@@ -77,6 +65,17 @@ router.push(REDIRECT_AFTER_REGISTER);
         autoComplete="email"
         {...formik.getFieldProps("email")}
         error={errorFor("email")}
+      />
+      <FormField
+        id="tel"
+        label="Номер телефону*"
+        type="tel"
+        inputMode="tel"
+        placeholder="+38 (0__) ___-__-__"
+        autoComplete="tel"
+        {...formik.getFieldProps("tel")}
+        onChange={e => formik.setFieldValue("tel", formatPhone(e.target.value))}
+        error={errorFor("tel")}
       />
       <FormField
         id="password"
@@ -94,7 +93,9 @@ router.push(REDIRECT_AFTER_REGISTER);
         disabled={formik.isSubmitting}
         aria-busy={formik.isSubmitting}
       >
-        {formik.isSubmitting && <span className={styles.spinner} aria-hidden="true" />}
+        {formik.isSubmitting && (
+          <span className={styles.spinner} aria-hidden="true" />
+        )}
         {formik.isSubmitting ? "Реєстрація…" : "Зареєструватися"}
       </button>
     </form>

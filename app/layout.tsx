@@ -3,7 +3,6 @@ import { Toaster } from "react-hot-toast";
 import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import { inter, nunito_sans } from "@/app/fonts";
-import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 import css from "./layout.module.css";
 import TanStackProvider from "../components/TanstackProvider/TanstackProvider";
@@ -11,7 +10,7 @@ import ThemeProvider from "@/components/ThemeProvider/ThemeProvider";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const SITE_URL = process.env.SITE_URL;
- if (!SITE_URL) {
+if (!SITE_URL) {
   throw new Error("SITE_URL is not defined in the environment variables");
 }
 
@@ -46,16 +45,17 @@ export default function RootLayout({ children }: Props) {
       suppressHydrationWarning
     >
       <body className={css.body}>
-        <TanStackProvider>
-  <AuthProvider>
-    <main className={css.main}>
-      <div className={css.plug}></div>
-      {children}
-    </main>
-    {modal}
-    <Toaster position="top-right" />
-  </AuthProvider>
-</TanStackProvider>
+        <ThemeProvider>
+          <TanStackProvider>
+            <AuthProvider>
+              <main className={css.main}>
+                <div className={css.plug}></div>
+                {children}
+              </main>
+              <Toaster position="top-right" containerStyle={{ zIndex: 99999 }} />
+            </AuthProvider>
+          </TanStackProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
