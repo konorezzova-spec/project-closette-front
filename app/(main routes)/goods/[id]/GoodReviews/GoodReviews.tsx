@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { MessageNoInfo } from "@/components/MessageNoInfo/MessageNoInfo";
 import ReviewsList from "@/components/ReviewsList/ReviewsList";
 import { fetchFeedbacks } from "@/lib/api/clientApi";
+import Modal from "@/components/Modal/Modal";
+import AddReviewForm from "@/components/AddReviewForm/AddReviewForm";
 
 type GoodReviewsProps = {
   goodId: string;
@@ -23,6 +25,7 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
   });
 
   const handleAction = () => {
+    console.log("click, isFormOpen ->", true);
     setIsFormOpen(true);
   };
 
@@ -32,16 +35,6 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
 
   return (
     <div className={css.container}>
-      <div className={css.header}>
-        <h2 className={css.title}>Відгуки клієнтів</h2>
-        <button
-          className={css.btn}
-          type="button"
-          onClick={() => setIsFormOpen(true)}
-        >
-          Залишити відгук
-        </button>
-      </div>
       <div className={css.content}>
         {reviews.feedbacks.length > 0 ? (
           <ReviewsList
@@ -57,7 +50,14 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
             onClick={handleAction}
           />
         )}
-        {/* {isFormOpen && <AddReviewForm />} */}
+        {isFormOpen && (
+          <Modal onClose={() => setIsFormOpen(false)}>
+            <AddReviewForm
+              goodId={goodId}
+              onSuccess={() => setIsFormOpen(false)}
+            />
+          </Modal>
+        )}
       </div>
     </div>
   );

@@ -40,3 +40,12 @@ export async function fetchCategories(
   return data.data;
 }
 
+export async function fetchFeedbacks() {
+  const cookieStore = await cookies();
+  const { data } = await nextServer.get("/feedbacks", {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  return data;
+}
