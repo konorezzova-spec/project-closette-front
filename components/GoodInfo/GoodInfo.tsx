@@ -10,8 +10,7 @@ interface GoodInfoProps {
 
 export default function GoodInfo({ good, rating}: GoodInfoProps) {
   return (
-    <>
-      {" "}
+    <><div className={css.goods_info}>
       <div className={css.image_container}>
         <Image
           src={
@@ -51,6 +50,7 @@ export default function GoodInfo({ good, rating}: GoodInfoProps) {
           Детальніше
         </Link>
       </div>
+    </div>
     </>
   );
 }

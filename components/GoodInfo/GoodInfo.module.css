@@ -1,3 +1,16 @@
+.goods_info {
+  width: 335px;
+  @media screen and (min-width: 768px) {
+    width: 198px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .goods_info{
+    width: 304px;
+  }
+}
+
 .image_container {
   position: relative;
   width: 335px;
