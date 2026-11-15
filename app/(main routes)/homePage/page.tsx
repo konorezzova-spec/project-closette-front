@@ -13,15 +13,19 @@ import Hero from "@/components/Hero/Hero";
 import Style from "@/components/Style/Style";
 import PopularCategories from "@/components/PopularCategories/PopularCategories";
 import ReviewsList from "@/components/ReviewsList/ReviewsList";
+import type { Feedback } from "@/types/feedback";
+import Container from "@/components/Container/Container";
 
 export default async function HomePage() {
   const queryClient = new QueryClient();
 
-  let feedbacksData = [];
+  let feedbacksData: Feedback[] = [];
   try {
     const response = await fetchFeedbacks();
-    feedbacksData = response.data?.feedbacks || [];
-  } catch (error) {}
+    feedbacksData = response.data?.feedbacks ?? [];
+  } catch (error) {
+    console.error("Не вдалося завантажити останні відгуки", error);
+  }
 
   await Promise.all([
     queryClient.prefetchQuery({
@@ -42,12 +46,15 @@ export default async function HomePage() {
         <Style />
         <PopularCategories />
         <PopularGoods />
+        <Container>
         <ReviewsList
           reviews={feedbacksData}
           title="Останні відгуки"
           showButton={false}
           showProduct
+          hideWhenEmpty
         />
+        </Container>
       </HydrationBoundary>
     </>
   );
