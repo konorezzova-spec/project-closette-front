@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
+import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import { inter, nunito_sans } from "@/app/fonts";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 import css from "./layout.module.css";
 import TanStackProvider from "../components/TanstackProvider/TanstackProvider";
@@ -39,17 +41,15 @@ export default async function RootLayout({ children, modal }: Props) {
     <html lang="uk" className={`${inter.variable} ${nunito_sans.variable}`}>
       <body className={css.body}>
         <TanStackProvider>
-          {/* <AuthProvider> */}
-
-          <main className={css.main}>
-            <div className={css.plug}></div>
-            {children}
-          </main>
-          {modal}
-          <Toaster position="top-right" />
-
-          {/* </AuthProvider> */}
-        </TanStackProvider>
+  <AuthProvider>
+    <main className={css.main}>
+      <div className={css.plug}></div>
+      {children}
+    </main>
+    {modal}
+    <Toaster position="top-right" />
+  </AuthProvider>
+</TanStackProvider>
       </body>
     </html>
   );

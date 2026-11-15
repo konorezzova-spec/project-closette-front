@@ -28,14 +28,15 @@ export default function RegistrationForm() {
       try {
         // при успіху бекенд сам ставить cookie сесії, тобто користувач вже авторизований
         const user = await registerUser({
-          name: values.name.trim(),
-          email: values.email.trim(),
-          tel: toApiPhone(values.tel),
-          password: values.password,
-        });
-        // бекенд уже поставив cookie сесії, тож записуємо користувача у стор
-        setUser({ id: user._id, name: user.name, email: user.email });
-        router.push(REDIRECT_AFTER_REGISTER);
+  name: values.name.trim(),
+  email: values.email.trim(),
+  tel: toApiPhone(values.tel),
+  password: values.password,
+});
+
+setUser({ id: user._id, name: user.name, email: user.email });
+toast.success("Реєстрація успішна!");
+router.push(REDIRECT_AFTER_REGISTER);
       } catch (err) {
         toast.error(getApiErrorMessage(err));
       }

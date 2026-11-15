@@ -21,7 +21,7 @@
 //       const isAuthenticated = await checkSession();
 //       if (isAuthenticated) {
 //         // Якщо сесія валідна — отримуємо користувача
-//         const user = await getMe();
+//         // const user = await getMe();
 //         if (user) setUser(user);
 //       } else {
 //         // Якщо сесія невалідна — чистимо стан
