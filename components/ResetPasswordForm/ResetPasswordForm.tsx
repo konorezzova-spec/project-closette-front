@@ -72,7 +72,9 @@ export default function ResetPasswordForm() {
         disabled={formik.isSubmitting}
         aria-busy={formik.isSubmitting}
       >
-        {formik.isSubmitting && <span className={styles.spinner} aria-hidden="true" />}
+        {formik.isSubmitting && (
+          <span className={styles.spinner} aria-hidden="true" />
+        )}
         {formik.isSubmitting ? "Збереження…" : "Змінити пароль"}
       </button>
     </form>

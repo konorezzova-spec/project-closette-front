@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
+import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import { inter, nunito_sans } from "@/app/fonts";
 
@@ -9,7 +10,7 @@ import ThemeProvider from "@/components/ThemeProvider/ThemeProvider";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const SITE_URL = process.env.SITE_URL;
- if (!SITE_URL) {
+if (!SITE_URL) {
   throw new Error("SITE_URL is not defined in the environment variables");
 }
 
@@ -46,10 +47,13 @@ export default function RootLayout({ children }: Props) {
       <body className={css.body}>
         <ThemeProvider>
           <TanStackProvider>
-      <AuthProvider>
-            {children}
-            <Toaster position="top-right" />
-      </AuthProvider>
+            <AuthProvider>
+              <main className={css.main}>
+                <div className={css.plug}></div>
+                {children}
+              </main>
+              <Toaster position="top-right" containerStyle={{ zIndex: 99999 }} />
+            </AuthProvider>
           </TanStackProvider>
         </ThemeProvider>
       </body>

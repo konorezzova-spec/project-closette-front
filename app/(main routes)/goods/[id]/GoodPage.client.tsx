@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { fetchGoodById } from "@/lib/api/clientApi";
 
-import css from "./GoodPage.client.module.css";
+// import css from "./GoodPage.client.module.css";
 import GoodForPurchase from "./GoodForPurchase/GoodForPurchase";
 import GoodReviews from "./GoodReviews/GoodReviews";
 
@@ -26,12 +26,10 @@ const GoodPageClient = () => {
   if (error || !good) return <p>Something went wrong.</p>;
 
   return (
-    <main className={css.main}>
-      <div className={css.container}>
+      <div>
         <GoodForPurchase good={good} />
         <GoodReviews goodId={good._id} />
       </div>
-    </main>
   );
 };
 
