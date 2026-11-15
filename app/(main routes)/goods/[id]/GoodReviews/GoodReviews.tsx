@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { MessageNoInfo } from "@/components/MessageNoInfo/MessageNoInfo";
 import ReviewsList from "@/components/ReviewsList/ReviewsList";
 import { fetchFeedbacks } from "@/lib/api/clientApi";
+import Container from "@/components/Container/Container";
 
 type GoodReviewsProps = {
   goodId: string;
@@ -31,7 +32,8 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
   if (error || !reviews) return <p>Не вдалося завантажити відгуки.</p>;
 
   return (
-    <div className={css.container}>
+    <Container>
+      {/* <div className={css.container}> */}
       <div className={css.header}>
         <h2 className={css.title}>Відгуки клієнтів</h2>
         <button
@@ -59,7 +61,8 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
         )}
         {/* {isFormOpen && <AddReviewForm />} */}
       </div>
-    </div>
+      {/* </div> */}
+    </Container>
   );
 };
 

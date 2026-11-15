@@ -3,18 +3,18 @@
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0;
-  /* padding: 64px 20px; */
+  padding: 64px 0;
 }
 /* @media only screen and (min-width: 768px) {
   .container {
     padding: 64px 32px;
   }
-}
+} */
 @media only screen and (min-width: 1440px) {
   .container {
-    padding: 112px 64px;
+    padding: 112px 0;
   }
-} */
+}
 
 .title {
   font-family: var(--second-family);
@@ -111,6 +111,7 @@ p + .characteristics {
 
 .btn {
   width: 100%;
+  /* max-width: 100%; */
   max-width: 335px;
   height: 36px;
   padding: 6px;
@@ -216,6 +217,7 @@ p + .characteristics {
 .selectWrapper {
   position: relative;
   width: 335px;
+  /* width: 100%; */
   height: 36px;
 }
 
