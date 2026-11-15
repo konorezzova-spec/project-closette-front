@@ -1,33 +1,33 @@
-/* mobile */
-
-body:has(.login-page) .plug {
-    display: none;
-    height: 0px;
-}
+/* mobile first */
 
 .login-page {
+    box-sizing: border-box;
     width: 100%;
     max-width: 480px;
-    margin: 0 auto;
-    padding: 24px 16px 32px;
-    box-sizing: border-box;
-    color: #000;
-    background-color: var(--color-deco-lightest, #F9FCF6);
+    margin: -8px auto 0;
+    padding: 0 16px 72px;
+    color: var(--color-scheme-1-text);
     font:
-        400 16px/24px var(--font-inter, "Inter"),
-        system-ui,
-        sans-serif;
+    400 16px/24px var(--font-inter, "Inter"),
+    system-ui,
+    sans-serif;
+}
+
+.card {
+    box-sizing: border-box;
+    min-height: 662px;
+    padding-top: 79px;
 }
 
 .login-title {
-    margin: 24px 0;
+    margin: 34px 0 32px;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
     font-family:
         var(--font-nunito-sans, "Nunito Sans"), var(--font-inter, "Inter"),
         system-ui, sans-serif;
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 36px;
-    text-align: center;
 }
 
 .logo-wrap {
@@ -76,7 +76,7 @@ body:has(.login-page) .plug {
 
 @media (min-width: 375px) {
     .login-page {
-        padding: 32px 20px 40px;
+        padding-inline: 20px;
     }
 
     .login-title {
@@ -85,27 +85,6 @@ body:has(.login-page) .plug {
     }
 }
 
-/* tablet styles */
-
-@media (min-width: 768px) {
-    .login-page {
-        padding: clamp(32px, 12.8vh, 113px) 0 32px;
-    }
-
-    .login-title {
-        margin: 30px 0 32px;
-        font-size: 34px;
-        line-height: 44px;
-    }
-}
-
-/* laptop styles */
-
-@media (min-width: 1440px) {
-    .login-page {
-        padding-top: clamp(64px, 12.8vh, 113px);
-    }
-}
 
 
 .field {
@@ -197,7 +176,7 @@ body:has(.login-page) .plug {
     .field {
         margin-bottom: 22px;
     }
-
+    
     .input {
         height: 50px;
     }
@@ -269,4 +248,36 @@ body:has(.login-page) .plug {
 .loginLink:focus-visible {
     outline: 2px solid var(--color-focus, #8cb860);
     outline-offset: 2px;
+}
+
+
+/* tablet styles */
+
+@media (min-width: 768px) {
+    .login-page {
+        min-height: calc(100vh - 80px);
+        margin-top: 0;
+        padding: clamp(32px, 12.8vh, 113px) 0 72px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login-title {
+        margin: 30px 0 32px;
+        font-size: 34px;
+        line-height: 44px;
+    }
+
+    .card {
+        min-height: 0;
+        padding-top: 0;
+    }
+}
+
+/* laptop styles */
+
+@media (min-width: 1440px) {
+    .login-page {
+        padding: clamp(64px, 12.8vh, 113px) 0 0;
+    }
 }

@@ -1,0 +1,39 @@
+/* mobile і tablet (до 1440px): футер зафіксований внизу екрана
+   і не рухається разом із формою під час прокручування */
+.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 72px;
+  padding: 5px;
+  background-color: var(--color-scheme-4-background);
+}
+
+.text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+}
+
+/* desktop: від 1440px футер у потоці сторінки, притиснутий до низу */
+@media (min-width: 1440px) {
+  .footer {
+    position: static;
+    margin-top: auto;
+    height: auto;
+    padding: 56px 5px 20px;
+    background-color: transparent;
+  }
+}

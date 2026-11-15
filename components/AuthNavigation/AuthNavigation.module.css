@@ -32,6 +32,8 @@
   width: 335px;
   height: 36px;
   background-color: var(--color-deco);
+  transition: background-color 0.3s ease;
+  transition: border 0.3s ease;
   @media screen and (min-width: 768px) {
     border: 1px solid var(--opacity-transparent);
     background-color: var(--opacity-neutral-darkest-5);
@@ -56,6 +58,8 @@
   border-radius: 100px;
   width: 335px;
   height: 36px;
+  transition: background-color 0.3s ease;
+  transition: border 0.3s ease;
   @media screen and (min-width: 768px) {
     width: 50px;
     height: 29px;
@@ -78,6 +82,8 @@
   width: 335px;
   height: 36px;
   background-color: var(--color-deco);
+  transition: background-color 0.3s ease;
+  transition: border 0.3s ease;
   @media screen and (min-width: 768px) {
     width: 98px;
     height: 29px;
@@ -91,8 +97,6 @@
   }
 }
 
-.auth_li:hover,
-.auth_li:focus,
 .auth_in_li:hover,
 .auth_in_li:focus,
 .auth_li_cabinet:hover,
@@ -101,9 +105,21 @@
   background-color: var(--color-deco-dark);
 }
 
-.auth_li:active,
 .auth_in_li:active,
 .auth_li_cabinet:active {
   border: 1px solid var(--color-deco);
   background-color: var(--color-deco-darkest);
+  color: var(--color-white);
+}
+
+.auth_li:hover,
+.auth_li:focus {
+  background-color: var(--opacity-neutral-darkest-15);
+  border: 1px solid var(--opacity-neutral-darkest-50);
+}
+
+.auth_li:active {
+  border: 1px solid var(--opacity-neutral-darkest-50);
+  background-color: var(--opacity-neutral-darkest-50);
+  color: var(--color-white);
 }

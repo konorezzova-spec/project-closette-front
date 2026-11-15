@@ -3,7 +3,8 @@
 import { Formik, Form } from "formik";
 import type { FormikHelpers } from "formik";
 import * as Yup from "yup";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { isAxiosError } from "axios";
 import { nextServer } from "@/lib/api/api";
 import css from "./Footer.module.css";
 
@@ -34,7 +35,12 @@ export default function SubscribeForm() {
 
       toast.success("Ви успішно підписалися!");
       resetForm();
-    } catch {
+    } catch (error) {
+      if (isAxiosError(error) && error.response?.status === 409) {
+        toast.error("Цей email уже підписаний!");
+        return;
+      }
+
       toast.error("Не вдалося оформити підписку");
     }
   };
@@ -74,8 +80,6 @@ export default function SubscribeForm() {
           </Form>
         )}
       </Formik>
-
-      <Toaster position="top-right" />
     </>
   );
 }

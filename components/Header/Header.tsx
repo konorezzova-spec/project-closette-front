@@ -165,6 +165,7 @@ export default function Header() {
             />
             <p className={css.amount}>{totalQuantity}</p>
           </Link>
+          <ThemeToggle />
         </nav>
 
         <nav className={css.desktop_menu}>
@@ -173,7 +174,7 @@ export default function Header() {
             <Image
               className={css.basket_svg}
               src={basket}
-              alt="logo"
+              alt="basket"
               width={36}
               height={36}
               priority
@@ -220,8 +221,8 @@ export default function Header() {
                 Категорії
               </Link>
             </li>
+            <AuthNavigation onClick={closeMenu} />
           </ul>
-          <AuthNavigation onClick={closeMenu} />
         </nav>
       )}
     </header>

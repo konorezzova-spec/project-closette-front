@@ -14,8 +14,8 @@ export async function GET(request: NextRequest) {
     const category = rawTag === "All" ? "" : rawTag;
 
     const size = request.nextUrl.searchParams.get("size") ?? "";
-    const price = Number(request.nextUrl.searchParams.get("price") ?? "");
-    const gender = request.nextUrl.searchParams.get("size") ?? "";
+   const maxPrice = Number(request.nextUrl.searchParams.get("maxPrice") ?? "");
+   const gender = request.nextUrl.searchParams.get("gender") ?? "";
 
     const res = await api.get("/goods", {
       params: {
@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
         perPage,
         ...(category && { category }),
         ...(size && { size }),
-        ...(price && { price }),
+        ...(maxPrice && { maxPrice }),
         ...(gender && { gender }),
       },
       headers: {

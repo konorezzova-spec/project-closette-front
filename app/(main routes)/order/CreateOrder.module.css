@@ -1,59 +1,64 @@
-.section{
+.section {
   padding-top: 48px;
   padding-bottom: 64px;
+  color: var(--color-scheme-1-text);
 }
 
-.title{
-  margin-bottom: 32px;
+.title {
+  margin-bottom: 48px;
   font-family: var(--second-family);
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 400;
   line-height: 1.2;
   text-align: center;
 }
 
-.content{
+.content {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 32px;
 }
 
-.subtitle{
-  margin-bottom: 24px;
-  font-size: 18px;
+.goods {
+  gap: 16px;
+}
+
+.subtitle {
+  margin-bottom: 16px;
+  font-size: 20px;
   font-weight: 400;
   text-align: center;
 }
 
-@media screen and (min-width: 768px){
-  .section{
+@media screen and (min-width: 768px) {
+  .section {
     padding-top: 64px;
     padding-bottom: 80px;
   }
-  .title{
+  .title {
     margin-bottom: 40px;
     font-size: 40px;
   }
 }
 
-@media screen and (min-width: 1440px){
-  .section{
+@media screen and (min-width: 1440px) {
+  .section {
     padding-top: 112px;
     padding-bottom: 112px;
   }
-  .title{
+  .title {
     margin-bottom: 48px;
     font-size: 45px;
   }
 
-  .content{
+  .content {
     flex-direction: row;
     align-items: flex-start;
     gap: 32px;
   }
 
   .goods,
-  .form{
+  .form {
     flex: 1;
   }
 }

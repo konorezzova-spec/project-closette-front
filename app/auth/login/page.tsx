@@ -7,14 +7,10 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Loader2 } from 'lucide-react';
+import { Link, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import './login.css';
-// import type { Metadata } from "next";
-// import AuthHeader from "@/components/AuthHeader/AuthHeader";
-// import AuthTab from "@/components/AuthTab/AuthTab";
-// import RegistrationForm from "@/components/RegistrationForm/RegistrationForm";
-// import AuthFooter from "@/components/AuthFooter/AuthFooter";
+import forgotPassword from "@/auth/forgot-password/page.tsx";
 
 
 
@@ -49,6 +45,9 @@ export default function LoginPage() {
         if (!response.ok) {
           throw new Error(data.message || 'Помилка авторизації');
         }
+        if (data.token) {
+          localStorage.setItem('token', data.token); // або твоя функція saveUserToken(data.token)
+        }
         localStorage.setItem('user', JSON.stringify(data.user));
         toast.success('Успішний вхід! Перенаправлення...');
         setTimeout(() => {
@@ -63,21 +62,21 @@ export default function LoginPage() {
   });
   return (
     <main className="login-page">
+      <div className="card">
         <div className="logo_wrap">
-          <a href="/" aria-label="Home" className="logo-link">
-            <button className="logo-btn">
+          <Link href="/" aria-label="Home" className="logo-link">
               <Image
                 className="logo"
-                src="/header/company_logo.svg"
+                src="/public/header/company_logo.svg"
                 alt="logo"
                 width={84}
                 height={36}
               />
-            </button>
-            </a>
+            </Link>
         <link href="/components/Header/Header.tsx" className="logo-link">
         </link>
-      </div>
+        </div>
+        </div>
       
       <div className="buttons">
         <button className="register-button" onClick={() => router.push('/auth/register')}>Реєстрація</button>
@@ -116,6 +115,13 @@ export default function LoginPage() {
             <span className="error">{formik.errors.password}</span>
           ) : null}
         </label>
+
+        <div className="forgot-password">
+          <Link href="../../../app/auth/forgot-password/page.tsx" className="forgot-password-link">
+            Забули пароль?
+          </Link>
+        </div>
+
         <button
           className="login-btn"
           type="submit" 

@@ -1,27 +1,5 @@
-// import React, { useState } from "react";
-// import { Rating } from "next-flex-rating";
-
-// export default function ReviewForm() {
-//   const [userRating, setUserRating] = useState(0);
-//   return (
-//     <div>
-//       <h3>Rate This Product</h3>
-//       <Rating
-//         value={userRating}
-//         size={48}
-//         spacing={12}
-//         color="#000000"
-//         emptyColor="#CFD8DC"
-//         onChange={setUserRating}
-//       />
-//       <p>Current rating: {userRating}</p>
-//     </div>
-//   );
-// }
-
 "use client";
-
-import { Rating as FlexRating } from "next-flex-rating";
+import css from "./Rating.module.css";
 
 type RatingProps = {
   value: number;
@@ -30,17 +8,34 @@ type RatingProps = {
 };
 
 const Rating = ({ value, onChange, readOnly = false }: RatingProps) => {
-  return (
-    <FlexRating
-      value={value}
-      size={24}
-      spacing={4}
-      color="#000000"
-      emptyColor="#CFD8DC"
-      onChange={onChange}
-      readOnly={readOnly}
-    />
-  );
+  const stars = Array.from({ length: 5 }, (_, index) => {
+    const starNumber = index + 1;
+
+    let icon = "star";
+
+    if (value >= starNumber) {
+      icon = "star-filled";
+    } else if (value >= starNumber - 0.5) {
+      icon = "star-half";
+    }
+
+    return (
+      <button
+        key={starNumber}
+        type="button"
+        className={css.starButton}
+        disabled={readOnly || !onChange}
+        onClick={() => onChange?.(starNumber)}
+        aria-label={`${starNumber} з 5`}
+      >
+        <svg className={css.starIcon} viewBox="0 0 24 24">
+          <use href={`/icons/sprite.svg#${icon}`} />
+        </svg>
+      </button>
+    );
+  });
+
+  return <div className={css.rating}>{stars}</div>;
 };
 
 export default Rating;
