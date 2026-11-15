@@ -1,14 +1,11 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Keyboard, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperInstance } from "swiper/types";
 import { Feedback } from "../../types/feedback";
 import Rating from "../Rating/Rating";
-import Modal from "../Modal/Modal";
-import AddReviewForm from "../AddReviewForm/AddReviewForm";
-import Container from "../Container/Container";
 import Link from "next/link";
 
 import "swiper/css";
@@ -20,7 +17,6 @@ type ReviewsListProps = {
   reviews?: Feedback[];
   title?: string;
   showButton?: boolean;
-  goodId?: string;
   onLeaveReview?: () => void;
   showProduct?: boolean;
   hideWhenEmpty?: boolean;
@@ -28,9 +24,8 @@ type ReviewsListProps = {
 
 export default function ReviewsList({
   reviews = [],
-  title = "Відгуки клієнтів",
+  title,
   showButton = true,
-  goodId,
   onLeaveReview,
   showProduct = false,
   hideWhenEmpty = false,
@@ -38,17 +33,7 @@ export default function ReviewsList({
   const swiperRef = useRef<SwiperInstance | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const closeModal = useCallback(() => setIsModalOpen(false), []);
-  const handleLeaveReview = () => {
-    if (onLeaveReview) {
-      onLeaveReview();
-    } else {
-      setIsModalOpen(true);
-    }
-  };
-
+  
   const items = reviews.slice(0, MAX_REVIEWS);
   const isEmpty = items.length === 0;
 
@@ -60,22 +45,23 @@ export default function ReviewsList({
   };
 
   return (
-    <Container className={css.reviewsSection}>
       <section className={css.reviewsSection}>
-        <div
-          className={`${css.headerWrapper} ${isEmpty ? css.headerEmpty : ""}`}
-        >
-          <h2 className={css.title}>{title}</h2>
-          {showButton && (
-            <button
-              type="button"
-              className={css.reviewButton}
-              onClick={handleLeaveReview}
-            >
-              Залишити відгук
-            </button>
-          )}
-        </div>
+        {title && (
+          <div
+            className={`${css.headerWrapper} ${isEmpty ? css.headerEmpty : ""}`}
+          >
+            <h2 className={css.title}>{title}</h2>
+            {showButton && (
+              <button
+                type="button"
+                className={css.reviewButton}
+                onClick={onLeaveReview}
+              >
+                Залишити відгук
+              </button>
+            )}
+          </div>
+        )}
 
         {isEmpty ? (
           <div className={css.emptyContainer}>
@@ -84,7 +70,7 @@ export default function ReviewsList({
               <button
                 type="button"
                 className={`${css.reviewButton} ${css.emptyButton}`}
-                onClick={handleLeaveReview}
+                onClick={onLeaveReview}//handleLeaveReview
               >
                 Залишити відгук
               </button>
@@ -130,6 +116,7 @@ export default function ReviewsList({
                       review.productId && (
                         <Link
                           href={`/goods/${review.productId._id}`}
+                          prefetch={false}
                           className={css.product}
                         >
                           {review.productId.name ?? review.productId.title}
@@ -140,9 +127,7 @@ export default function ReviewsList({
               ))}
             </Swiper>
 
-            <div
-              className={`${css.navigationWrapper} ${!showProduct ? css.navCenterMobile : ""}`}
-            >
+            <div className={css.navigationWrapper}>
               <button
                 type="button"
                 className={css.navButton}
@@ -192,13 +177,8 @@ export default function ReviewsList({
             </div>
           </div>
         )}
-
-        {isModalOpen && goodId && (
-          <Modal onClose={closeModal}>
-            <AddReviewForm goodId={goodId} onSuccess={closeModal} />
-          </Modal>
-        )}
+ 
       </section>
-    </Container>
+
   );
 }
