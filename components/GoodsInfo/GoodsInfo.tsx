@@ -1,10 +1,9 @@
 
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import type { Good } from "@/types/good";
 import css from "./GoodsInfo.module.css";
+import GoodInfo from "../GoodInfo/GoodInfo";
 
 interface GoodsInfoProps {
   goods: Good[];
@@ -25,53 +24,15 @@ export default function GoodsInfo({
 
   return (
     <>
-      <div className={css.productsGrid}>
-        {goods.map((good) => (
-          <article key={good._id} className={css.productCard}>
-            <Link
-              href={`/goods/${good._id}`}
-              className={css.imageWrapper}
-            >
-              {good.image && (
-                <Image
-                  src={good.image}
-                  alt={good.name}
-                  width={350}
-                  height={350}
-                  className={css.productImage}
-                  loading="eager"
-                />
-              )}
-            </Link>
-
-            <div className={css.productInfo}>
-              <div className={css.productDetails}>
-                <h3 className={css.productName}>
-                  {good.name}
-                </h3>
-
-                <p className={css.price}>
-                  {good.price.value} {good.price.currency}
-                </p>
-              </div>
-
-              <div className={css.rating}>
-                <span>★</span>
-                <span>
-                  {good.feedbacks?.length ?? 0} відгуків
-                </span>
-              </div>
-
-              <Link
-                href={`/goods/${good._id}`}
-                className={css.detailsButton}
-              >
-                Детальніше
-              </Link>
-            </div>
-          </article>
-        ))}
-      </div>
+     {goods && (
+  <ul>
+    {goods.map((good) => (
+      <li key={good._id}>
+        <GoodInfo good={good} />
+      </li>
+    ))}
+  </ul>
+)}
 
       {hasNextPage && (
         <div className={css.loadMoreWrapper}>

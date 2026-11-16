@@ -7,33 +7,14 @@ import type { Feedback, FeedbacksResponse, CreateFeedbackParams } from "@/types/
 import { nextServer } from "./api"
 
 export interface FetchGoodsParams {
-  page: number
-  perPage: number
-  category?: string
-  size?: string[]
-  gender?: string
-  minPrice?: number
-  maxPrice?: number
+  page: number;
+  perPage: number;
+  category?: string;
+  size?: string[];
+  gender?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }
-
-export interface Category {
-  _id: string
-  name: string
-  image?: string
-}
-
-export interface CategoriesHttpResponse {
-  status: number
-  message: string
-  data: {
-    categories: Category[]
-    totalItems: number
-    page: number
-    perPage: number
-    totalPages: number
-  }
-}
-
 
 export const fetchGoods = async (
   params: FetchGoodsParams
