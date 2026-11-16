@@ -3,6 +3,7 @@ import type { FetchGoodsParams } from "./clientApi";
 import type { GoodsHttpResponse, Good } from "@/types/good";
 import { nextServer } from "./api";
 import { CategoriesHttpResponse, CategoriesResponse } from "@/types/category";
+import { FeedbacksResponse } from "@/types/feedback";
 
 export const fetchGoods = async (
   fetchParams: FetchGoodsParams
@@ -41,12 +42,19 @@ export async function fetchCategories(
   return data.data;
 }
 
-export async function fetchFeedbacks() {
+export async function fetchFeedbacks(
+  params: {
+    page?: number;
+    perPage?: number;
+    productId?: string;
+  }={}
+):Promise<FeedbacksResponse> {
   const cookieStore = await cookies();
   const { data } = await nextServer.get("/feedbacks", {
+    params,
     headers: {
       Cookie: cookieStore.toString(),
     },
   });
-  return data;
+  return data.data;
 }

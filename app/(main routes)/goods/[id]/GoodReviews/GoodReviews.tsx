@@ -48,9 +48,6 @@ const GoodReviews = ({ goodId }: GoodReviewsProps) => {
           {reviews.feedbacks.length > 0 ? (
             <ReviewsList
               reviews={reviews.feedbacks}
-              title="Відгуки клієнтів"
-              showButton
-              onLeaveReview={handleAction}
             />
           ) : (
             <MessageNoInfo
