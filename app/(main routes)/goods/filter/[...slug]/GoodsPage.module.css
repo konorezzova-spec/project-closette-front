@@ -3,13 +3,13 @@
   justify-content: flex-start;
   flex-direction: column;
   gap: 32px;
-  padding-top: 64px;
+  padding-top: 24px;
   padding-bottom: 64px;
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
-  color: var(--color-neutral-darkest);
+  color: var(--color-scheme-1-text);
   @media screen and (min-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;
@@ -23,7 +23,6 @@
 }
 
 .title {
-  margin: 0 0 24px;
   font-family: var(--second-family);
   font-weight: 400;
   font-size: 36px;
@@ -49,7 +48,7 @@
     font-family: var(--font-family);
     font-size: 16px;
     line-height: 150%;
-    color: var(--color-neutral-darkest);
+    color: var(--color-scheme-1-text);
     background-color: transparent;
   }
 }
@@ -124,60 +123,4 @@
   height: 15px;
   accent-color: #899c7e;
   cursor: pointer;
-}
-
-.priceFilter {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.priceFilter input {
-  width: 100%;
-  accent-color: #899c7e;
-  cursor: pointer;
-}
-
-.priceValues {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-}
-
-.activeFilter {
-  color: #526b45;
-  font-weight: 700;
-}
-
-.priceInputs {
-  display: flex;
-  gap: 10px;
-}
-
-.priceInputs label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-  font-size: 14px;
-}
-
-.priceInputs input {
-  width: 100%;
-  min-width: 0;
-  padding: 10px;
-  border: 1px solid #d8ded3;
-  border-radius: 6px;
-  outline: none;
-  font: inherit;
-}
-
-.priceInputs input:focus {
-  border-color: #526b45;
-}
-
-.priceError {
-  color: #c0392b;
-  font-size: 12px;
-  margin-top: 8px;
 }

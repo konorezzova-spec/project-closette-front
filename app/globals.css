@@ -88,17 +88,16 @@
   --color-scheme-4-background: var(--color-neutral-darker);
   --color-scheme-4-text: var(--color-deco-lightest);
 
-  --color-scheme-5-text: var(--color-neutral-darkest);
+  --color-scheme-5-text: var(--color-deco-lighter);
   --color-scheme-5-background: var(--color-deco-darker);
 
---color-scheme-6-background:var(--color-deco-dark);
---color-scheme-6-foreground:var(--color-deco-light);
+  --color-scheme-6-background: var(--color-deco-dark);
+  --color-scheme-6-foreground: var(--color-deco-light);
 
-  
   --opacity-neutral-darkest-5: var(--color-neutral-dark);
   --opacity-transparent: var(--color-neutral-light);
-  --opacity-neutral-darkest-50: var(--color-neutral);
-  --opacity-neutral-darkest-15: var( --color-deco-darkest);
+  --opacity-neutral-darkest-50: var(--color-neutral-light);
+  --opacity-neutral-darkest-15: var(--color-neutral);
 }
 
 html,

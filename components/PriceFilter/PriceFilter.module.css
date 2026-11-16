@@ -1,0 +1,45 @@
+.input {
+  width: 264px;
+  height: 4px;
+  border-radius: 5px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+
+  background: linear-gradient(
+    to right,
+    var(--color-neutral-darkest) var(--progress),
+    var(--color-neutral-lightest) var(--progress)
+  );
+
+  /* Chrome, Safari, Edge */
+  &::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--color-scheme-1-border);
+    background: var(--color-white);
+    box-shadow: 0 0 10px 0 var(--opacity-neutral-darkest-10);
+    cursor: pointer;
+  }
+
+  /* Firefox */
+  &::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--color-scheme-1-border);
+    background: var(--color-white);
+    box-shadow: 0 0 10px 0 var(--opacity-neutral-darkest-10);
+    cursor: pointer;
+  }
+
+  &::-moz-range-track {
+    height: 4px;
+    border-radius: 5px;
+    background: transparent;
+  }
+}
