@@ -1,4 +1,3 @@
-
 "use client";
 
 import type { Good } from "@/types/good";
@@ -24,16 +23,15 @@ export default function GoodsInfo({
 
   return (
     <>
-     {goods && (
-  <ul>
-    {goods.map((good) => (
-      <li key={good._id}>
-        <GoodInfo good={good} />
-      </li>
-    ))}
-  </ul>
-)}
-
+      {goods && (
+        <ul className={css.goods_list}>
+          {goods.map(good => (
+            <li key={good._id}>
+              <GoodInfo good={good} />
+            </li>
+          ))}
+        </ul>
+      )}
       {hasNextPage && (
         <div className={css.loadMoreWrapper}>
           <button
@@ -42,9 +40,7 @@ export default function GoodsInfo({
             onClick={fetchNextPage}
             disabled={isFetchingNextPage}
           >
-            {isFetchingNextPage
-              ? "Завантаження..."
-              : "Показати більше"}
+            {isFetchingNextPage ? "Завантаження..." : "Показати більше"}
           </button>
         </div>
       )}

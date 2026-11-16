@@ -1,0 +1,183 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-neutral-darkest);
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .filter_box {
+    width: 243px;
+  }
+}
+
+.title {
+  margin: 0 0 24px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  color: var(--color-scheme-1-text);
+}
+
+.filterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  h2 {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 140%;
+    letter-spacing: -0.01em;
+    color: var(--color-scheme-1-text);
+  }
+  button {
+    font-family: var(--font-family);
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--color-neutral-darkest);
+    background-color: transparent;
+  }
+}
+
+.resultsCount {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--color-scheme-1-text);
+  padding-bottom: 24px;
+}
+
+.filter a {
+  transition: color 0.3 ease;
+  transition: text-decoration 0.3 ease;
+}
+
+.filter a:hover {
+  text-decoration: underline;
+}
+
+.filter a:active {
+  color: var(--color-deco-dark);
+}
+
+.filterSection {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-scheme-1-border);
+}
+
+.filterTitle {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  h3 {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+    color: var(--color-scheme-1-text);
+  }
+  button {
+    background-color: transparent;
+  }
+}
+
+.filterList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+}
+
+.checkboxList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkboxList label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.checkboxList input {
+  width: 15px;
+  height: 15px;
+  accent-color: #899c7e;
+  cursor: pointer;
+}
+
+.priceFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.priceFilter input {
+  width: 100%;
+  accent-color: #899c7e;
+  cursor: pointer;
+}
+
+.priceValues {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.activeFilter {
+  color: #526b45;
+  font-weight: 700;
+}
+
+.priceInputs {
+  display: flex;
+  gap: 10px;
+}
+
+.priceInputs label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  font-size: 14px;
+}
+
+.priceInputs input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #d8ded3;
+  border-radius: 6px;
+  outline: none;
+  font: inherit;
+}
+
+.priceInputs input:focus {
+  border-color: #526b45;
+}
+
+.priceError {
+  color: #c0392b;
+  font-size: 12px;
+  margin-top: 8px;
+}

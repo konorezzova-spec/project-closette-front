@@ -25,9 +25,9 @@
     background-color 250ms ease,
     border 250ms ease;
 
-    svg {
-      fill:var(--color-neutral-darker);
-    }
+  svg {
+    fill: var(--color-neutral-darker);
+  }
 
   &:hover:not(:disabled) {
     border: 1px solid var(--color-deco-darker);
@@ -44,6 +44,7 @@
     cursor: not-allowed;
   }
 }
+
 .btn_left {
   bottom: 0;
   right: 64px;
@@ -56,14 +57,18 @@
 
 @media screen and (min-width: 768px) {
   .btn_left {
-    bottom: 415px;
+    bottom: 385px;
     left: -24px;
   }
 
   .btn_right {
-    bottom: 415px;
+    bottom: 385px;
     right: -24px;
   }
+}
+
+:global(.swiper-wrapper) {
+  padding-bottom: 40px;
 }
 
 :global(.swiper-pagination) {
