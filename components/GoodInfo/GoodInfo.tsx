@@ -16,7 +16,7 @@ export default function GoodInfo({ good, rating }: GoodInfoProps) {
           <Image
             src={
               good.image ||
-              "https://res.cloudinary.com/rvojizer/image/upload/v1793091224/default-avatar.jpg"
+              "https://res.cloudinary.com/rvojizer/image/upload/v1794845540/Placeholder_Image.jpg"
             }
             alt={good.name}
             className={css.image}

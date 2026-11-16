@@ -35,7 +35,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
-  color: var(--color-neutral-darkest);
+  color: var(--color-scheme-4-text);
   transition:
     background-color 250ms ease,
     border 250ms ease;

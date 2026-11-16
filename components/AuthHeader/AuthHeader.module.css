@@ -9,7 +9,7 @@
 
 .logo {
   display: inline-block;
-  color: var(--color-neutral-darkest);
+  color: var(--color-scheme-1-text);
   font-family:
     var(--font-nunito-sans, "Nunito Sans"), var(--font-inter, "Inter"),
     system-ui, sans-serif;
