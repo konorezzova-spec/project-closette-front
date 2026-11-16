@@ -18,20 +18,15 @@ const handleError = (error: unknown) => {
 
 const API_URL = process.env.API_URL;
 
-/**
- * ==========================================
- * Функціонал: Отримання списку замовлень (GET)
- * ==========================================
- */
 export async function GET(request: NextRequest) {
   try {
-    const token = request.cookies.get("token")?.value;
+    const cookieHeader = request.headers.get("cookie") || "";
 
     const backendResponse = await fetch(`${API_URL}/api/orders`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        Cookie: cookieHeader,
       },
     });
 
