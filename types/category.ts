@@ -1,7 +1,7 @@
 export interface Category {
   _id: string;
   name: string;
-  image: string;
+  image?: string;
 }
 
 export interface CategoriesResponse {
@@ -10,4 +10,10 @@ export interface CategoriesResponse {
   page: number;
   perPage: number;
   totalPages: number;
+}
+
+export interface CategoriesHttpResponse {
+  status: number;
+  message: string;
+  data: CategoriesResponse;
 }

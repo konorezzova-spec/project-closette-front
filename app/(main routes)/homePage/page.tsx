@@ -4,11 +4,18 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import PopularGoods from "@/components/PopularGoods/PopularGoods";
-import { fetchCategories, fetchGoods } from "@/lib/api/serverApi";
+import {
+  fetchCategories,
+  fetchGoods,
+  fetchFeedbacks,
+} from "@/lib/api/serverApi";
 import Hero from "@/components/Hero/Hero";
 import Style from "@/components/Style/Style";
 import PopularCategories from "@/components/PopularCategories/PopularCategories";
-import ReviewsList from "@/components/ReviewsList/ReviewsList";
+// import ReviewsList from "@/components/ReviewsList/ReviewsList";
+// import type { Feedback } from "@/types/feedback";
+import LastReviews from "@/components/LastReviews/LastReviews";
+// import Container from "@/components/Container/Container";
 
 export default async function HomePage() {
   const queryClient = new QueryClient();
@@ -32,7 +39,7 @@ export default async function HomePage() {
         <Style />
         <PopularCategories />
         <PopularGoods />
-        <ReviewsList />
+        <LastReviews/>
       </HydrationBoundary>
     </>
   );
