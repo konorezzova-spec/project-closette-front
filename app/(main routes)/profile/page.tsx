@@ -25,7 +25,7 @@ const statusTranslations: Record<string, string> = {
 };
 
 export default function CabinetPage() {
-  const [orders, setOrders] = useState<IOrder[]>([]);
+ const [orders, setOrders] = useState<IOrder[]>([]);
   const [userData, setUserData] = useState<IUserData | undefined>(undefined);
   const [isLoadingOrders, setIsLoadingOrders] = useState<boolean>(true);
   const [isLoadingProfile, setIsLoadingProfile] = useState<boolean>(true);
@@ -134,7 +134,10 @@ export default function CabinetPage() {
                       </div>
 
                       <div className={styles.orderStatus}>
-                        Статус: {statusTranslations[order.status] || order.status}
+                       <span className={styles.orderStatusLabel}>Статус:</span>
+                        <span className={styles.orderStatusValue}>
+                        {statusTranslations[order.status] || order.status}
+                         </span>
                       </div>
                     </li>
                   ))}
