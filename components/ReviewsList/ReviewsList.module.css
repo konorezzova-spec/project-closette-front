@@ -12,6 +12,7 @@
 
 .swiperContainer {
   position: relative;
+  margin-bottom: 64px;
 }
 
 .swiper {
@@ -97,4 +98,11 @@
 .navButton:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+@media screen and (min-width: 1440px) {
+  .swiperContainer {
+    position: relative;
+    margin-bottom: 112px;
+  }
 }
