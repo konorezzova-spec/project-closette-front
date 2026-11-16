@@ -87,12 +87,16 @@ export default function LoginPage() {
           setUser(data.data);
         }
 
-        toast.success("Успішний вхід! Перенаправлення...");
+        toast.success("Успішний вхід! Перенаправлення...", {
+          duration: 1500,
+        });
         setTimeout(() => {
           router.push("/homePage");
-        }, 1000);
+        }, 800);
       } catch (error: unknown) {
-        toast.error((error as { message?: string }).message || "Щось пішло не так");
+        toast.error((error as { message?: string }).message || "Щось пішло не так", {
+          duration: 1500,
+        });
       } finally {
         setIsLoading(false);
       }
