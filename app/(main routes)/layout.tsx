@@ -11,6 +11,7 @@ export default function MainLayout({ children, modal }: Props) {
   return (
     <section className={css.layout_container}>
       <Header />
+      <div className={css.plug}></div>
       <main className={css.main}>
         {children}
       </main>
