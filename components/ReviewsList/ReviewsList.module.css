@@ -6,92 +6,8 @@
   --rl-accent-active: var(--color-deco-darkest);
   --rl-on-accent: var(--color-neutral-darkest);
   --rl-on-active: var(--color-white);
-  --rl-empty-bg: var(--color-scheme-5-background);
 
-  padding-block: 24px 40px;
   color: var(--rl-text);
-}
-
-.headerWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.headerEmpty {
-  align-items: stretch;
-}
-
-.title {
-  font-family: var(--second-family);
-  font-size: 28px;
-  font-weight: 400;
-  line-height: 1.2;
-  color: var(--rl-text);
-}
-
-.reviewButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 156px;
-  height: 36px;
-  padding: 0 16px;
-  border: 1px solid transparent;
-  border-radius: 20px;
-  background-color: var(--rl-accent);
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--rl-on-accent);
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    color 0.3s ease;
-}
-
-.reviewButton:hover,
-.reviewButton:focus-visible {
-  background-color: var(--rl-accent-hover);
-  border-color: var(--rl-border-hover);
-  outline: none;
-}
-
-.reviewButton:active {
-  background-color: var(--rl-accent-active);
-  border-color: var(--rl-accent-active);
-  color: var(--rl-on-active);
-}
-
-.reviewButton:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.emptyContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 12px;
-  width: 100%;
-  padding: 24px 16px;
-  border-radius: 16px;
-  background-color: var(--rl-empty-bg);
-  text-align: center;
-}
-
-.emptyText {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--rl-text);
-}
-
-.emptyButton {
-  align-self: stretch;
 }
 
 .swiperContainer {
@@ -117,6 +33,7 @@
   font-size: 14px;
   line-height: 1.4;
   color: var(--rl-text);
+  overflow-wrap: anywhere;
 }
 
 .author {
@@ -180,43 +97,4 @@
 .navButton:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-}
-
-@media screen and (min-width: 768px) {
-  .reviewsSection {
-    padding-block: 32px 48px;
-  }
-
-  .headerWrapper {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .headerEmpty {
-    align-items: center;
-  }
-
-  .title {
-    font-size: 32px;
-  }
-
-  .emptyContainer {
-    align-items: center;
-    padding: 24px;
-  }
-
-  .emptyButton {
-    align-self: center;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .reviewsSection {
-    padding-block: 48px 80px;
-  }
-
-  .emptyContainer {
-    width: 753px;
-  }
 }
