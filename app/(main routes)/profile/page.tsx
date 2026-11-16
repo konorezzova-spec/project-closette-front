@@ -6,6 +6,7 @@ import { MessageNoInfo } from '@/components/MessageNoInfo/MessageNoInfo';
 import styles from './page.module.css';
 import { UserForm, IUserData } from '@/components/UserForm/UserForm';
 import { nextServer } from '@/lib/api/api';
+import { useAuthStore } from '@/lib/store/authStore';
 
 interface IOrder {
   _id: string;
@@ -20,8 +21,11 @@ export default function CabinetPage() {
   const [userData, setUserData] = useState<IUserData | undefined>(undefined);
   const [isLoadingOrders, setIsLoadingOrders] = useState<boolean>(true);
   const [isLoadingProfile, setIsLoadingProfile] = useState<boolean>(true);
-  const router = useRouter();
+  const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
   
+  const router = useRouter();
+  const clearIsAuthenticated = useAuthStore((state) => state.clearIsAuthenticated);
+
   useEffect(() => {
     async function fetchCabinetData() {
       try {
@@ -47,12 +51,19 @@ export default function CabinetPage() {
   }, []);
 
   const handleLogout = async () => {
+    if (isLoggingOut) return;
+    
+    setIsLoggingOut(true);
     try {
       await nextServer.post('/auth/logout');
       localStorage.removeItem('token');
-      router.push('/login');
+      clearIsAuthenticated(); 
+
+      router.push('/');
+      router.refresh();
     } catch (error) {
       console.error('Помилка виходу з системи:', error);
+      setIsLoggingOut(false);
     }
   };
 
@@ -133,8 +144,12 @@ export default function CabinetPage() {
           </div>
 
           <div className={styles.cabinetButton}>
-            <button onClick={handleLogout} className={styles.logoutButton}>
-              Вийти з кабінету
+            <button 
+              onClick={handleLogout} 
+              className={styles.logoutButton}
+              disabled={isLoggingOut}
+            >
+              {isLoggingOut ? 'Вихід...' : 'Вийти з кабінету'}
             </button>
           </div>
         </div>
