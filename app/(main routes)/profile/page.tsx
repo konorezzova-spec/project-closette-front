@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 import { MessageNoInfo } from '@/components/MessageNoInfo/MessageNoInfo';
 import styles from './page.module.css';
 import { UserForm, IUserData } from '@/components/UserForm/UserForm';
@@ -15,6 +16,13 @@ interface IOrder {
   amount: number;
   status: string;
 }
+
+const statusTranslations: Record<string, string> = {
+  inProcess: 'У процесі',
+  completing: 'Комплектується',
+  done: 'Виконано',
+  canceled: 'Скасовано',
+};
 
 export default function CabinetPage() {
   const [orders, setOrders] = useState<IOrder[]>([]);
@@ -76,16 +84,16 @@ export default function CabinetPage() {
         city: data.city,
         postOffice: Number(data.postOffice),
       });
-      alert('Дані профілю успішно оновлено!');
+      toast.success('Дані профілю успішно оновлено!');
     } catch (error) {
       console.error('Помилка оновлення профілю:', error);
-      alert('Не вдалося оновити дані. Спробуйте пізніше.');
+      toast.error('Не вдалося оновити дані. Спробуйте пізніше.');
     }
   };
   
   return (
     <div className={styles.cabinetPageWrapper}>
-      <main className={styles.cabinetMain}>
+      <section className={styles.cabinetSection}>
         <div className={styles.cabinetContainer}>
           <h1 className={styles.cabinetTitle}>Кабінет</h1>
 
@@ -126,7 +134,7 @@ export default function CabinetPage() {
                       </div>
 
                       <div className={styles.orderStatus}>
-                        Статус: {order.status}
+                        Статус: {statusTranslations[order.status] || order.status}
                       </div>
                     </li>
                   ))}
@@ -153,7 +161,7 @@ export default function CabinetPage() {
             </button>
           </div>
         </div>
-      </main>
+      </section>
     </div>
   );
 }
