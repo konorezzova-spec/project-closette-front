@@ -27,7 +27,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 100%;
+  width: 100%;
+  height: 180px;
 }
 
 .reviewText {
@@ -35,6 +36,7 @@
   line-height: 1.4;
   color: var(--rl-text);
   overflow-wrap: anywhere;
+  flex: 1;
 }
 
 .author {
