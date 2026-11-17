@@ -4,8 +4,8 @@ import type { User } from "@/types/user";
 
 export interface RegisterPayload {
   name: string;
-  email: string;
   tel: string;
+  email: string;
   password: string;
 }
 
@@ -13,8 +13,8 @@ export interface RegisterPayload {
 export interface RegisteredUser {
   _id: string;
   name: string;
-  email: string;
   tel: string;
+  email: string;
 }
 
 export const registerUser = async (payload: RegisterPayload) => {
@@ -74,8 +74,9 @@ export const checkSession = (): Promise<boolean> => {
   return sessionCheck;
 };
 
+// Вхід за номером телефону (формат +380XXXXXXXXX, див. toApiPhone)
 export interface LoginRequest {
-  email: string;
+  tel: string;
   password: string;
 }
 
@@ -88,14 +89,13 @@ export const logout = async (): Promise<void> => {
   await nextServer.post("/auth/logout");
 };
 
+// Проксі: app/api/users/route.ts → бекенд /api/users
 export const getMe = async (): Promise<User> => {
-  const response = await nextServer.get<User>("/users/me");
+  const response = await nextServer.get<User>("/users");
   return response.data;
 };
 
 export const updateMe = async (name: string) => {
-  const response = await nextServer.patch<User>("/users/me", {
-    username: name,
-  });
+  const response = await nextServer.patch<User>("/users", { name });
   return response.data;
 };
