@@ -89,7 +89,7 @@ export default function LoginPage() {
         }
 
         toast.success("Успішний вхід! Перенаправлення...", {
-          duration: 1500,
+          duration: 150,
         });
         setTimeout(() => {
           router.push("/homePage");
@@ -125,7 +125,7 @@ export default function LoginPage() {
                   formik.setFieldValue("tel", formatted);
                 }}
                 onBlur={formik.handleBlur}
-                className={styles.input}
+                className={`${styles.input} ${formik.touched.tel && formik.errors.tel ? styles.inputError : ''}`}
               />
               {formik.touched.tel && formik.errors.tel ? (
                 <span className={styles.error}>{formik.errors.tel}</span>
@@ -144,7 +144,7 @@ export default function LoginPage() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     style={{ width: '100%' }}
-                    className={styles.input}
+                    className={`${styles.input} ${formik.touched.password && formik.errors.password ? styles.inputError : ''}`}
                   />
                   <button
                     type="button"
