@@ -47,7 +47,14 @@ export default function CabinetPage() {
 
       try {
         const profileRes = await nextServer.get('/users');
-        setUserData(profileRes.data.user);
+
+setUserData({
+  name: profileRes.data.user.name || '',
+  surName: profileRes.data.user.surname || '',
+  tel: profileRes.data.user.tel || '',
+  city: profileRes.data.user.city || '',
+  postOffice: String(profileRes.data.user.postOffice || ''),
+});
       } catch (error) {
         console.error('Помилка завантаження профілю:', error);
       } finally {
