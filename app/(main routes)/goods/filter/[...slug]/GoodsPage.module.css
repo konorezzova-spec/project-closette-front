@@ -12,7 +12,6 @@
   color: var(--color-scheme-1-text);
   @media screen and (min-width: 768px) {
     flex-direction: row;
-    /* flex-wrap: wrap; */
   }
 }
 

@@ -131,6 +131,12 @@
   }
 }
 
+.active {
+  text-decoration: underline;
+  text-decoration-color: var(--color-neutral-darkest);
+  text-underline-offset: 4px;
+}
+
 .filter a {
   transition: color 0.3 ease;
   transition: text-decoration 0.3 ease;

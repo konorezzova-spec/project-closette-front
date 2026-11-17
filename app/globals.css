@@ -97,11 +97,12 @@
   --color-scheme-6-background: var(--color-deco-dark);
   --color-scheme-6-foreground: var(--color-deco-light);
 
-  --opacity-neutral-darkest-5: var(--color-neutral-dark);
   --opacity-transparent: var(--color-neutral-light);
-  --opacity-neutral-darkest-50: var(--color-neutral-light);
-  --opacity-neutral-darkest-15: var(--color-neutral);
 
+  --opacity-neutral-darkest-5: var(--color-neutral-dark);
+  --opacity-neutral-darkest-15: var(--color-neutral);
+  --opacity-neutral-darkest-20: var(--opacity-white-20);
+  --opacity-neutral-darkest-50: var(--color-neutral-light);
   --opacity-neutral-darkest-60: var(--opacity-white-60);
 }
 
