@@ -19,6 +19,11 @@ export const fetchGoods = async (
   return data;
 };
 
+export const fetchPopularGoods = async (): Promise<GoodsHttpResponse> => {
+  const { data } = await nextServer.get<GoodsHttpResponse>("/popular");
+  return data;
+};
+
 export async function fetchGoodById(id: string): Promise<Good> {
   const cookieStore = await cookies();
   const response = await nextServer.get<Good>(`/goods/${id}`, {
@@ -47,8 +52,8 @@ export async function fetchFeedbacks(
     page?: number;
     perPage?: number;
     productId?: string;
-  }={}
-):Promise<FeedbacksResponse> {
+  } = {}
+): Promise<FeedbacksResponse> {
   const cookieStore = await cookies();
   const { data } = await nextServer.get("/feedbacks", {
     params,

@@ -143,13 +143,32 @@
 }
 
 .nav_link {
-  border-bottom: 1px solid transparent;
-  transition: border-bottom 0.3s ease;
+  /* border-bottom: 1px solid transparent;
+  transition: border-bottom 0.3s ease; */
+
+  position: relative;
 }
 
-.nav_link:hover,
-.nav_link:focus {
-  border-bottom: 1px solid var(--color-scheme-5-text);
+.nav_link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-scheme-5-text);
+  transition: width 0.3s ease;
+}
+
+/* Активна сторінка */
+.nav_link.active::after {
+  width: 100%;
+}
+
+/* Hover та focus */
+.nav_link:hover::after,
+.nav_link:focus-visible::after {
+  width: 100%;
 }
 
 .nav_link:active {

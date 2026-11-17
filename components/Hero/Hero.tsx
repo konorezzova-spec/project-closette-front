@@ -30,12 +30,11 @@ export default function Hero() {
         </div>
         <div className={css["hero__right-img"]}>
           <Image
-            src="/hero.webp"
+            src="/hero_mob.webp"
             alt="image mask group"
-            // fill
-            width={335}
-            height={335}
+            fill
             priority
+            sizes="(max-width: 767px) 335px, (max-width: 1439px) 50vw, 50vw"
             className={css.hero__image}
           />
         </div>

@@ -140,7 +140,7 @@
   font-size: 16px;
 
   line-height: 1.5;
-  color: var(--opacity-neutral-darkest-60);
+  color: var(--opacity-neutral-darkest-40);
 }
 
 .error_text {
@@ -214,9 +214,6 @@
 .social_list {
   display: flex;
   gap: 12px;
-}
-
-.social_item {
 }
 
 .social_link {

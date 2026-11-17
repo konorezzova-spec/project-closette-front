@@ -75,7 +75,7 @@ export default function GoodsPageClient({
 
   // Очищення всіх фільтрів
   const clearAllFilters = () => {
-    router.replace(pathname, { scroll: false });
+    router.replace("/goods/filter/all", { scroll: false });
   };
 
   // Параметри фільтрації
