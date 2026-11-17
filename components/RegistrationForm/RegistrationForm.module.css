@@ -20,7 +20,8 @@
 }
 
 .button:focus-visible {
-  outline: 2px solid var(—color-focus, #8cb860);
+  /* outline: 2px solid var(--color-focus, #8cb860); */
+  outline: 2px solid var(--color-deco-dark);
   outline-offset: 2px;
 }
 
