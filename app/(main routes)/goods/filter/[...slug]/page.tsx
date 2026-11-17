@@ -1,5 +1,8 @@
-
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 
 import { fetchCategories, fetchGoods } from "@/lib/api/serverApi";
 import GoodsPageClient from "./GoodsPage.client";
@@ -23,8 +26,7 @@ export default async function GoodPage({
   const { slug } = await params;
   const search = await searchParams;
 
-  const category =
-    slug[0] === "all" ? undefined : slug[0];
+  const category = slug[0] === "all" ? undefined : slug[0];
 
   const size = search.size
     ? Array.isArray(search.size)
@@ -34,18 +36,18 @@ export default async function GoodPage({
 
   const gender = search.gender || undefined;
 
-const parsedMaxPrice = Number(search.maxPrice);
+  const parsedMaxPrice = Number(search.maxPrice);
 
-const maxPrice =
-  search.maxPrice &&
-  Number.isFinite(parsedMaxPrice) &&
-  parsedMaxPrice >= 0 &&
-  parsedMaxPrice <= 10000
-    ? parsedMaxPrice
-    : undefined;
+  const maxPrice =
+    search.maxPrice &&
+    Number.isFinite(parsedMaxPrice) &&
+    parsedMaxPrice >= 0 &&
+    parsedMaxPrice <= 10000
+      ? parsedMaxPrice
+      : undefined;
 
   const categoriesRow = await fetchCategories(1, 20);
-const categories = categoriesRow.categories ?? [];
+  const categories = categoriesRow.categories ?? [];
 
   const queryClient = new QueryClient();
 
@@ -69,10 +71,7 @@ const categories = categoriesRow.categories ?? [];
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <GoodsPageClient
-        categories={categories}
-        initialFilters={filters}
-      />
+      <GoodsPageClient categories={categories} initialFilters={filters} />
     </HydrationBoundary>
   );
 }

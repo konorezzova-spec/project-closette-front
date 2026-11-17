@@ -4,6 +4,7 @@ import PriceFilter from "../PriceFilter/PriceFilter";
 import { Good } from "@/types/good";
 import { Category } from "@/types/category";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 interface GoodsFilterProps {
   goods: Good[];
@@ -32,6 +33,10 @@ export default function GoodsFilter({
 }: GoodsFilterProps) {
   //Ховаю фільтр
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+
+  //Для активнрї категорії
+  const pathname = usePathname();
+
   return (
     <>
       <div className={css.filter}>
@@ -74,11 +79,23 @@ export default function GoodsFilter({
             <div className={css.filter}>
               {/* Категорії */}
               <div className={css.filterSection}>
-                <Link href="/goods/filter/all">Усі</Link>
+                <Link
+                  href="/goods/filter/all"
+                  className={pathname === "/goods/filter/all" ? css.active : ""}
+                >
+                  Усі
+                </Link>
                 <ul className={css.filterList}>
                   {categories?.map(category => (
                     <li key={category._id}>
-                      <Link href={`/goods/filter/${category._id}`}>
+                      <Link
+                        href={`/goods/filter/${category._id}`}
+                        className={
+                          pathname === `/goods/filter/${category._id}`
+                            ? css.active
+                            : ""
+                        }
+                      >
                         {category.name}
                       </Link>
                     </li>
@@ -157,11 +174,23 @@ export default function GoodsFilter({
           <div className={css.filter}>
             {/* Категорії */}
             <div className={css.filterSection}>
-              <Link href="/goods/filter/all">Усі</Link>
+              <Link
+                href="/goods/filter/all"
+                className={pathname === "/goods/filter/all" ? css.active : ""}
+              >
+                Усі
+              </Link>
               <ul className={css.filterList}>
                 {categories?.map(category => (
                   <li key={category._id}>
-                    <Link href={`/goods/filter/${category._id}`}>
+                    <Link
+                      href={`/goods/filter/${category._id}`}
+                      className={
+                        pathname === `/goods/filter/${category._id}`
+                          ? css.active
+                          : ""
+                      }
+                    >
                       {category.name}
                     </Link>
                   </li>

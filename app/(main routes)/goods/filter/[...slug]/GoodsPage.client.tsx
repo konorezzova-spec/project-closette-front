@@ -8,8 +8,6 @@ import type { Good } from "@/types/good";
 import type { Category } from "@/types/category";
 import GoodsInfo from "@/components/GoodsInfo/GoodsInfo";
 import Container from "@/components/Container/Container";
-// import Link from "next/link";
-// import PriceFilter from "@/components/PriceFilter/PriceFilter";
 import { GoodsFilters } from "@/types/filters";
 import GoodsFilter from "@/components/GoodsFilter/GoodsFilter";
 
@@ -88,6 +86,12 @@ export default function GoodsPageClient({
     maxPrice: maxPriceFromUrl < 10000 ? maxPriceFromUrl : undefined,
   };
 
+  const currentCategory = categories.find(
+    category => pathname === `/goods/filter/${category._id}`
+  );
+
+  const categoryTitle = currentCategory?.name ?? "Усі товари";
+
   // Завантаження товарів
   const {
     data,
@@ -122,7 +126,7 @@ export default function GoodsPageClient({
 
   return (
     <Container className={css.section}>
-      <h1 className={css.title}>Всі товари</h1>
+      <h1 className={css.title}>{categoryTitle}</h1>
       <div className={css.container}>
         <GoodsFilter
           clearAllFilters={clearAllFilters}
