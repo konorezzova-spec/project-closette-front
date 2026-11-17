@@ -32,7 +32,7 @@
 
   --color-scheme-3-accent: var(--color-neutral-darkest);
   --color-scheme-3-background: var(--color-white);
-  --color-scheme-3-border: var(--opacity-neutral-darkest-15);
+  --color-scheme-3-border: var(--opacity-neutral-darkest-5);
   --color-scheme-3-foreground: var(--color-neutral-lightest);
   --color-scheme-3-text: var(--color-neutral-darkest);
 
@@ -84,6 +84,9 @@
 
   --color-scheme-1-background: var(--color-neutral-darker);
   --color-scheme-1-text: var(--color-neutral-lightest);
+
+  --color-scheme-3-foreground: var(--color-neutral);
+  --color-scheme-3-border: var(--color-deco-dark);
 
   --color-scheme-4-background: var(--color-neutral-darker);
   --color-scheme-4-text: var(--color-deco-lightest);
