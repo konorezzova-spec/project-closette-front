@@ -1,7 +1,12 @@
 
 import { redirect } from "next/navigation";
 
-export default function GoodsPage(){
-  redirect("/goods/filter/all");
-  return null;
+interface GoodsPageProps{
+  searchParams: Promise<{ category?: string }>;
+}
+
+export default async function GoodsPage({ searchParams }: GoodsPageProps) {
+  const { category } = await searchParams;
+  redirect(`/goods/filter/${category || "all"}`);
+  // return null;
 }
