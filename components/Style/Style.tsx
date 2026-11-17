@@ -1,5 +1,6 @@
 import css from "./Style.module.css";
 import Container from "../Container/Container";
+import Image from "next/image";
 
 const benefits = [
   {
@@ -32,7 +33,7 @@ export default function Style() {
       <ul className={css.list}>
         {benefits.map(benefit => (
           <li key={benefit.id} className={css.item}>
-            <img
+            <Image
               className={css.image}
               src={benefit.image}
               alt=""

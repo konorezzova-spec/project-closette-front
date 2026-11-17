@@ -6,14 +6,14 @@ import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { Good } from "@/types/good";
 import css from "./PopularGoods.module.css";
-import { fetchGoods } from "@/lib/api/clientApi";
+import { fetchPopularGoods } from "@/lib/api/clientApi";
 import Link from "next/link";
 import GoodsLists from "../GoodsLists/GoodsLists";
 
 export default function PopularGoods() {
   const { data, error, isLoading, isError } = useQuery({
-    queryKey: ["PopularGoods", { page: 1, perPage: 12 }],
-    queryFn: () => fetchGoods({ page: 1, perPage: 12 }),
+    queryKey: ["PopularGoods"],
+    queryFn: () => fetchPopularGoods(),
     retry: 1,
     placeholderData: keepPreviousData,
   });

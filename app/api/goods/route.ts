@@ -1,15 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { api } from "../api";
-import { cookies } from "next/headers";
 import { isAxiosError } from "axios";
 import { logErrorResponse } from "../_utils/utils";
 
 export async function GET(request: NextRequest) {
   try {
-    const cookieStore = await cookies();
-
     const page = Number(request.nextUrl.searchParams.get("page") ?? 1);
-    const perPage = Number(request.nextUrl.searchParams.get("perPage") ?? 12);
+    const perPage = Number(request.nextUrl.searchParams.get("perPate") ?? 12);
     const rawTag = request.nextUrl.searchParams.get("category") ?? "";
     const category = rawTag === "All" ? "" : rawTag;
 
@@ -27,10 +24,6 @@ export async function GET(request: NextRequest) {
         ...(gender && { gender }),
       },
       paramsSerializer: { indexes: null },
-
-      headers: {
-        Cookie: cookieStore.toString(),
-      },
     });
 
     return NextResponse.json(res.data, { status: res.status });

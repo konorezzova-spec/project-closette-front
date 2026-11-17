@@ -1,10 +1,18 @@
+import type { Good, GoodsHttpResponse } from "@/types/good";
+import type { CategoriesResponse } from "@/types/category";
+import type {
+  CreateOrderParams,
+  Order,
+  OrderStatus,
+  AdminOrdersResponse,
+} from "@/types/order";
+import type {
+  Feedback,
+  FeedbacksResponse,
+  CreateFeedbackParams,
+} from "@/types/feedback";
 
-import type { Good, GoodsHttpResponse } from "@/types/good"
-import type { CategoriesResponse } from "@/types/category"
-import type { CreateOrderParams, Order, OrderStatus, AdminOrdersResponse } from "@/types/order"
-import type { Feedback, FeedbacksResponse, CreateFeedbackParams } from "@/types/feedback";
-
-import { nextServer } from "./api"
+import { nextServer } from "./api";
 
 export interface FetchGoodsParams {
   page: number;
@@ -19,34 +27,38 @@ export interface FetchGoodsParams {
 export const fetchGoods = async (
   params: FetchGoodsParams
 ): Promise<GoodsHttpResponse> => {
-  const { data } = await nextServer.get<GoodsHttpResponse>('/goods', {
+  const { data } = await nextServer.get<GoodsHttpResponse>("/goods", {
     params,
-        paramsSerializer: {
-      serialize: (params) => {
-        const searchParams = new URLSearchParams()
+    paramsSerializer: {
+      serialize: params => {
+        const searchParams = new URLSearchParams();
 
         Object.entries(params).forEach(([key, value]) => {
           if (Array.isArray(value)) {
-            value.forEach((item) => {
-              searchParams.append(key, String(item))
-            })
+            value.forEach(item => {
+              searchParams.append(key, String(item));
+            });
           } else if (value !== undefined && value !== null) {
-            searchParams.append(key, String(value))
+            searchParams.append(key, String(value));
           }
-        })
+        });
 
-        return searchParams.toString()
+        return searchParams.toString();
       },
     },
-  })
+  });
 
-  return data
-}
+  return data;
+};
 
+export const fetchPopularGoods = async (): Promise<GoodsHttpResponse> => {
+  const { data } = await nextServer.get<GoodsHttpResponse>("/popular");
+  return data;
+};
 
 export async function fetchGoodById(id: string): Promise<Good> {
-  const response = await nextServer.get<Good>(`/goods/${id}`)
-  return response.data
+  const response = await nextServer.get<Good>(`/goods/${id}`);
+  return response.data;
 }
 
 export async function fetchCategories(
@@ -55,17 +67,17 @@ export async function fetchCategories(
 ): Promise<CategoriesResponse> {
   const { data } = await nextServer.get("/categories", {
     params: { page, perPage },
-  })
+  });
 
-  return data.data
+  return data.data;
 }
 
 export const createOrder = async (
   params: CreateOrderParams
 ): Promise<Order> => {
-  const response = await nextServer.post<Order>("/orders", params)
-  return response.data
-}
+  const response = await nextServer.post<Order>("/orders", params);
+  return response.data;
+};
 
 export const fetchFeedbacks = async (
   productId: string,
@@ -75,9 +87,9 @@ export const fetchFeedbacks = async (
   const { data } = await nextServer.get<{ data: FeedbacksResponse }>(
     "/feedbacks",
     { params: { productId, page, perPage } }
-  )
-  return data.data
-}
+  );
+  return data.data;
+};
 
 export const createFeedback = async (
   params: CreateFeedbackParams
@@ -85,10 +97,9 @@ export const createFeedback = async (
   const { data } = await nextServer.post<{ data: Feedback }>(
     "/feedbacks",
     params
-  )
-  return data.data
-}
-
+  );
+  return data.data;
+};
 
 export interface FetchAllOrdersParams {
   page?: number;
@@ -102,9 +113,9 @@ export const fetchAllOrders = async (
   const { data } = await nextServer.get<{ data: AdminOrdersResponse }>(
     "/orders/admin",
     { params }
-  )
-  return data.data
-}
+  );
+  return data.data;
+};
 
 export const updateOrderStatus = async (
   orderId: string,
@@ -112,6 +123,6 @@ export const updateOrderStatus = async (
 ): Promise<Order> => {
   const { data } = await nextServer.patch<Order>(`/orders/${orderId}`, {
     status,
-  })
-  return data
-}
+  });
+  return data;
+};

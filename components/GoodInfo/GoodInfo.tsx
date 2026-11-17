@@ -5,10 +5,9 @@ import { Good } from "@/types/good";
 
 interface GoodInfoProps {
   good: Good;
-  rating?: number;
 }
 
-export default function GoodInfo({ good, rating }: GoodInfoProps) {
+export default function GoodInfo({ good }: GoodInfoProps) {
   return (
     <>
       <div className={css.goods_info}>
@@ -38,7 +37,7 @@ export default function GoodInfo({ good, rating }: GoodInfoProps) {
                   <use href="/icons/sprite.svg#star-filled" />
                 </svg>
 
-                <p>{rating ?? 5}</p>
+                <p>{good.rating ?? 5}</p>
 
                 <svg
                   className={css.comment}

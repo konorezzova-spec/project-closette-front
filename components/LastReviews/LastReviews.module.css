@@ -4,6 +4,7 @@
 
 .title {
   margin-bottom: 32px;
+  margin-top: 64px;
   font-family: var(--second-family);
   font-size: 32px;
   font-weight: 400;

@@ -12,6 +12,7 @@ import AuthNavigation from "../AuthNavigation/AuthNavigation";
 import { useBasketStore } from "@/lib/store/basketStore";
 import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,6 +87,8 @@ export default function Header() {
 
   const totalQuantity = useBasketStore(state => state.items.length);
 
+  const pathname = usePathname();
+
   return (
     <header
       className={`${css.header} ${
@@ -95,7 +98,7 @@ export default function Header() {
       <Container className={`${css.header_container}`}>
         <Link
           className={`${css.link} ${css.logo_link}`}
-          href="/"
+          href="/homePage"
           aria-label="Home"
           onClick={closeMenu}
         >
@@ -105,12 +108,20 @@ export default function Header() {
         <nav className={css.desktop_menu}>
           <ul className={css.nav}>
             <li className={css.nav_item}>
-              <Link href="/" prefetch={false} className={css.nav_link}>
+              <Link
+                href="/homePage"
+                prefetch={false}
+                className={`${css.nav_link} ${pathname === "/homePage" ? css.active : ""}`}
+              >
                 Головна
               </Link>
             </li>
             <li className={css.nav_item}>
-              <Link href="/goods" prefetch={false} className={css.nav_link}>
+              <Link
+                href="/goods"
+                prefetch={false}
+                className={`${css.nav_link} ${pathname.startsWith("/goods") ? css.active : ""}`}
+              >
                 Товари
               </Link>
             </li>
@@ -118,7 +129,7 @@ export default function Header() {
               <Link
                 href="/categories"
                 prefetch={false}
-                className={css.nav_link}
+                className={`${css.nav_link} ${pathname === "/categories" ? css.active : ""}`}
               >
                 Категорії
               </Link>
