@@ -9,28 +9,31 @@
 .list li:not(:last-child)::after {
   content: ">";
   margin-left: 8px;
-  color: var(--color-neutral);
+  color: var(--color-scheme-5-text);
 }
 
-/* .list li:last-child {
-  color: var(--color-neutral-darkest);
-} */
 .currentPage {
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: 0;
-  color: var(--color-neutral-darkest);
+  color: var(--color-scheme-5-text);
 }
 
 .list a {
   font-family: var(--font-family);
   font-weight: 400;
-  color: var(--color-neutral);
+  color: var(--color-scheme-5-text);
   transition: color 250ms ease;
 }
 
-.list a:hover {
-  color: var(--color-neutral-darkest);
+.list a:hover,
+.list a:focus {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.list a:active {
+  color: var(--color-deco-dark);
 }
