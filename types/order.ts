@@ -1,3 +1,4 @@
+import { inter } from "@/app/fonts";
 import type { Size } from "./good";
 
 export interface OrderItem{
@@ -30,8 +31,25 @@ export type OrderStatus = "inProcess" | "completing" | "done" | "canceled";
 
 export interface Order extends CreateOrderParams {
   _id: string;
-  orderNumber: OrderStatus;
+  orderNumber: number;
+  status: OrderStatus
   userId: string | null;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface AdminOrder extends Omit<Order, "goodsOrderList">{
+  goodsOrderList: {
+    goodId: { _id: string; name: string } | null;
+    size: Size;
+    quantity: number;
+  }[];
+}
+
+export interface AdminOrdersResponse {
+  orders: AdminOrder[];
+  page: number;
+  perPage: number;
+  totalItems: number;
+  totalPages: number;
 }
