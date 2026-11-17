@@ -89,7 +89,7 @@ export default function LoginPage() {
         }
 
         toast.success("Успішний вхід! Перенаправлення...", {
-          duration: 1500,
+          duration: 150,
         });
         setTimeout(() => {
           router.push("/homePage");

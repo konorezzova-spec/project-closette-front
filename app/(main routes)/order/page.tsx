@@ -6,14 +6,17 @@ import { UserForm, IUserData } from "@/components/UserForm/UserForm";
 import css from "./CreateOrder.module.css";
 import { useRouter } from "next/navigation";
 import { useBasketStore } from "@/lib/store/basketStore";
+import { useAuthStore } from "@/lib/store/authStore";
 import type { CreateOrderParams } from "@/types/order";
 import { createOrder } from "@/lib/api/clientApi";
 import { isAxiosError } from "axios";
+import toast from "react-hot-toast";
 
 export default function OrderPage() {
   const router = useRouter();
   const items = useBasketStore(state => state.items);
   const clearBasket = useBasketStore(state => state.clearBasket);
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
   // const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (data: IUserData) => {
@@ -47,12 +50,18 @@ export default function OrderPage() {
     try {
       await createOrder(orderData);
       clearBasket();
-      router.push("/")
+      // router.push("/")
+      if (isAuthenticated) {
+        router.push("/profile");
+      } else {
+        toast.success("Ваше замовлення створено. Очікуйте на зворотний зв'язок");
+      }
     } catch (error) {
       const message = isAxiosError(error)
         ? error.response?.data?.error ?? error.message
         : "Щось пішло не так";
       console.error("Щось пішло не так", message);
+      toast.error("Помилка збереження замовлення");
     }
     // finally {
     //   setIsSubmitting(false);

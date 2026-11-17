@@ -47,7 +47,11 @@ const validationSchema = Yup.object({
     .matches(phoneRegExp, "Введіть коректний український номер (+380...)")
     .required("Введіть номер телефону"),
   city: Yup.string()
-    .required("Введіть місто"),
+  .matches(
+    /^[А-Яа-яІіЇїЄєҐґ\s'’ʼ-]+$/,
+    'Використовуйте тільки українські літери'
+  )
+  .required('Введіть місто'),
   postOffice: Yup.string()
     .required("Введіть номер відділення"),
   comment: Yup.string(),
@@ -211,7 +215,12 @@ export const UserForm = ({
             id="city"
             name="city"
             value={formik.values.city}
-            onChange={formik.handleChange}
+            onChange={(e) => {
+  formik.setFieldValue(
+    'city',
+    filterUkrainianName(e.target.value)
+  );
+}}
             onBlur={formik.handleBlur}
             placeholder="Ваше місто"
             disabled={isSubmitting}

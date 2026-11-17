@@ -1,0 +1,110 @@
+.section {
+  padding-block: 40px 64px;
+}
+
+.title {
+  margin-bottom: 24px;
+  font-family: var(--second-family);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--color-scheme-1-text);
+}
+
+.error {
+  color: var(--color-error, #c0392b);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: var(--color-scheme-1-text);
+}
+
+.table th,
+.table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  /* var(--color-scheme-1-border, #ddd); */
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.goodsList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statusSelect {
+  padding: 6px 8px;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: 8px;
+  background-color: var(--color-scheme-1-background);
+  font: inherit;
+  color: var(--color-scheme-1-text);
+  cursor: pointer;
+}
+
+.statusSelect option {
+  background-color: var(--color-scheme-1-background);
+  color: var(--color-scheme-1-text);
+}
+
+.statusSelect:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.filterLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.pageButton {
+  padding: 8px 16px;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: 20px;
+  background-color: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.pageButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  transition: opacity 0.2s ease;
+}

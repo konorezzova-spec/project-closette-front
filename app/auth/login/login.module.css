@@ -1,232 +1,232 @@
 /* mobile first */
 
 .page {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 480px;
-    margin: -8px auto 0;
-    padding: 0 16px 72px;
-    color: var(--color-scheme-1-text);
-    font:
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 480px;
+  margin: -8px auto 0;
+  padding: 0 16px 72px;
+  color: var(--color-scheme-1-text);
+  font:
     400 16px/24px var(--font-inter, "Inter"),
     system-ui,
     sans-serif;
 }
 
 .card {
-    margin-top: 79px;
-    box-sizing: border-box;
-    min-height: 662px;
+  margin-top: 79px;
+  box-sizing: border-box;
+  min-height: 662px;
 }
 
 .title {
-    margin: 34px 0 32px;
-    text-align: center;
-    justify-content: center;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 40px;
-    font-family:
-        var(--second-family),
+  margin: 34px 0 32px;
+  text-align: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 40px;
+  font-family: var(--second-family);
 }
 
 .btn {
-    margin-top: 14px;
-    display: block;
-    width: 100%;
-    height: 38px;
-    border: 0;
-    border-radius: 999px;
-    background-color: var(--color-accent, #c5e1a5);
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.btn:active {
-    background-color: var(--color-deco-darkest);
-    border: 1px solid var(--color-deco);
-    color: var(--color-white);
+  margin-top: 14px;
+  display: block;
+  width: 100%;
+  height: 38px;
+  border-radius: 999px;
+  font: inherit;
+  color: var(--color-neutral-darkest);
+  border: 1px solid var(--color-scheme-6-background);
+  background-color: var(--color-scheme-6-background);
+  transition: background-color 0.3s ease;
+  transition: border 0.3s ease;
 }
 
 .btn:hover:not(:disabled) {
-    background-color: var(--color-accent-hover, #b5d48f);
+  border: 1px solid var(--color-deco-darker);
+  background-color: var(--color-scheme-6-foreground);
+}
+
+.btn:active {
+  border: 1px solid var(--color-scheme-6-background);
+  background-color: var(--color-deco-darkest);
+  color: var(--color-scheme-2-text);
 }
 
 .btn:focus-visible {
-    outline: 2px solid var(--color-focus, #8cb860);
-    outline-offset: 2px;
+  outline: 2px solid var(--color-focus, #8cb860);
+  outline-offset: 2px;
 }
 
 .btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 @media (min-width: 375px) {
-    .page {
-        padding-inline: 20px;
-    }
+  .page {
+    padding-inline: 20px;
+  }
 
-    .title {
-        font-size: 30px;
-        line-height: 40px;
-    }
+  .title {
+    font-size: 30px;
+    line-height: 40px;
+  }
 
-    .card {
-        margin-top: 79px;
-    }
+  .card {
+    margin-top: 79px;
+  }
 }
 
 .phoneLabel {
-    display: block;
-    margin-bottom: 24px;
+  display: block;
+  margin-bottom: 24px;
 }
 
 .passwordLabel {
-    display: block;
-    margin-bottom: 12px;
+  display: block;
+  margin-bottom: 12px;
 }
 
 .field {
-    display: block;
+  display: block;
 }
 
 .input {
-    margin-top: 8px;
-    display: block;
-    width: 100%;
-    height: 48px;
-    padding: 0 8px;
-    border: 1px solid var(--color-border, #d4d6d1);
-    border-radius: 16px;
-    background: transparent;
-    color: inherit;
-    font: inherit;
-    transition: border-color 0.2s;
+  margin-top: 8px;
+  display: block;
+  width: 100%;
+  height: 48px;
+  padding: 0 8px;
+  border: 1px solid var(--color-border, #d4d6d1);
+  border-radius: 16px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  transition: border-color 0.2s;
 }
 
 .input::placeholder {
-    color: var(--color-placeholder, #646562);
-    opacity: 1;
+  color: var(--color-placeholder, #646562);
+  opacity: 1;
 }
 
 .input:hover {
-    border-color: var(--color-tab-line, #a0a29e);
+  border-color: var(--color-tab-line, #a0a29e);
 }
 
 .input:focus-visible {
-    outline: 2px solid var(--color-focus, #8cb860);
-    outline-offset: 2px;
+  outline: 2px solid var(--color-focus, #8cb860);
+  outline-offset: 2px;
 }
 
 .inputError {
-    border-color: var(--color-error, #b3261e);
+  border-color: var(--color-error, #b3261e);
 }
 
 .error {
-    margin: 4px 0 0;
-    color: var(--color-error, #b3261e);
-    font-size: 14px;
-    line-height: 20px;
+  margin: 4px 0 0;
+  color: var(--color-error, #b3261e);
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .forgotPassword {
-    font:
-            400 16px/24px var(--font-inter, "Inter"),
-            system-ui,
-            sans-serif;
-    color: var(--color-text, #000);
-    font-weight: 450;
-    font-size: 15px;
-    line-height: 24px;
+  font:
+    400 16px/24px var(--font-inter, "Inter"),
+    system-ui,
+    sans-serif;
+  color: var(--color-scheme-1-text);
+  font-weight: 450;
+  font-size: 15px;
+  line-height: 24px;
 }
 
 .forgotPassword:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .forgotPassword:active {
-    color: var(--color-deco-dark, #9db484);
+  color: var(--color-deco-dark, #9db484);
 }
 
 .forgotPassword:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .div {
-    position: relative;
+  position: relative;
 }
 
 .toggle {
-    position: absolute;
-    top: 50%;
-    right: 8px;
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border: 0;
-    border-radius: 8px;
-    background: transparent;
-    color: var(--color-placeholder, #646562);
-    cursor: pointer;
-    transform: translateY(-40%);
-    transition: color 0.2s;
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-placeholder, #646562);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: color 0.2s;
 }
 
 .toggle:hover {
-    color: var(--color-text, #000);
+  color: var(--color-text, #000);
 }
 
 .toggle:focus-visible {
-    outline: 2px solid var(--color-focus, #8cb860);
-    outline-offset: 0;
+  outline: 2px solid var(--color-focus, #8cb860);
+  outline-offset: 0;
 }
 
 .btnTest {
-    font-family: var(--font-family);
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 1.5;
-        color: var(--color-neutral-darkest);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-neutral-darkest);
 }
 
 /* tablet styles */
 
 @media (min-width: 768px) {
-    .page {
-        min-height: calc(100vh - 80px);
-        margin-top: 0;
-        padding: clamp(32px, 12.8vh, 113px) 0 72px;
-        display: flex;
-        flex-direction: column;
-    }
+  .page {
+    min-height: calc(100vh - 80px);
+    margin-top: 0;
+    padding: clamp(32px, 12.8vh, 113px) 0 72px;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .title {
-        margin: 30px 0 32px;
-        font-size: 34px;
-        line-height: 44px;
-    }
+  .title {
+    margin: 30px 0 32px;
+    font-size: 34px;
+    line-height: 44px;
+  }
 
-    .card {
-        min-height: 0;
-        padding-top: 0;
-        margin-top: 75px;
-    }
+  .card {
+    min-height: 0;
+    padding-top: 0;
+    margin-top: 75px;
+  }
 }
 
 /* laptop styles */
 
 @media (min-width: 1440px) {
-    .page {
-        padding: clamp(64px, 12.8vh, 113px) 0 0;
-    }
+  .page {
+    padding: clamp(64px, 12.8vh, 113px) 0 0;
+  }
 
-    .card {
-        margin-top: 67px;
-    }
+  .card {
+    margin-top: 67px;
+  }
 }

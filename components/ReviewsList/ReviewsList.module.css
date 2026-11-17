@@ -12,6 +12,7 @@
 
 .swiperContainer {
   position: relative;
+  margin-bottom: 64px;
 }
 
 .swiper {
@@ -26,7 +27,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 100%;
+  width: 100%;
+  height: 180px;
 }
 
 .reviewText {
@@ -34,6 +36,7 @@
   line-height: 1.4;
   color: var(--rl-text);
   overflow-wrap: anywhere;
+  flex: 1;
 }
 
 .author {
@@ -68,8 +71,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border: 1px solid transparent;
   border-radius: 50%;
   background-color: var(--rl-accent);
@@ -97,4 +100,11 @@
 .navButton:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+@media screen and (min-width: 1440px) {
+  .swiperContainer {
+    position: relative;
+    margin-bottom: 112px;
+  }
 }

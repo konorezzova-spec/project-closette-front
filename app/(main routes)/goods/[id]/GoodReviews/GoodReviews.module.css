@@ -1,3 +1,13 @@
+.container {
+  padding: 64px 0;
+}
+
+@media only screen and (min-width: 1440px) {
+  .container {
+    padding: 112px 0;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: column;
