@@ -1,39 +1,20 @@
 
 import type { Good, GoodsHttpResponse } from "@/types/good"
 import type { CategoriesResponse } from "@/types/category"
-import type { CreateOrderParams, Order } from "@/types/order"
+import type { CreateOrderParams, Order, OrderStatus, AdminOrdersResponse } from "@/types/order"
 import type { Feedback, FeedbacksResponse, CreateFeedbackParams } from "@/types/feedback";
 
 import { nextServer } from "./api"
 
 export interface FetchGoodsParams {
-  page: number
-  perPage: number
-  category?: string
-  size?: string[]
-  gender?: string
-  minPrice?: number
-  maxPrice?: number
+  page: number;
+  perPage: number;
+  category?: string;
+  size?: string[];
+  gender?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }
-
-export interface Category {
-  _id: string
-  name: string
-  image?: string
-}
-
-export interface CategoriesHttpResponse {
-  status: number
-  message: string
-  data: {
-    categories: Category[]
-    totalItems: number
-    page: number
-    perPage: number
-    totalPages: number
-  }
-}
-
 
 export const fetchGoods = async (
   params: FetchGoodsParams
@@ -106,4 +87,31 @@ export const createFeedback = async (
     params
   )
   return data.data
+}
+
+
+export interface FetchAllOrdersParams {
+  page?: number;
+  perPage?: number;
+  status?: OrderStatus;
+}
+
+export const fetchAllOrders = async (
+  params: FetchAllOrdersParams = {}
+): Promise<AdminOrdersResponse> => {
+  const { data } = await nextServer.get<{ data: AdminOrdersResponse }>(
+    "/orders/admin",
+    { params }
+  )
+  return data.data
+}
+
+export const updateOrderStatus = async (
+  orderId: string,
+  status: OrderStatus
+): Promise<Order> => {
+  const { data } = await nextServer.patch<Order>(`/orders/${orderId}`, {
+    status,
+  })
+  return data
 }

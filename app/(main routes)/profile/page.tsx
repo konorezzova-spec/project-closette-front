@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 import { MessageNoInfo } from '@/components/MessageNoInfo/MessageNoInfo';
 import styles from './page.module.css';
 import { UserForm, IUserData } from '@/components/UserForm/UserForm';
 import { nextServer } from '@/lib/api/api';
+import { useAuthStore } from '@/lib/store/authStore';
 
 interface IOrder {
   _id: string;
@@ -15,13 +17,23 @@ interface IOrder {
   status: string;
 }
 
+const statusTranslations: Record<string, string> = {
+  inProcess: 'У процесі',
+  completing: 'Комплектується',
+  done: 'Виконано',
+  canceled: 'Скасовано',
+};
+
 export default function CabinetPage() {
-  const [orders, setOrders] = useState<IOrder[]>([]);
+ const [orders, setOrders] = useState<IOrder[]>([]);
   const [userData, setUserData] = useState<IUserData | undefined>(undefined);
   const [isLoadingOrders, setIsLoadingOrders] = useState<boolean>(true);
   const [isLoadingProfile, setIsLoadingProfile] = useState<boolean>(true);
-  const router = useRouter();
+  const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
   
+  const router = useRouter();
+  const clearIsAuthenticated = useAuthStore((state) => state.clearIsAuthenticated);
+
   useEffect(() => {
     async function fetchCabinetData() {
       try {
@@ -35,7 +47,14 @@ export default function CabinetPage() {
 
       try {
         const profileRes = await nextServer.get('/users');
-        setUserData(profileRes.data.user);
+
+setUserData({
+  name: profileRes.data.user.name || '',
+  surName: profileRes.data.user.surname || '',
+  tel: profileRes.data.user.tel || '',
+  city: profileRes.data.user.city || '',
+  postOffice: String(profileRes.data.user.postOffice || ''),
+});
       } catch (error) {
         console.error('Помилка завантаження профілю:', error);
       } finally {
@@ -47,12 +66,19 @@ export default function CabinetPage() {
   }, []);
 
   const handleLogout = async () => {
+    if (isLoggingOut) return;
+    
+    setIsLoggingOut(true);
     try {
       await nextServer.post('/auth/logout');
       localStorage.removeItem('token');
-      router.push('/login');
+      clearIsAuthenticated(); 
+
+      router.push('/');
+      router.refresh();
     } catch (error) {
       console.error('Помилка виходу з системи:', error);
+      setIsLoggingOut(false);
     }
   };
 
@@ -65,16 +91,16 @@ export default function CabinetPage() {
         city: data.city,
         postOffice: Number(data.postOffice),
       });
-      alert('Дані профілю успішно оновлено!');
+      toast.success('Дані профілю успішно оновлено!');
     } catch (error) {
       console.error('Помилка оновлення профілю:', error);
-      alert('Не вдалося оновити дані. Спробуйте пізніше.');
+      toast.error('Не вдалося оновити дані. Спробуйте пізніше.');
     }
   };
   
   return (
     <div className={styles.cabinetPageWrapper}>
-      <main className={styles.cabinetMain}>
+      <section className={styles.cabinetSection}>
         <div className={styles.cabinetContainer}>
           <h1 className={styles.cabinetTitle}>Кабінет</h1>
 
@@ -115,7 +141,10 @@ export default function CabinetPage() {
                       </div>
 
                       <div className={styles.orderStatus}>
-                        Статус: {order.status}
+                       <span className={styles.orderStatusLabel}>Статус:</span>
+                        <span className={styles.orderStatusValue}>
+                        {statusTranslations[order.status] || order.status}
+                         </span>
                       </div>
                     </li>
                   ))}
@@ -133,12 +162,16 @@ export default function CabinetPage() {
           </div>
 
           <div className={styles.cabinetButton}>
-            <button onClick={handleLogout} className={styles.logoutButton}>
-              Вийти з кабінету
+            <button 
+              onClick={handleLogout} 
+              className={styles.logoutButton}
+              disabled={isLoggingOut}
+            >
+              {isLoggingOut ? 'Вихід...' : 'Вийти з кабінету'}
             </button>
           </div>
         </div>
-      </main>
+      </section>
     </div>
   );
 }

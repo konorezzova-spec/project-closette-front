@@ -8,7 +8,7 @@ import { fetchCategories, fetchGoods } from "@/lib/api/serverApi";
 import Hero from "@/components/Hero/Hero";
 import Style from "@/components/Style/Style";
 import PopularCategories from "@/components/PopularCategories/PopularCategories";
-import ReviewsList from "@/components/ReviewsList/ReviewsList";
+import LastReviews from "@/components/LastReviews/LastReviews";
 
 export default async function HomePage() {
   const queryClient = new QueryClient();
@@ -32,7 +32,7 @@ export default async function HomePage() {
         <Style />
         <PopularCategories />
         <PopularGoods />
-        <ReviewsList />
+        <LastReviews />
       </HydrationBoundary>
     </>
   );

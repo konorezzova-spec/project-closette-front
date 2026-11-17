@@ -1,7 +1,9 @@
 import { cookies } from "next/headers";
-import type { CategoriesHttpResponse, FetchGoodsParams } from "./clientApi";
+import type { FetchGoodsParams } from "./clientApi";
 import type { GoodsHttpResponse, Good } from "@/types/good";
 import { nextServer } from "./api";
+import { CategoriesHttpResponse, CategoriesResponse } from "@/types/category";
+import { FeedbacksResponse } from "@/types/feedback";
 
 export const fetchGoods = async (
   fetchParams: FetchGoodsParams
@@ -28,9 +30,9 @@ export async function fetchGoodById(id: string): Promise<Good> {
 export async function fetchCategories(
   page: number,
   perPage: number
-): Promise<CategoriesHttpResponse> {
+): Promise<CategoriesResponse> {
   const cookieStore = await cookies();
-  const { data } = await nextServer.get("/categories", {
+  const { data } = await nextServer.get<CategoriesHttpResponse>("/categories", {
     params: { page, perPage },
     headers: {
       Cookie: cookieStore.toString(),
@@ -40,3 +42,19 @@ export async function fetchCategories(
   return data.data;
 }
 
+export async function fetchFeedbacks(
+  params: {
+    page?: number;
+    perPage?: number;
+    productId?: string;
+  }={}
+):Promise<FeedbacksResponse> {
+  const cookieStore = await cookies();
+  const { data } = await nextServer.get("/feedbacks", {
+    params,
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  return data.data;
+}

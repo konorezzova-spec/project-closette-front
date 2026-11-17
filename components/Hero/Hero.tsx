@@ -30,7 +30,7 @@ export default function Hero() {
         </div>
         <div className={css["hero__right-img"]}>
           <Image
-            src="/imagehero1.jpg"
+            src="/hero.webp"
             alt="image mask group"
             // fill
             width={335}

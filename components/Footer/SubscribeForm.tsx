@@ -30,7 +30,7 @@ export default function SubscribeForm() {
   ) => {
     try {
       await nextServer.post("/subscriptions", {
-        email: values.email.trim(),
+        email: values.email.trim().toLowerCase(),
       });
 
       toast.success("Ви успішно підписалися!");

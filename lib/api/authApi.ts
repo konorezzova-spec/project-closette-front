@@ -95,6 +95,7 @@ export const getMe = async (): Promise<User> => {
   return response.data;
 };
 
+
 export const updateMe = async (name: string) => {
   const response = await nextServer.patch<User>("/users", { name });
   return response.data;

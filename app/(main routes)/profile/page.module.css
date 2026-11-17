@@ -1,4 +1,4 @@
-.cabinetMain {
+.cabinetSection {
   padding: 0 20px;
   margin-top: 64px;
 }
@@ -34,10 +34,14 @@
   width: 100%;
 }
 .ordersSection {
+  padding: 0 20px;
   order: 2;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 .ordersTitle {
   font-family: var(--second-family), sans-serif;
@@ -56,18 +60,22 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
 .orderCard {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 16px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
 }
 
 .orderLeft {
   display: flex;
+  text-align: left;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
 }
 
 .orderNumber {
@@ -89,8 +97,9 @@
 .orderRight {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 4px;
+  width: 100px;
 }
 
 .orderSumLabel {
@@ -112,6 +121,22 @@
   display: none;
 }
 
+.orderStatusLabel {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text);
+}
+
+.orderStatusValue {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-scheme-1-text);
+}
+
 .emptyOrdersWrapper {
   width: 100%;
 }
@@ -121,9 +146,6 @@
 }
 
 .logoutButton {
-  color: var(--color-neutral-darkest);
-  background: var(--opacity-neutral-darkest-5);
-  border: 1px solid var(--opacity-transparent);
   border-radius: 100px;
   padding: 6px 12px;
   width: 100%;
@@ -133,11 +155,29 @@
   line-height: 1.5;
   cursor: pointer;
   margin-bottom: 48px;
+  border: 1px solid var(--opacity-transparent);
+  background-color: var(--opacity-neutral-darkest-5);
+  transition:
+    background-color 0.3s ease,
+    border 0.3s ease;
+}
+
+.logoutButton:hover,
+.logoutButton:focus {
+  background-color: var(--opacity-neutral-darkest-15);
+  border: 1px solid var(--opacity-neutral-darkest-50);
+}
+
+.logoutButton:active {
+  border: 1px solid var(--opacity-neutral-darkest-50);
+  background-color: var(--opacity-neutral-darkest-50);
+  color: var(--color-white);
 }
 
 @media (min-width: 320px) {
   .emptyOrdersWrapper {
-    width: 335px;
+    width: 100%;
+    max-width: 335px;
   }
   .cabinetButton {
     width: auto;
@@ -153,19 +193,50 @@
     display: inline-block;
   }
 
-  .cabinetMain {
+  .cabinetSection {
     padding: 0 32px;
   }
 
   .emptyOrdersWrapper {
-    width: 704px;
+    width: 100%;
+    max-width: 704px;
     display: flex;
     justify-content: center;
+  }
+
+  .ordersSection {
+    width: 100%;
+    max-width: 704px;
+    margin: 0 auto;
+  }
+
+  .orderCard {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .orderLeft {
+    width: auto;
+  }
+  .orderRight {
+    width: auto;
+  }
+  .orderStatus {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .userFormSection {
+    width: 100%;
+    max-width: 704px;
   }
 }
 
 @media (min-width: 1440px) {
-  .cabinetMain {
+  .cabinetSection {
     padding: 0 64px;
   }
 

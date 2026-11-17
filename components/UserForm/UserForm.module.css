@@ -49,6 +49,7 @@
   font-size: 16px;
   line-height: 1.5;
   color: var(--opacity-neutral-darkest-60);
+  -webkit-text-fill-color: var(--opacity-neutral-darkest-60);
   transition: border-color 0.2s;
   background: var(--opacity-transparent);
 }
