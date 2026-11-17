@@ -174,7 +174,7 @@
     background: transparent;
     color: var(--color-placeholder, #646562);
     cursor: pointer;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
     transition: color 0.2s;
 }
 
