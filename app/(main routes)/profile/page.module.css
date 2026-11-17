@@ -34,13 +34,14 @@
   width: 100%;
 }
 .ordersSection {
+  padding: 0 20px;
   order: 2;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 .ordersTitle {
   font-family: var(--second-family), sans-serif;
@@ -201,6 +202,12 @@
     max-width: 704px;
     display: flex;
     justify-content: center;
+  }
+
+  .ordersSection {
+    width: 100%;
+    max-width: 704px;
+    margin: 0 auto;
   }
 
   .orderCard {
