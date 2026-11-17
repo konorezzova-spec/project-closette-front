@@ -85,6 +85,10 @@
   margin-bottom: 48px;
 }
 
+.wrapper:last-child {
+  margin-bottom: 0;
+}
+
 .wrapper .characteristics {
   list-style-type: disc;
   padding-left: 20px;
@@ -245,10 +249,22 @@ p + .characteristics {
   background-color: transparent;
   font-family: inherit;
   font-size: 16px;
+  color: var(--color-scheme-5-text);
   cursor: pointer;
 
   -webkit-appearance: none;
   appearance: none;
+}
+
+.sizeSelect option {
+  color: var(--color-scheme-5-text);
+  background-color: var(--color-scheme-5-background);
+}
+
+.sizeSelect option:hover,
+.sizeSelect option:focus {
+  color: var(--color-scheme-5-text);
+  background-color: var(--color-scheme-5-background);
 }
 
 .sizeSelect:focus {
@@ -271,8 +287,8 @@ p + .characteristics {
   top: 50%;
   width: 8px;
   height: 8px;
-  border-right: 1.5px solid var(--opacity-neutral-darkest-60);
-  border-bottom: 1.5px solid var(--opacity-neutral-darkest-60);
+  border-right: 1.5px solid var(--color-scheme-5-text);
+  border-bottom: 1.5px solid var(--color-scheme-5-text);
   transform: translateY(-70%) rotate(45deg);
   pointer-events: none;
 }
