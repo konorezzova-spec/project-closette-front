@@ -101,6 +101,8 @@
   --opacity-transparent: var(--color-neutral-light);
   --opacity-neutral-darkest-50: var(--color-neutral-light);
   --opacity-neutral-darkest-15: var(--color-neutral);
+
+  --opacity-neutral-darkest-60: var(--opacity-white-60);
 }
 
 html,

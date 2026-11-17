@@ -23,27 +23,29 @@ export default function GoodsInfo({
 
   return (
     <>
-      {goods && (
-        <ul className={css.goods_list}>
-          {goods.map(good => (
-            <li key={good._id}>
-              <GoodInfo good={good} />
-            </li>
-          ))}
-        </ul>
-      )}
-      {hasNextPage && (
-        <div className={css.loadMoreWrapper}>
-          <button
-            type="button"
-            className={css.loadMoreButton}
-            onClick={fetchNextPage}
-            disabled={isFetchingNextPage}
-          >
-            {isFetchingNextPage ? "Завантаження..." : "Показати більше"}
-          </button>
-        </div>
-      )}
+      <div>
+        {goods && (
+          <ul className={css.goods_list}>
+            {goods.map(good => (
+              <li key={good._id}>
+                <GoodInfo good={good} />
+              </li>
+            ))}
+          </ul>
+        )}
+        {hasNextPage && (
+          <div className={css.loadMoreWrapper}>
+            <button
+              type="button"
+              className={css.loadMoreButton}
+              onClick={fetchNextPage}
+              disabled={isFetchingNextPage}
+            >
+              {isFetchingNextPage ? "Завантаження..." : "Показати більше"}
+            </button>
+          </div>
+        )}
+      </div>
     </>
   );
 }
