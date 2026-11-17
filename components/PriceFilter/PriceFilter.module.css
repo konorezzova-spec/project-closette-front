@@ -9,8 +9,8 @@
 
   background: linear-gradient(
     to right,
-    var(--color-neutral-darkest) var(--progress),
-    var(--color-neutral-lightest) var(--progress)
+    var(--color-scheme-1-text) var(--progress),
+    var(--color-scheme-3-foreground) var(--progress)
   );
 
   /* Chrome, Safari, Edge */

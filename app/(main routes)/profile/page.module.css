@@ -145,9 +145,6 @@
 }
 
 .logoutButton {
-  color: var(--color-neutral-darkest);
-  background: var(--opacity-neutral-darkest-5);
-  border: 1px solid var(--opacity-transparent);
   border-radius: 100px;
   padding: 6px 12px;
   width: 100%;
@@ -157,6 +154,23 @@
   line-height: 1.5;
   cursor: pointer;
   margin-bottom: 48px;
+  border: 1px solid var(--opacity-transparent);
+  background-color: var(--opacity-neutral-darkest-5);
+  transition:
+    background-color 0.3s ease,
+    border 0.3s ease;
+}
+
+.logoutButton:hover,
+.logoutButton:focus {
+  background-color: var(--opacity-neutral-darkest-15);
+  border: 1px solid var(--opacity-neutral-darkest-50);
+}
+
+.logoutButton:active {
+  border: 1px solid var(--opacity-neutral-darkest-50);
+  background-color: var(--opacity-neutral-darkest-50);
+  color: var(--color-white);
 }
 
 @media (min-width: 320px) {

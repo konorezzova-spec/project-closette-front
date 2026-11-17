@@ -8,9 +8,10 @@ import type { Good } from "@/types/good";
 import type { Category } from "@/types/category";
 import GoodsInfo from "@/components/GoodsInfo/GoodsInfo";
 import Container from "@/components/Container/Container";
-import Link from "next/link";
-import PriceFilter from "@/components/PriceFilter/PriceFilter";
+// import Link from "next/link";
+// import PriceFilter from "@/components/PriceFilter/PriceFilter";
 import { GoodsFilters } from "@/types/filters";
+import GoodsFilter from "@/components/GoodsFilter/GoodsFilter";
 
 interface GoodsPageClientProps {
   categories: Category[];
@@ -120,113 +121,32 @@ export default function GoodsPageClient({
   const totalItems = data?.pages[0]?.data.totalItems ?? 0;
 
   return (
-    <Container>
+    <Container className={css.section}>
       <h1 className={css.title}>Всі товари</h1>
       <div className={css.container}>
-        <div className={css.filter_box}>
-          <div className={css.filterHeader}>
-            <h2>Фільтри</h2>
-
-            <button type="button" onClick={clearAllFilters}>
-              Очистити всі
-            </button>
-          </div>
-
-          <p className={css.resultsCount}>
-            Показано {goods.length} із {totalItems} товарів
-          </p>
-
-          <div className={css.filter}>
-            {/* Категорії */}
-            <div className={css.filterSection}>
-              <Link href="/goods/filter/all">Усі</Link>
-              <ul className={css.filterList}>
-                {categories?.map(category => (
-                  <li key={category._id}>
-                    <Link href={`/goods/filter/${category._id}`}>
-                      {category.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Розмір */}
-            <div className={css.filterSection}>
-              <div className={css.filterTitle}>
-                <h3>Розмір</h3>
-                <button type="button" onClick={() => updateParams("size", [])}>
-                  Очистити
-                </button>
-              </div>
-
-              <div className={css.checkboxList}>
-                {["XXS", "XS", "S", "M", "L", "XL", "XXL"].map(size => (
-                  <label key={size}>
-                    <input
-                      type="checkbox"
-                      value={size}
-                      checked={selectedSizes.includes(size)}
-                      onChange={() => handleSizeChange(size)}
-                    />
-                    {size}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Ціна */}
-            <PriceFilter initialValue={maxPriceFromUrl} />
-
-            {/* Стать */}
-            <div className={css.filterSection}>
-              <div className={css.filterTitle}>
-                <h3>Стать</h3>
-
-                <button
-                  type="button"
-                  onClick={() => updateParams("gender", "")}
-                >
-                  Очистити
-                </button>
-              </div>
-
-              <div className={css.checkboxList}>
-                {[
-                  { label: "Всі", value: "" },
-                  { label: "Жіночий", value: "women" },
-                  { label: "Чоловічий", value: "man" },
-                  { label: "Унісекс", value: "unisex" },
-                ].map(item => (
-                  <label key={item.value || "all"}>
-                    <input
-                      type="radio"
-                      name="gender"
-                      value={item.value}
-                      checked={gender === item.value}
-                      onChange={() => handleGenderChange(item.value)}
-                    />
-                    {item.label}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* </aside> */}
-          </div>
-        </div>
-        <div className={css.productsSection}>
-          {isLoading && <p>Завантаження товарів...</p>}
-          {isError && <p>Помилка завантаження: {error.message}</p>}
-          {goods.length > 0 && (
-            <GoodsInfo
-              goods={goods}
-              hasNextPage={hasNextPage}
-              isFetchingNextPage={isFetchingNextPage}
-              fetchNextPage={fetchNextPage}
-            />
-          )}
-        </div>
+        <GoodsFilter
+          clearAllFilters={clearAllFilters}
+          goods={goods}
+          totalItems={totalItems}
+          categories={categories}
+          selectedSizes={selectedSizes}
+          maxPriceFromUrl={maxPriceFromUrl}
+          gender={gender}
+          updateParams={updateParams}
+          handleSizeChange={handleSizeChange}
+          handleGenderChange={handleGenderChange}
+        />
+        <div className={css.productsSection}></div>
+        {isLoading && <p>Завантаження товарів...</p>}
+        {isError && <p>Помилка завантаження: {error.message}</p>}
+        {goods.length > 0 && (
+          <GoodsInfo
+            goods={goods}
+            hasNextPage={hasNextPage}
+            isFetchingNextPage={isFetchingNextPage}
+            fetchNextPage={fetchNextPage}
+          />
+        )}
       </div>
     </Container>
   );
