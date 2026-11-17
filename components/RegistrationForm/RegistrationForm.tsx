@@ -73,7 +73,7 @@ export default function RegistrationForm() {
         label="Email*"
         type="email"
         placeholder="Ваш email"
-        autoComplete="email"
+        autoComplete="example@email.com"
         {...formik.getFieldProps("email")}
         error={errorFor("email")}
       />
