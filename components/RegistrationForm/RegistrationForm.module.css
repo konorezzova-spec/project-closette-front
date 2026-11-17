@@ -15,9 +15,8 @@
 }
 
 .button:hover:not(:disabled) {
-  border-color: var(—color-deco, #c5e1a5);
-    opacity: 1;
-    outline: none;
+  /* background-color: var(--color-accent-hover, #b5d48f); */
+  background-color: var(--color-deco-dark);
 }
 
 .button:focus-visible {
