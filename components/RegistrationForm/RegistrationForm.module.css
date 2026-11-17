@@ -15,13 +15,13 @@
 }
 
 .button:hover:not(:disabled) {
-  /* background-color: var(--color-accent-hover, #b5d48f); */
-  background-color: var(--color-deco-dark);
+  border-color: var(—color-deco, #c5e1a5);
+    opacity: 1;
+    outline: none;
 }
 
 .button:focus-visible {
-  /* outline: 2px solid var(--color-focus, #8cb860); */
-  outline: 2px solid var(--color-deco-dark);
+  outline: 2px solid var(—color-focus, #8cb860);
   outline-offset: 2px;
 }
 
