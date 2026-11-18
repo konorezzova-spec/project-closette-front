@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import css from "./GoodsOrderList.module.css";
 import type { OrderItem } from "@/types/order";
 import { useBasketStore } from "@/lib/store/basketStore";
@@ -31,16 +32,31 @@ export default function GoodsOrderList() {
       <ul className={css.list}>
         {items.map(item => (
           <li key={`${item.id}-${item.size}`} className={css.item}>
+            <Link
+              href={`/goods/${item.id}`}
+              prefetch={false}
+              className={css.imageLink}
+              tabIndex={-1}
+              aria-hidden="true"
+            >
             <Image
               src={item.image}
               alt={item.name}
               width={82}
               height={101}
               className={css.image}
-            />
+            /></Link>
             <div className={css.content}>
               <div className={css.details}>
-                <h3 className={css.name}>{item.name}</h3>
+                <h3 className={css.name}>
+                  <Link
+                    href={`/goods/${item.id}`}
+                    prefetch={false}
+                    className={css.nameLink}
+                  >
+                    {item.name}
+                  </Link>
+                </h3>
                 <div className={css.meta}>
                   <span className={css.metaItem}>
                     <svg width="16" height="16" aria-hidden="true">
