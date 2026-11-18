@@ -9,7 +9,7 @@ export default function Footer() {
       <Container>
         <div className={css.footer_top}>
           <div className={css.logo_wrap}>
-            <Link className={css.link} href="/" aria-label="Home">
+            <Link className={css.link} href="#hero" aria-label="Home">
               <svg
                 className={css.logo}
                 width={84}

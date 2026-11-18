@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <Container className={css.hero__container}>
+    <Container id="hero" className={css.hero__container}>
       <div className={css.hero__content}>
         <div className={css.hero__left}>
           <h1 className={css.hero__title}>
