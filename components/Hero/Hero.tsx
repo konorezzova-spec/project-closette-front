@@ -13,12 +13,12 @@ export default function Hero() {
           <h1 className={css.hero__title}>
             Знайди свій стиль з Clothica вже сьогодні!
           </h1>
-          <h2 className={css.hero__subtitle}>
+          <p className={css.hero__subtitle}>
             Clothica — це місце, де комфорт поєднується зі стилем. Ми створюємо
             базовий одяг, який легко комбінується та підходить для будь-якої
             нагоди. Обирай речі, що підкреслять твою індивідуальність і завжди
             будуть актуальними.
-          </h2>
+          </p>
           <ul className={css.hero__buttons}>
             <li className={css["hero__btn--left"]}>
               <Link href="#goods">До товарів</Link>
@@ -31,9 +31,10 @@ export default function Hero() {
         <div className={css["hero__right-img"]}>
           <Image
             src="/hero_mob.webp"
-            alt="image mask group"
+            alt="Пара закоханих у повсякденному одязі"
             fill
-            priority
+            preload
+            fetchPriority="high"
             sizes="(max-width: 767px) 335px,  50vw"
             className={css.hero__image}
           />

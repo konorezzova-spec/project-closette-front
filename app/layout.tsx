@@ -19,13 +19,13 @@ export const metadata: Metadata = {
   description: "Choose your unique style today. Visit our store.",
   metadataBase: new URL(SITE_URL),
   openGraph: {
-    title: "Clothing Store App",
+    title: "Closette",
     description: "Choose your unique style today. Visit our store.",
     url: SITE_URL,
     images: [
       {
         url: "https://res.cloudinary.com/rvojizer/image/upload/v1793859959/metadata.png",
-        alt: "Mane image",
+        alt: "Closette — онлайн-магазин одягу",
         width: 600,
         height: 300,
       },
