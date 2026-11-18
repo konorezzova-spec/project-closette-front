@@ -37,7 +37,7 @@ export default function GoodInfo({ good }: GoodInfoProps) {
                   <use href="/icons/sprite.svg#star-filled" />
                 </svg>
 
-                <p>{good.rating ?? 5}</p>
+                <p>{good.rating}</p>
 
                 <svg
                   className={css.comment}
