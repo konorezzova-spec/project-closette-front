@@ -21,7 +21,7 @@ export default function GoodInfo({ good }: GoodInfoProps) {
             className={css.image}
             fill
             sizes="(min-width: 1440px) 25vw, (min-width: 768px) 50vw, 100vw"
-          ></Image>
+          />
         </div>
         <div className={css.lower_group}>
           <div className={css.bottom}>
@@ -48,7 +48,7 @@ export default function GoodInfo({ good }: GoodInfoProps) {
                   <use href="/icons/sprite.svg#comment" />
                 </svg>
 
-                <p>{good.feedbacks.length}</p>
+                <p>{good.feedbacks.length ?? 0}</p>
               </div>
             </div>
             <div className={css.price}>

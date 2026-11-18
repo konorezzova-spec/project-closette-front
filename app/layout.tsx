@@ -15,7 +15,7 @@ if (!SITE_URL) {
 }
 
 export const metadata: Metadata = {
-  title: "Clothing Store App",
+  title: "Closette",
   description: "Choose your unique style today. Visit our store.",
   metadataBase: new URL(SITE_URL),
   openGraph: {
@@ -52,7 +52,10 @@ export default function RootLayout({ children }: Props) {
                 <div className={css.plug}></div>
                 {children}
               </main>
-              <Toaster position="top-right" containerStyle={{ zIndex: 99999 }} />
+              <Toaster
+                position="top-right"
+                containerStyle={{ zIndex: 99999 }}
+              />
             </AuthProvider>
           </TanStackProvider>
         </ThemeProvider>

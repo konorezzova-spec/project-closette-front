@@ -34,7 +34,7 @@ export default function Hero() {
             alt="image mask group"
             fill
             priority
-            sizes="(max-width: 767px) 335px, (max-width: 1439px) 50vw, 50vw"
+            sizes="(max-width: 767px) 335px,  50vw"
             className={css.hero__image}
           />
         </div>
