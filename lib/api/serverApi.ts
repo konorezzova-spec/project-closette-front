@@ -54,12 +54,8 @@ export async function fetchFeedbacks(
     productId?: string;
   } = {}
 ): Promise<FeedbacksResponse> {
-  const cookieStore = await cookies();
   const { data } = await nextServer.get("/feedbacks", {
     params,
-    headers: {
-      Cookie: cookieStore.toString(),
-    },
   });
   return data.data;
 }

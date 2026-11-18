@@ -35,6 +35,7 @@ export default function GoodsLists({ goods }: GoodsListsProps) {
   return (
     <>
       <Swiper
+        aria-label="Популярні товари"
         modules={[Keyboard, A11y, Pagination]}
         pagination={{
           clickable: true,
@@ -66,7 +67,7 @@ export default function GoodsLists({ goods }: GoodsListsProps) {
       >
         {goods.map(good => (
           <SwiperSlide key={good._id}>
-            <GoodInfo good={good}/>
+            <GoodInfo good={good} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -78,9 +79,9 @@ export default function GoodsLists({ goods }: GoodsListsProps) {
           disabled={isBeginning}
           aria-label="Previous goods"
         >
-            <svg width="24" height="24">
-                  <use href="/icons/symbol-defs.svg#icon-arrow_back" />
-            </svg>
+          <svg width="24" height="24">
+            <use href="/icons/symbol-defs.svg#icon-arrow_back" />
+          </svg>
         </button>
 
         <button
@@ -90,9 +91,9 @@ export default function GoodsLists({ goods }: GoodsListsProps) {
           disabled={isEnd}
           aria-label="Next goods"
         >
-             <svg width="24" height="24">
-                  <use href="/icons/symbol-defs.svg#icon-arrow_forward" />
-            </svg>
+          <svg width="24" height="24">
+            <use href="/icons/symbol-defs.svg#icon-arrow_forward" />
+          </svg>
         </button>
       </div>
     </>

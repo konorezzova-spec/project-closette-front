@@ -1,6 +1,6 @@
 "use client";
 
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Container from "@/components/Container/Container";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
@@ -15,7 +15,6 @@ export default function PopularGoods() {
     queryKey: ["PopularGoods"],
     queryFn: () => fetchPopularGoods(),
     retry: 1,
-    placeholderData: keepPreviousData,
   });
   const goods: Good[] = data?.data?.goods ?? [];
 
@@ -33,9 +32,13 @@ export default function PopularGoods() {
 
       {isError && <ErrorMessage message={error.message} />}
 
-      {goods.length > 0 && <GoodsLists goods={goods} />}
+      {!isLoading && !isError && goods.length > 0 && (
+        <GoodsLists goods={goods} />
+      )}
 
-      {goods.length === 0 && <p>Товарів поки немає.</p>}
+      {!isLoading && !isError && goods.length === 0 && (
+        <p>Товарів поки немає.</p>
+      )}
     </Container>
   );
 }
