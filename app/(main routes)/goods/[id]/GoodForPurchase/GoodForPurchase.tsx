@@ -9,10 +9,9 @@ import type { Good, Size } from "@/types/good";
 import { useBasketStore } from "@/lib/store/basketStore";
 import Rating from "@/components/Rating/Rating";
 import toast from "react-hot-toast";
-// import { Feedback } from "@/types/feedback";
 import Container from "@/components/Container/Container";
-import { useQuery } from "@tanstack/react-query";
-import { fetchFeedbacks } from "@/lib/api/clientApi";
+// import { useQuery } from "@tanstack/react-query";
+// import { fetchFeedbacks } from "@/lib/api/clientApi";
 
 const splitDescription = (description: string) => {
   const sentences = description.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
@@ -29,17 +28,6 @@ const splitDescription = (description: string) => {
 type GoodForPurchaseProps = {
   good: Good;
 };
-type ProductFeedback = {
-  rate: number;
-};
-
-const getAverageRating = (reviews: ProductFeedback[]) => {
-  if (reviews.length === 0) return 0;
-
-  const totalRating = reviews.reduce((sum, review) => sum + review.rate, 0);
-
-  return Number((totalRating / reviews.length).toFixed(1));
-};
 
 const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
   const [selectedSize, setSelectedSize] = useState<Size>(
@@ -49,16 +37,7 @@ const GoodForPurchase = ({ good }: GoodForPurchaseProps) => {
   const router = useRouter();
   const addItem = useBasketStore(state => state.addItem);
 
-  const { data: reviews } = useQuery({
-    queryKey: ["feedbacks", good._id],
-    queryFn: () => fetchFeedbacks(good._id),
-    enabled: Boolean(good._id),
-  });
-
-  const rating = getAverageRating(
-    (reviews?.feedbacks ?? []) as unknown as ProductFeedback[]
-  );
-  const reviewsCount = reviews?.totalItems ?? 0;
+  const { rating, reviewsCount } = good;
 
   const addToBasket = (): boolean => {
     const count = Number(quantity);
