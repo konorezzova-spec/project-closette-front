@@ -1,0 +1,10 @@
+# Closette
+
+Closette — онлайн-магазин повсякденного одягу
+для жінок і чоловіків.
+
+## Основні сторінки
+
+- [Головна](https://project-closette-front.vercel.app/homePage)
+- [Товари](https://project-closette-front.vercel.app/goods)
+- [Категорії](https://project-closette-front.vercel.app/categories)
