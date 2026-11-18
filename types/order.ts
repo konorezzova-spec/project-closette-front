@@ -1,4 +1,3 @@
-import { inter } from "@/app/fonts";
 import type { Size } from "./good";
 
 export interface OrderItem{
