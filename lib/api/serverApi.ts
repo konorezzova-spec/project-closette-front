@@ -63,3 +63,16 @@ export async function fetchFeedbacks(
   });
   return data.data;
 }
+
+export const checkServerSession = async () => {
+  // Дістаємо поточні cookie
+  const cookieStore = await cookies();
+  const res = await nextServer.post("/auth/session", null, {
+    headers: {
+      // передаємо кукі далі
+      Cookie: cookieStore.toString(),
+    },
+  });
+  // Повертаємо повний респонс, щоб proxy мав доступ до нових cookie
+  return res;
+};
