@@ -12,6 +12,10 @@ import { createOrder } from "@/lib/api/clientApi";
 import { isAxiosError } from "axios";
 import toast from "react-hot-toast";
 
+import { Suspense } from "react";
+import ShareCartButton from "@/components/ShareCartButton/ShareCartButton";
+import SharedCartNotice from "@/components/SharedCartNotice/SharedCartNotice";
+
 export default function OrderPage() {
   const router = useRouter();
   const items = useBasketStore(state => state.items);
@@ -71,10 +75,14 @@ export default function OrderPage() {
     <section className={css.section}>
       <Container>
         <h2 className={css.title}>Оформити замовлення</h2>
+        <Suspense fallback={null}>
+          <SharedCartNotice />
+        </Suspense>
         <div className={css.content}>
           <div className={css.goods}>
             <p className={css.subtitle}>Товари</p>
             <GoodsOrderList />
+            <ShareCartButton />
           </div>
 
           <div className={css.form}>
