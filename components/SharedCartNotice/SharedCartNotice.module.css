@@ -1,0 +1,45 @@
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding: 16px 20px;
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-radius: 16px;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.primary,
+.secondary {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.primary {
+  border: 1px solid transparent;
+  background-color: var(--color-scheme-1-accent);
+  color: var(--color-neutral-darkest);
+}
+
+.secondary {
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  background-color: transparent;
+  color: inherit;
+}

@@ -1,0 +1,16 @@
+.button {
+  padding: 8px 16px;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: 20px;
+  background-color: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  background-color: color-mix(in srgb, currentColor 8%, transparent);
+  outline: none;
+}
